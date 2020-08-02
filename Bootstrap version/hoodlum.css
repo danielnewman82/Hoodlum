@@ -1,4 +1,3 @@
-
 body {
   text-align: center;
   background-color: black;
@@ -9,21 +8,4 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-#cash {
-  color: green;
-}
-
-#hitPoints {
-  color: red;
-}
-
-hr {
-  border: 0;
-  clear:both;
-  display:block;
-  width: 96%;               
-  background-color: #ffffff;
-  height: 1px;
 }
