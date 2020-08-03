@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { changeLocation } from '../redux/ActionCreators';
-import store from '../redux/store'
 
 class Landing extends Component {
     render() {
-        function dispatchLocationChange(text) {
-            store.dispatch(changeLocation(text))
-          }
         return (
             <Container>
                 <Row>
@@ -33,7 +29,7 @@ class Landing extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <button onClick={dispatchLocationChange("about")}>About Hoodlum</button>
+                        <button onClick={changeLocation({ location : "about"})}>About Hoodlum</button>
                     </Col>
                 </Row>                
             </Container>

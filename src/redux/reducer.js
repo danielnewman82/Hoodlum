@@ -1,5 +1,4 @@
 import { CHANGE_LOCATION } from "./ActionCreators";
-import store from './store';
 
 export function reducer(state, action) {
     switch (action.type) {
