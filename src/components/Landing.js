@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { changeLocation } from '../redux/ActionCreators';
+import { connect } from 'react-redux';
+
+function mapStateToProps(state) {
+    return {
+      location: state.location
+    };
+  }
 
 class Landing extends Component {
+
+    about = () => {
+        this.props.dispatch({ type: 'ABOUT' })
+    }
+
+    street = () => {
+        this.props.dispatch({ type: 'STREET'})
+    }
+
     render() {
         return (
             <Container>
@@ -24,12 +39,12 @@ class Landing extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <button>Hit the streets running</button>
+                        <button onClick={this.street}>Hit the streets running</button>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <button onClick={changeLocation({ location : "about"})}>About Hoodlum</button>
+                        <button onClick={this.about}>About Hoodlum</button>
                     </Col>
                 </Row>                
             </Container>
@@ -37,4 +52,4 @@ class Landing extends Component {
     }
 }
 
-export default Landing;
+export default connect(mapStateToProps)(Landing);

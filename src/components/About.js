@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-function About(props) {
+function mapStateToProps(state) {
+    return {
+      location: state.location
+    };
+  }
+
+class About extends Component {
+    
+    backToLanding = () => {
+        this.props.dispatch({ type: 'LANDING' })
+    }
+
+    render() {
     return (
         <Container>
             <Row>
@@ -43,11 +56,12 @@ function About(props) {
             </Row>
             <Row>
                 <Col>
-                    <button onClick={props.backToLanding}>Back to the landing page</button>
+                    <button onClick={this.backToLanding}>Back to the landing page</button>
                 </Col>
             </Row>
         </Container>
     )
 }
+}
 
-export default About;
+export default connect(mapStateToProps)(About);

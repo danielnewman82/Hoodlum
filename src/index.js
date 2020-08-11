@@ -1,17 +1,56 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux'
 
-ReactDOM.render(
-  <React.StrictMode>
+const initialState = {
+  name: "Derp",
+  sex: "Dude",
+  level: 1,
+  curHitPoints: 20,
+  maxHitPoints: 20,
+  cashInHand: 0,
+  cashInBank: 0,
+  weapon: " Fists",
+  atkPower: 1,
+  armor: " None",
+  defPower: 1,
+  outfit: "Shabby Urchin Gear",
+  reputation: "Anonymous Nobody",
+  repScore: 0, 
+  location: "landing"
+}
+
+function reducer(state = initialState, action) {
+  switch(action.type) {
+    case 'ABOUT':
+      return {
+        location: state.location = "about"
+      };
+    case 'LANDING':
+      return {
+        location: state.location = "landing"
+      };
+    case 'STREET':
+      return {
+        location: state.location = "Out On The Street",
+        level: state.level,
+        cashInHand: state.cashInHand,
+        curHitPoints: state.curHitPoints,
+        maxHitPoints: state.maxHitPoints
+      }
+    default:
+      return state;
+  }
+}
+
+const store = createStore(reducer);
+
+const Index = () => (
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </Provider>
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+render(<Index />, document.getElementById('root'));
