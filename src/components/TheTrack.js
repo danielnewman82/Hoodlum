@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import Level1Encounters from './Level1Encounters';
+
+function mapStateToProps(state) {
+    return state
+}
 
 class TheTrack extends Component {
     constructor(props) {
-        super(props);
-        this.state = { encounterCrackhead : false, encounterSmallerKid : false, combat : false, 
-            onTheTrack : true, encounterNum : 0 };
-        this.pveFight = this.pveFight.bind(this);
-        this.retreat = this.retreat.bind(this);
+        super(props)
+        this.state = {combat: false}
     }
-        
-        pveFight() {
-            this.setState({ combat : true, onTheTrack : false });
-        }
 
-        retreat() {
-            this.setState({ combat : false, onTheTrack : true })
-        } 
+    street = () => {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
+    }
+
+    hospital = () => {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "At The Hospital"})
+    }
     
+    pveFight() {
+        this.setState({combat: true});
+    }
     render() {
         if (this.state.combat === true && this.props.level === 1) {
-            return <Level1Encounters retreat={this.retreat} 
-            atkPower={this.props.atkPower}
-            defPower={this.props.defPower} 
-            curHP={this.props.curHP} />
+            return <Level1Encounters />
         }
-        if (this.state.onTheTrack === true) {
         return (
             <Container>
                 <Row>
@@ -37,19 +38,18 @@ class TheTrack extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <button onClick={this.pveFight}>Look for trouble</button>
+                        <button onClick={() => this.pveFight()}>Look for trouble</button>
                     </Col>
                     <Col>
-                        <button onClick={this.props.clinic}>Go to the clinic</button>
+                        <button onClick={this.hospital}>Go to the clinic</button>
                     </Col>
                     <Col>
-                        <button onClick={this.props.logIn}>Back to the Street</button>
+                        <button onClick={this.street}>Back to the Street</button>
                     </Col>
                 </Row>
             </Container>
         )
         }
     }
-}
 
-export default TheTrack;
+export default connect(mapStateToProps)(TheTrack);

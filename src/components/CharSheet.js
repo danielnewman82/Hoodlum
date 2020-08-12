@@ -1,64 +1,78 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-function CharSheet(props) {
+function mapStateToProps(state) {
+    return {
+        state
+    };
+  }
+
+class CharSheet extends Component {
+    street = () => {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
+    }
+
+    render() {
     return (
         <Container>
             <Row>
                 <Col>
-                    Name: {props.name}
+                    Name: {this.props.state.name}
                 </Col>
                 <Col>
-                    Sex: {props.sex}
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    Experience Level: {props.level}
-                </Col>
-                <Col>
-                    Hit Points: <span id="hitPoints">{props.curHitPoints}/{props.maxHitPoints}</span>
+                    Sex: {this.props.state.sex}
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    Cash On Hand: <span id="cash">${props.cashInHand}</span>
+                    Experience Level: {this.props.state.level}
                 </Col>
                 <Col>
-                    Cash In The Bank: <span id="cash">${props.cashInBank}</span>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    Equipped Weapon: {props.weapon}
-                </Col>
-                <Col>
-                    Attack Power: {props.atkPower}
+                    Experience Points: {this.props.state.xp}
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    Equipped Armor: {props.armor}
+                    Cash On Hand: <span id="cash">${this.props.state.cashInHand}</span>
                 </Col>
                 <Col>
-                    Defense Power: {props.defPower}
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    Outfit: {props.outfit}
-                </Col>
-                <Col>
-                    Reputation: {props.reputation}
+                    Bank / Stash Balance: <span id="cash">${this.props.state.cashInBank} / ${this.props.state.cashInStash}</span>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <button onClick={props.logIn}>Back To The Street</button>
+                    Equipped Weapon: {this.props.state.weapon}
+                </Col>
+                <Col>
+                    Attack Power: {this.props.state.atkPower}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    Equipped Armor: {this.props.state.armor}
+                </Col>
+                <Col>
+                    Defense Power: {this.props.state.defPower}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    Outfit: {this.props.state.outfit}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    Reputation: {this.props.state.reputation}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <button onClick={this.street}>Back To The Street</button>
                 </Col>
             </Row>
         </Container>
         );
     }
-
-export default CharSheet;
+}
+export default connect(mapStateToProps)(CharSheet);

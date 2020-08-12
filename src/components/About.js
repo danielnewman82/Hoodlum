@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
     return {
-      location: state.location
+    state
     };
   }
 
 class About extends Component {
     
     backToLanding = () => {
-        this.props.dispatch({ type: 'LANDING' })
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "landing" })
     }
 
     render() {
@@ -20,7 +20,9 @@ class About extends Component {
             <Row>
                 <Col>
                     <p>Hoodlum is a browser-based text RPG, set in a bleak, gritty urban environment. It is coded
-                    in JavaScript, using <a href="https://reactjs.org/">ReactJS</a>. I first started development
+                    in JavaScript, using <a href="https://reactjs.org/">ReactJS</a> and <a href="https://redux.js.org/">
+                    Redux</a>. (Man, was that a pain in the ass to get working!) 
+                    I first started development
                     in late June 2020, whilst I was in the Nucamp web / mobile development bootcamp. Previously, I 
                     implemented a simpler browser game as a project for my Bootstrap class: a remake of an old
                     C64 game I remember fondly from my childhood, "Hike" or "Forest Walk". That was all Bootstrap
@@ -33,11 +35,13 @@ class About extends Component {
                     browser game, and got inspired by another game I remember fondly from childhood: Legend of the
                     Red Dragon. But I have long felt that the whole fantasy dragon-slaying motif has been done to 
                     death, so I took the core mechanics and applied them to a contemporary motif.</p>
-                    <p>Hoodlum is not appropriate for all ages. Some parts depict truly ugly things; please keep in mind
+                    <p>Hoodlum is not appropriate for all ages. Some parts depict truly ugly things; part of the game
+                    is that you can choose to be a lowlife, and doing the right thing 
+                    doesn't necessarily pay off. Please keep in mind
                     that depiction does not equal endorsement. Nor is it intended to be a 100% accurate reflection of
                     reality. It is a work of fiction, albeit intended to resemble reality closely enough to be a bit
                     unsettling. My goals are to make people laugh, think, and feel uncomfortable.</p>
-                    <p>I hope you enjoy the game. Na zdrovye!</p>
+                    <p>I hope you enjoy the game. L'chaim!</p>
                     <p>- <a href="mailto:daniel.newman82@gmail.com">Daniel</a>, the implementor</p>
                     
                     Inspirations include:

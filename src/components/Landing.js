@@ -4,18 +4,18 @@ import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
     return {
-      location: state.location
+      state
     };
   }
 
 class Landing extends Component {
 
     about = () => {
-        this.props.dispatch({ type: 'ABOUT' })
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "about" })
     }
 
     street = () => {
-        this.props.dispatch({ type: 'STREET'})
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
     }
 
     render() {

@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-function Bar(props) {
-    if (props.level < 3) {
+function mapStateToProps(state) {
+    return state
+}
+
+class Bar extends Component {
+
+    street = () => {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
+    }
+    render() {
+    if (this.props.level < 3) {
         return (
             <Container>
                 <Row>
@@ -13,7 +23,7 @@ function Bar(props) {
                 </Row>
                 <Row>
                     <Col>
-                    <button onClick={props.logIn}>Back out to the Street</button>
+                    <button onClick={this.street}>Back out to the Street</button>
                     </Col>
                 </Row>
             </Container>
@@ -32,11 +42,12 @@ function Bar(props) {
             </Row>
             <Row>
                 <Col>
-                    <button onClick={props.logIn}>Back out to the Street</button>
+                    <button onClick={this.street}>Back out to the Street</button>
                 </Col>
             </Row>
         </Container>
     )
 }
+}
 
-export default Bar;
+export default connect(mapStateToProps)(Bar);

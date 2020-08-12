@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
+
+function mapStateToProps(state) {
+    return state
+}
 
 class WeaponShop extends Component {
-
+    street = () => {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
+    }
+    
     render() {
         if (this.props.level < 3) {
             return (
@@ -27,7 +35,7 @@ class WeaponShop extends Component {
             </Row>
             <Row>
                 <Col>
-                    <button onClick={this.props.logIn}>Back To The Street</button>
+                    <button onClick={this.street}>Back To The Street</button>
                 </Col>
             </Row>
         </Container>
@@ -75,4 +83,4 @@ class WeaponShop extends Component {
         )
     }
 }
-export default WeaponShop;
+export default connect(mapStateToProps)(WeaponShop);

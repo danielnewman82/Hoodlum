@@ -8,9 +8,11 @@ const initialState = {
   name: "Derp",
   sex: "Dude",
   level: 1,
-  curHitPoints: 20,
+  xp: 0,
+  curHitPoints: 14,
   maxHitPoints: 20,
   cashInHand: 0,
+  cashInStash: 0,
   cashInBank: 0,
   weapon: " Fists",
   atkPower: 1,
@@ -24,22 +26,46 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch(action.type) {
-    case 'ABOUT':
+    case 'CHANGE_LOCATION':
       return {
-        location: state.location = "about"
-      };
-    case 'LANDING':
-      return {
-        location: state.location = "landing"
-      };
-    case 'STREET':
-      return {
-        location: state.location = "Out On The Street",
+        location: state.location = action.payload,
+        name: state.name,
+        sex: state.sex,
         level: state.level,
-        cashInHand: state.cashInHand,
+        xp: state.xp,
         curHitPoints: state.curHitPoints,
-        maxHitPoints: state.maxHitPoints
-      }
+        maxHitPoints: state.maxHitPoints,
+        cashInHand: state.cashInHand,
+        cashInStash: state.cashInStash,
+        cashInBank: state.cashInBank,
+        weapon: state.weapon,
+        atkPower: state.atkPower,
+        armor: state.armor,
+        defPower: state.defPower,
+        outfit: state.outfit,
+        reputation: state.reputation,
+        repScore: state.repScore
+      };
+    case 'RESTORE_HP' :
+      return {
+        location: state.location,
+        name: state.name,
+        sex: state.sex,
+        level: state.level,
+        xp: state.xp,
+        curHitPoints: state.curHitPoints + action.payload,
+        maxHitPoints: state.maxHitPoints,
+        cashInHand: state.cashInHand,
+        cashInStash: state.cashInStash,
+        cashInBank: state.cashInBank,
+        weapon: state.weapon,
+        atkPower: state.atkPower,
+        armor: state.armor,
+        defPower: state.defPower,
+        outfit: state.outfit,
+        reputation: state.reputation,
+        repScore: state.repScore
+    }
     default:
       return state;
   }

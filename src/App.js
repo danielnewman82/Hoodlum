@@ -9,26 +9,67 @@ import CharSheet from './components/CharSheet';
 import WeaponShop from './components/WeaponShop';
 import Bar from './components/Bar';
 import TheTrack from './components/TheTrack';
+import Hospital from './components/Hospital';
 
 function mapStateToProps(state) {
   return {
-    location: state.location
+    state
   };
 }
 
 class App extends Component {
   render() {
-    if (this.props.location === "landing") {
+    if (this.props.state.location === "landing") {
       return <Landing />
     }
-    if (this.props.location === "about") {
+    if (this.props.state.location === "about") {
       return <About />
     }
-    if (this.props.location === "Out On The Street") {
+    if (this.props.state.location === "Out On The Street") {
       return (
         <Fragment>
-        <Header state/>
+        <Header />
         <Street />
+        </Fragment>
+      )
+    }
+    if (this.props.state.location === "Spider's Gun Shop") {
+      return (
+        <Fragment>
+        <Header />
+          <WeaponShop />
+        </Fragment>
+      )
+    }
+    if (this.props.state.location === "Your Stats") {
+      return (
+        <Fragment>
+        <Header />
+          <CharSheet  />
+        </Fragment>
+      )
+    }
+    if (this.props.state.location === "At The Bar") {
+      return (
+        <Fragment>
+        <Header />
+        <Bar />
+        </Fragment>
+      )
+    }
+    if (this.props.state.location === "Looking For Trouble") {
+      return (
+        <Fragment>
+        <Header />
+          <TheTrack />
+        </Fragment>
+      )
+    }
+    if (this.props.state.location === "At The Hospital") {
+      return (
+        <Fragment>
+          <Header />
+          <Hospital />
         </Fragment>
       )
     }
