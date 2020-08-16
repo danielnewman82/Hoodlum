@@ -3,9 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
-    return {
-      state
-    };
+    return {state};
   }
 
 class Landing extends Component {

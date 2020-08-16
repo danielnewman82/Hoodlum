@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
-    return state
+    return {state};
 }
 
 class WeaponShop extends Component {
@@ -12,7 +12,7 @@ class WeaponShop extends Component {
     }
     
     render() {
-        if (this.props.level < 3) {
+        if (this.props.state.level < 3) {
             return (
                 <Container>
             <Row>

@@ -3,9 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
-    return {
-    location: state.location,
-    };
+    return {state};
   }
 
 class Street extends Component {

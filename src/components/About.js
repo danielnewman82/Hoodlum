@@ -54,7 +54,7 @@ class About extends Component {
                     <li>World of Warcraft</li>
                     <li><a href="https://en.wikipedia.org/wiki/Kingpin:_Life_of_Crime">Kingpin: Life of Crime (1999)</a></li>
                     <li><a href="https://bluebottlegames.com/games/neo-scavenger">NEO Scavenger</a></li>
-                    <li>Living in West Oakland most of my adult life</li>
+                    <li>Living in <a href="https://en.wikipedia.org/wiki/West_Oakland,_Oakland,_California">West Oakland</a> most of my adult life</li>
                     </ul>
                 </Col>
             </Row>

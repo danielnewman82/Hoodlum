@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Level1Encounters from './Level1Encounters';
 
 function mapStateToProps(state) {
-    return state
+    return {state};
 }
 
 class TheTrack extends Component {
@@ -22,11 +22,12 @@ class TheTrack extends Component {
     }
     
     pveFight() {
-        this.setState({combat: true});
+        this.setState({ combat : true });
     }
+
     render() {
-        if (this.state.combat === true && this.props.level === 1) {
-            return <Level1Encounters />
+        if (this.state.combat === true && this.props.state.level === 1) {
+            return <Level1Encounters flee={this.street}/>
         }
         return (
             <Container>

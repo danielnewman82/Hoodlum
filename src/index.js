@@ -9,7 +9,7 @@ const initialState = {
   sex: "Dude",
   level: 1,
   xp: 0,
-  curHitPoints: 14,
+  curHitPoints: 20,
   maxHitPoints: 20,
   cashInHand: 0,
   cashInStash: 0,
@@ -46,7 +46,7 @@ function reducer(state = initialState, action) {
         reputation: state.reputation,
         repScore: state.repScore
       };
-    case 'RESTORE_HP' :
+    case 'CHANGE_HP' :
       return {
         location: state.location,
         name: state.name,

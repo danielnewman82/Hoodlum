@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Col, Row, Container } from 'react-bootstrap';
 
 function mapStateToProps(state) {
-    return state
+    return {state};
 }
 
 class Hospital extends Component {
@@ -17,11 +17,12 @@ class Hospital extends Component {
     }
 
     heal = () => {
-        this.props.dispatch({ type: 'RESTORE_HP', payload: this.state.totalDamage})
+        this.props.dispatch({ type: 'CHANGE_HP', payload: this.state.totalDamage})
+        this.props.dispatch({ type: 'CHANGE_CASH', payload: -(this.state.totalDamage * 10)})
     }
 
     render() {
-        if (this.props.curHitPoints < this.props.maxHitPoints) {
+        if (this.props.state.curHitPoints < this.props.state.maxHitPoints) {
             return ( 
             <Container>
                 <Row>
@@ -47,7 +48,8 @@ class Hospital extends Component {
             <Container>
                 <Row>
                     <Col>
-                        The hospital staff look you up and down and tell you, "You're fine, don't waste our time."
+                        The hospital intake nurse looks you up and down and tells you, "You're fine. Don't waste my 
+                        time with your hypochondria."
                     </Col>
                 </Row>
                 <Row>
