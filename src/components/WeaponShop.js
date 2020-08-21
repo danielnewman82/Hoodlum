@@ -27,10 +27,10 @@ class WeaponShop extends Component {
             </Row>
             <Row>
                 <Col>
-                    <button>Buy a Pocket Knife - $20</button>
+                    <button>Buy a Pocket Knife - $40</button>
                 </Col>
                 <Col>
-                    <button>Buy a Baseball Bat - $40</button>
+                    <button>Buy a Baseball Bat - $80</button>
                 </Col>
             </Row>
             <Row>

@@ -40,6 +40,14 @@ class CharSheet extends Component {
             </Row>
             <Row>
                 <Col>
+                    Current Hit Points: <span id="hitPoints">{this.props.state.curHitPoints}</span>
+                </Col>
+                <Col>
+                    Maximum Hit Points: <span id="hitPoints">{this.props.state.maxHitPoints}</span>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
                     Equipped Weapon: {this.props.state.weapon}
                 </Col>
                 <Col>

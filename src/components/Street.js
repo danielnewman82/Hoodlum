@@ -27,6 +27,14 @@ class Street extends Component {
         this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "At The Bar"})
     }
 
+    bank = () => {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "The Credit Union"})
+    }
+
+    graffitiWall = () => {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "The Graffiti Wall"})
+    }
+
     render() {
         return ( 
         <Container id="mainMenu">
@@ -48,7 +56,7 @@ class Street extends Component {
             </Row>
             <Row>
                 <Col>
-                    <button type="button" onClick={this.theBar}>Go To The (B)ar</button>
+                    <button type="button" onClick={this.theBar}>Go To The (C)lub</button>
                 </Col>
                 <Col>
                     <button type="button" onClick={this.gunShop}>(S)pider's Gun Shop</button>
@@ -57,6 +65,14 @@ class Street extends Component {
             <Row>
                 <Col>
                     <button type="button" onClick={this.hospital}>Go To The (H)ospital</button>
+                </Col>
+                <Col>
+                    <button type="button" onClick={this.bank}>Go To The (B)ank</button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <button type="button" onClick={this.graffitiWall}>Hit Up The (G)raffiti Wall</button>
                 </Col>
             </Row>
         </Container>

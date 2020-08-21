@@ -10,11 +10,12 @@ import WeaponShop from './components/WeaponShop';
 import Bar from './components/Bar';
 import TheTrack from './components/TheTrack';
 import Hospital from './components/Hospital';
+import Bank from './components/Bank';
+import Level1Encounters from './components/Level1Encounters';
+import GraffitiWall from './components/GraffitiWall';
 
 function mapStateToProps(state) {
-  return {
-    state
-  };
+  return {state};
 }
 
 class App extends Component {
@@ -70,6 +71,30 @@ class App extends Component {
         <Fragment>
           <Header />
           <Hospital />
+        </Fragment>
+      )
+    }
+    if (this.props.state.location === "In A Street Fight" && this.props.state.level === 1) {
+      return (
+        <Fragment>
+          <Header />
+          <Level1Encounters />
+        </Fragment>
+      )
+    }
+    if (this.props.state.location === "The Credit Union") {
+      return (
+        <Fragment>
+          <Header />
+          <Bank />
+        </Fragment>
+      )
+    }
+    if (this.props.state.location === "The Graffiti Wall") {
+      return (
+        <Fragment>
+          <Header />
+          <GraffitiWall />
         </Fragment>
       )
     }

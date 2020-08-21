@@ -19,10 +19,9 @@ class About extends Component {
         <Container>
             <Row>
                 <Col>
-                    <p>Hoodlum is a browser-based text RPG, set in a bleak, gritty urban environment. It is coded
+                    <p>Hoodlum is a browser-based text RPG, set in a bleak, dystopian urban environment. It is coded
                     in JavaScript, using <a href="https://reactjs.org/">ReactJS</a> and <a href="https://redux.js.org/">
-                    Redux</a>. (Man, was that a pain in the ass to get working!) 
-                    I first started development
+                    Redux</a>. (Man, was that a pain in the ass to get working!) I first started development
                     in late June 2020, whilst I was in the Nucamp web / mobile development bootcamp. Previously, I 
                     implemented a simpler browser game as a project for my Bootstrap class: a remake of an old
                     C64 game I remember fondly from my childhood, "Hike" or "Forest Walk". That was all Bootstrap
@@ -35,12 +34,13 @@ class About extends Component {
                     browser game, and got inspired by another game I remember fondly from childhood: Legend of the
                     Red Dragon. But I have long felt that the whole fantasy dragon-slaying motif has been done to 
                     death, so I took the core mechanics and applied them to a contemporary motif.</p>
-                    <p>Hoodlum is not appropriate for all ages. Some parts depict truly ugly things; part of the game
-                    is that you can choose to be a lowlife, and doing the right thing 
-                    doesn't necessarily pay off. Please keep in mind
-                    that depiction does not equal endorsement. Nor is it intended to be a 100% accurate reflection of
-                    reality. It is a work of fiction, albeit intended to resemble reality closely enough to be a bit
-                    unsettling. My goals are to make people laugh, think, and feel uncomfortable.</p>
+                    <p>Hoodlum is not appropriate for all ages. Some parts depict truly ugly things and abhorrent 
+                    behavior; part of the game is that you can choose to be a lowlife, and doing the right thing 
+                    doesn't necessarily pay off. 
+                    Please keep in mind that depiction does not equal endorsement. Nor is it intended to be a 100% 
+                    accurate reflection of reality. It is a work of fiction, albeit intended to resemble reality 
+                    closely enough to be a bit unsettling. My goals are to make people laugh, think, and feel 
+                    uncomfortable.</p>
                     <p>I hope you enjoy the game. L'chaim!</p>
                     <p>- <a href="mailto:daniel.newman82@gmail.com">Daniel</a>, the implementor</p>
                     
@@ -48,13 +48,23 @@ class About extends Component {
                     <ul> 
                     <li><a href="http://lord.lordlegacy.com/">Legend of the Red Dragon</a>
                     (<a href="https://en.wikipedia.org/wiki/Legend_of_the_Red_Dragon">Wiki</a>)</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Hardcore_hip_hop">Hardcore hip hop</a></li>
                     <li><a href="https://www.kingdomofloathing.com">Kingdom of Loathing</a></li>
                     <li><a href="http://misspentyouth.robertbohl.com/">Misspent Youth</a></li>
-                    <li>World of Warcraft</li>
                     <li><a href="https://en.wikipedia.org/wiki/Kingpin:_Life_of_Crime">Kingpin: Life of Crime (1999)</a></li>
                     <li><a href="https://bluebottlegames.com/games/neo-scavenger">NEO Scavenger</a></li>
                     <li>Living in <a href="https://en.wikipedia.org/wiki/West_Oakland,_Oakland,_California">West Oakland</a> most of my adult life</li>
+                    </ul>
+
+                    This game was coded while listening to:
+                    <ul>
+                        <li>Oozing Wound</li>
+                        <li>Masked Intruder</li>
+                        <li>The Bombpops</li>
+                        <li>Venom</li>
+                        <li>Bad Cop / Bad Cop</li>
+                        <li>The Last Resort</li>
+                        <li>Evil Conduct</li>
+                        <li>Cock Sparrer</li>
                     </ul>
                 </Col>
             </Row>

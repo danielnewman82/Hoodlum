@@ -27,3 +27,14 @@ hr {
   background-color: #ffffff;
   height: 1px;
 }
+
+@font-face {
+  font-family: adrip1;
+  src: url(adrip1.ttf)
+}
+
+#wordOfGod {
+  color: rgb(53, 188, 221);
+  font-family: adrip1;
+  font-size: 30pt;
+}

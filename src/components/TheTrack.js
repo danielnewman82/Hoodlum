@@ -8,11 +8,6 @@ function mapStateToProps(state) {
 }
 
 class TheTrack extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {combat: false}
-    }
-
     street = () => {
         this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
     }
@@ -22,13 +17,14 @@ class TheTrack extends Component {
     }
     
     pveFight() {
-        this.setState({ combat : true });
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "In A Street Fight"})
     }
 
     render() {
-        if (this.state.combat === true && this.props.state.level === 1) {
-            return <Level1Encounters flee={this.street}/>
+        if (this.props.state.location === "In A Street Fight") {
+            return <Level1Encounters />
         }
+        if (this.props.state.location === "Looking For Trouble")
         return (
             <Container>
                 <Row>

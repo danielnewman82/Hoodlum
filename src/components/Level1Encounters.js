@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Crackhead from './Level1Encounters/Crackhead'
+import Mob from './Level1Encounters/Mob'
 
 function mapStateToProps(state) {
     return {state};
@@ -9,7 +9,7 @@ function mapStateToProps(state) {
 class Level1Encounters extends Component {
     render() {
 /*         var encounterNum = (Math.floor(Math.random() * 50)); */
-            return <Crackhead flee={this.props.flee}/>
+            return <Mob />
 /*         if (encounterNum < 50 && yourTurnResults === false) {
             return <SmallerKid />
         } */
