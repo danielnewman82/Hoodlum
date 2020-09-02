@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+//import { useAuth0 } from '@auth0/auth0-react';
 
 function mapStateToProps(state) {
     return {state};
@@ -13,10 +14,21 @@ class Landing extends Component {
     }
 
     street = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
+        if (this.props.state.lockedOut === false) {
+            this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street" })
+        }
+        if (this.props.state.lockedOut === true) {
+            this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "lockout"})
+        }
     }
 
-    render() {
+/*     const LoginButton = () => {
+        const { loginWithRedirect } = useAuth0();
+      
+        return <button onClick={() => loginWithRedirect()}>Hit The Streets Running</button>;
+      }; */
+
+      render() {
         return (
             <Container>
                 <Row>
@@ -37,7 +49,7 @@ class Landing extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <button onClick={this.street}>Hit the streets running</button>
+                        <button onClick={this.street}>Hit The Streets Running</button>
                     </Col>
                 </Row>
                 <Row>
@@ -46,8 +58,7 @@ class Landing extends Component {
                     </Col>
                 </Row>                
             </Container>
-        )
+        )}
     }
-}
 
 export default connect(mapStateToProps)(Landing);

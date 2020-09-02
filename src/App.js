@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 import Landing from './components/Landing';
+import Lockout from './components/Lockout';
 import About from './components/About';
 import Header from './components/Header';
 import Street from './components/Street';
@@ -13,6 +14,8 @@ import Hospital from './components/Hospital';
 import Bank from './components/Bank';
 import Level1Encounters from './components/Level1Encounters';
 import GraffitiWall from './components/GraffitiWall';
+import Gym from './components/Gym';
+import ArmorShop from './components/ArmorShop';
 
 function mapStateToProps(state) {
   return {state};
@@ -25,6 +28,9 @@ class App extends Component {
     }
     if (this.props.state.location === "about") {
       return <About />
+    }
+    if (this.props.state.location === "lockout") {
+      return <Lockout />
     }
     if (this.props.state.location === "Out On The Street") {
       return (
@@ -95,6 +101,22 @@ class App extends Component {
         <Fragment>
           <Header />
           <GraffitiWall />
+        </Fragment>
+      )
+    }
+    if (this.props.state.location === "The Training Gym") {
+      return (
+        <Fragment>
+          <Header />
+          <Gym />
+        </Fragment>
+      )
+    }
+    if (this.props.state.location === "The Milsurp Shop") {
+      return (
+        <Fragment>
+          <Header />
+          <ArmorShop />
         </Fragment>
       )
     }

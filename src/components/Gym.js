@@ -6,17 +6,18 @@ function mapStateToProps(state) {
     return state
 }
 
-class ComponentX extends Component {
+class Gym extends Component {
     street = () => {
         this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
     }
-    
+
     render() {
         return (
             <Container>
                 <Row>
                     <Col>
-                        This is the base template for Hoodlum components.
+                        The neighborhood boxing gym smells of dried sweat and blood. Big, muscly looking dudes are
+                         pummeling heavy bags, pumping iron, and throwing hands in the ring.
                     </Col>
                 </Row>
                 <Row>
@@ -29,4 +30,4 @@ class ComponentX extends Component {
     }
 }
 
-export default connect(mapStateToProps)(ComponentX)
+export default connect(mapStateToProps)(Gym)

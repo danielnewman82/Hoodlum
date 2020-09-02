@@ -12,27 +12,35 @@ class Street extends Component {
     }
 
     viewCharSheet = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Your Stats"})
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Your Stats" })
     }
 
     hospital = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "At The Hospital"})
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "At The Hospital" })
     }
 
     gunShop = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Spider's Gun Shop"})
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Spider's Gun Shop" })
     }
 
     theBar = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "At The Bar"})
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "At The Bar" })
     }
 
     bank = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "The Credit Union"})
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "The Credit Union" })
     }
 
     graffitiWall = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "The Graffiti Wall"})
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "The Graffiti Wall" })
+    }
+    
+    gym = () => {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "The Training Gym" })
+    }
+
+    armorShop = () => {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "The Milsurp Shop" })
     }
 
     render() {
@@ -48,31 +56,42 @@ class Street extends Component {
             </Row>
             <Row>
                 <Col>
-                <button type="button" onClick={this.walkTheTrack}>(W)alk The Track</button>
+                <button onClick={this.walkTheTrack}>(W)alk The Track</button>
                 </Col>
                 <Col>
-                <button type="button" onClick={this.viewCharSheet}>(V)iew Your Stats</button>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <button type="button" onClick={this.theBar}>Go To The (C)lub</button>
-                </Col>
-                <Col>
-                    <button type="button" onClick={this.gunShop}>(S)pider's Gun Shop</button>
+                <button onClick={this.viewCharSheet}>(V)iew Your Stats</button>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <button type="button" onClick={this.hospital}>Go To The (H)ospital</button>
+                    <button onClick={this.gunShop}>Spider's (G)un Shop</button>
                 </Col>
                 <Col>
-                    <button type="button" onClick={this.bank}>Go To The (B)ank</button>
+                    <button onClick={this.armorShop}>The Milsurp (A)rmor Shop</button>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <button type="button" onClick={this.graffitiWall}>Hit Up The (G)raffiti Wall</button>
+                    <button onClick={this.hospital}>Go To The (H)ospital</button>
+                </Col>
+                <Col>
+                    <button onClick={this.bank}>Go To The (B)ank</button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <button onClick={this.graffitiWall}>Hit Up The Graffiti (W)all</button>
+                </Col>
+                <Col>
+                    <button onClick={this.gym}>(L)evel Up At The Gym</button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <button onClick={this.clothingShop}>(S)hop for Clothes</button>
+                </Col>
+                <Col>
+                    <button onClick={this.theBar}>Go To The (C)lub</button>
                 </Col>
             </Row>
         </Container>

@@ -3,9 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
-    return {
-    state
-    };
+    return {state};
   }
 
 class About extends Component {
@@ -57,14 +55,14 @@ class About extends Component {
 
                     This game was coded while listening to:
                     <ul>
-                        <li>Oozing Wound</li>
-                        <li>Masked Intruder</li>
-                        <li>The Bombpops</li>
-                        <li>Venom</li>
-                        <li>Bad Cop / Bad Cop</li>
-                        <li>The Last Resort</li>
-                        <li>Evil Conduct</li>
-                        <li>Cock Sparrer</li>
+                        <li><a href="https://oozingwound.bandcamp.com/">Oozing Wound</a></li>
+                        <li><a href="https://maskedintruder.bandcamp.com/">Masked Intruder</a></li>
+                        <li><a href="https://thebombpops.bandcamp.com/">The Bombpops</a></li>
+                        <li><a href="https://www.metal-archives.com/bands/venom/">Venom</a></li>
+                        <li><a href="https://badcopbadcop.bandcamp.com/album/the-ride">Bad Cop / Bad Cop</a></li>
+                        <li><a href="https://www.facebook.com/thelastresortuk/">The Last Resort</a></li>
+                        <li><a href="https://www.facebook.com/Evil-Conduct-Official-137898319572260/">Evil Conduct</a></li>
+                        <li><a href="https://www.facebook.com/cocksparreruk/">Cock Sparrer</a></li>
                     </ul>
                 </Col>
             </Row>

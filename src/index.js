@@ -2,16 +2,17 @@ import React from 'react';
 import App from './App';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux'
+import { createStore } from 'redux';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 const initialState = {
   name: "Derp",
   sex: "Dude",
   level: 1,
   xp: 0,
-  curHitPoints: 15,
+  curHitPoints: 20,
   maxHitPoints: 20,
-  cashInHand: 15,
+  cashInHand: 20,
   cashInStash: 0,
   cashInBank: 0,
   weapon: " Fists",
@@ -21,95 +22,48 @@ const initialState = {
   outfit: "Shabby Urchin Gear",
   reputation: "Anonymous Nobody",
   repScore: 0, 
-  location: "landing"
+  location: "landing",
+  pveFights: 15,
+  pvpFights: 3,
+  lockedOut: false
 }
 
 function reducer(state = initialState, action) {
   switch(action.type) {
     case 'CHANGE_LOCATION':
       return {
-        location: state.location = action.payload,
-        name: state.name,
-        sex: state.sex,
-        level: state.level,
-        xp: state.xp,
-        curHitPoints: state.curHitPoints,
-        maxHitPoints: state.maxHitPoints,
-        cashInHand: state.cashInHand,
-        cashInStash: state.cashInStash,
-        cashInBank: state.cashInBank,
-        weapon: state.weapon,
-        atkPower: state.atkPower,
-        armor: state.armor,
-        defPower: state.defPower,
-        outfit: state.outfit,
-        reputation: state.reputation,
-        repScore: state.repScore
-      };
+        ...state, location: state.location = action.payload
+    };
+      
     case 'CHANGE_HP' :
       return {
-        location: state.location,
-        name: state.name,
-        sex: state.sex,
-        level: state.level,
-        xp: state.xp,
-        curHitPoints: state.curHitPoints + action.payload,
-        maxHitPoints: state.maxHitPoints,
-        cashInHand: state.cashInHand,
-        cashInStash: state.cashInStash,
-        cashInBank: state.cashInBank,
-        weapon: state.weapon,
-        atkPower: state.atkPower,
-        armor: state.armor,
-        defPower: state.defPower,
-        outfit: state.outfit,
-        reputation: state.reputation,
-        repScore: state.repScore
+      ...state, curHitPoints: state.curHitPoints + action.payload
     }
+
     case 'CHANGE_CASHINHAND' :
       return {
-        location: state.location,
-        name: state.name,
-        sex: state.sex,
-        level: state.level,
-        xp: state.xp,
-        curHitPoints: state.curHitPoints,
-        maxHitPoints: state.maxHitPoints,
-        cashInHand: state.cashInHand + action.payload,
-        cashInStash: state.cashInStash,
-        cashInBank: state.cashInBank,
-        weapon: state.weapon,
-        atkPower: state.atkPower,
-        armor: state.armor,
-        defPower: state.defPower,
-        outfit: state.outfit,
-        reputation: state.reputation,
-        repScore: state.repScore
+      ...state, cashInHand: state.cashInHand + action.payload
     }
+
     case 'CHANGE_CASHINBANK' :
       return {
-        ...state, cashInBank : state.cashInBank + action.payload
-      }
+      ...state, cashInBank : state.cashInBank + action.payload
+    }
+
     case 'GAIN_XP' :
       return {
-        location: state.location,
-        name: state.name,
-        sex: state.sex,
-        level: state.level,
-        xp: state.xp + action.payload,
-        curHitPoints: state.curHitPoints,
-        maxHitPoints: state.maxHitPoints,
-        cashInHand: state.cashInHand,
-        cashInStash: state.cashInStash,
-        cashInBank: state.cashInBank,
-        weapon: state.weapon,
-        atkPower: state.atkPower,
-        armor: state.armor,
-        defPower: state.defPower,
-        outfit: state.outfit,
-        reputation: state.reputation,
-        repScore: state.repScore
+      ...state, xp: state.xp + action.payload
     }
+
+    case 'CHANGE_LOCKOUT' :
+      return {
+        ...state, lockedOut: state.lockedOut = action.payload
+    }
+
+    case 'CHANGE_PVEFIGHTS' :
+      return {
+        ...state, pveFights: state.pveFights + action.payload
+      }
     default:
       return state;
   }
@@ -117,10 +71,18 @@ function reducer(state = initialState, action) {
 
 const store = createStore(reducer);
 
+// maybe someday I'll figure out how to make Auth0 redirect dispatch a Redux action...
+
 const Index = () => (
+  <Auth0Provider
+    domain="dev-voamfjoa.us.auth0.com"
+    clientId="K0VmrctjLtGOExfSh2rtSX17hjtBB7qJ"
+    redirectUri={window.location.origin}
+  >
   <Provider store={store}>
     <App />
   </Provider>
+  </Auth0Provider>
 );
 
 render(<Index />, document.getElementById('root'));

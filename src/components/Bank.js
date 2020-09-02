@@ -9,7 +9,8 @@ function mapStateToProps(state) {
 class Bank extends Component {
     constructor(props) {
         super(props)
-        this.state = { deposit : 0, withdrawal : 0, depositForm : false, depositFailed : false }
+        this.state = { deposit : '', withdrawal : '', depositForm : false, depositFailed : false, 
+        depositSuccess : false, withdrawalFailed : false, withdrawalSuccess : false }
     }
 
     depositForm = () => {
@@ -21,10 +22,14 @@ class Bank extends Component {
     }
 
     deposit = () => {
-        if (this.state.deposit < this.props.state.cashInHand) {
-            this.setState({ depositFailed : true})
+        if (this.state.deposit > this.props.state.cashInHand) {
+            this.setState({ depositFailed : true })
             this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: -(this.props.state.cashInHand)})
             this.props.dispatch({ type: 'CHANGE_CASHINBANK', payload: (this.props.state.cashInHand)})
+        } else {
+            this.setState({ depositSuccess : true })
+            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: -(this.state.deposit) })
+            this.props.dispatch({ type: 'CHANGE_CASHINBANK', payload: (this.state.deposit)})
         }
     }
     render() {
@@ -38,9 +43,19 @@ class Bank extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            <textarea></textarea>
+                            <input type="number" value={this.state.deposit}></input>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col>
+                            <button onClick={this.deposit}>Deposit Cash</button>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <button type="button" onClick={this.street}>Back To The Street</button>
+                        </Col>
+                </Row>
                 </Container>
             )
         }
@@ -52,6 +67,27 @@ class Bank extends Component {
                             You don't have that much money to deposit. Instead, you deposit <span id="cash">${this.props.state.cashInHand}</span>.
                         </Col>
                     </Row>
+                    <Row>
+                        <Col>
+                            <button type="button" onClick={this.street}>Back To The Street</button>
+                        </Col>
+                </Row>
+                </Container>
+            )
+        }
+        if (this.state.depositSuccess === true) {
+            return (
+                <Container>
+                    <Row>
+                        <Col>
+                            You have deposited <span id="cash">${this.state.deposit}</span> in the bank. Very sensible of you.
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <button type="button" onClick={this.street}>Back To The Street</button>
+                        </Col>
+                </Row>
                 </Container>
             )
         }

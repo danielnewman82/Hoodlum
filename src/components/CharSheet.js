@@ -48,6 +48,14 @@ class CharSheet extends Component {
             </Row>
             <Row>
                 <Col>
+                    Street Fights: {this.props.state.pveFights}
+                </Col>
+                <Col>
+                    Player Fights: {this.props.state.pvpFights}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
                     Equipped Weapon: {this.props.state.weapon}
                 </Col>
                 <Col>
