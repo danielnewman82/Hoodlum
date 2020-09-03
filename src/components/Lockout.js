@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Col, Row, Container } from 'react-bootstrap';
 
 function mapStateToProps(state) {
-    return state
+    return {state}
 }
 
-class ComponentX extends Component {
+class Lockout extends Component {
     returnToLanding = () => { 
         this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "landing"})
     }
@@ -29,4 +29,4 @@ class ComponentX extends Component {
         }
     }
 
-export default connect(mapStateToProps)(ComponentX)
+export default connect(mapStateToProps)(Lockout)
