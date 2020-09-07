@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {state};
@@ -45,7 +46,7 @@ class ArmorShop extends Component {
             </Row>
             <Row>
                 <Col>
-                    <button onClick={this.street}>Back To The Street</button>
+                <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
                 </Col>
             </Row>
         </Container>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Col, Row, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {state};
@@ -45,7 +46,7 @@ class Hospital extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            <button type="button" onClick={this.street}>Back To The Street</button>
+                        <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
                         </Col>
                     </Row>
                 </Container>
@@ -62,7 +63,7 @@ class Hospital extends Component {
                     </Row>
                     <Row>
                     <Col>
-                        <button type="button" onClick={this.street}>Back To The Street</button>
+                        <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
                     </Col>
                     </Row>
                 </Container>
@@ -78,7 +79,7 @@ class Hospital extends Component {
                     </Row>
                     <Row>
                     <Col>
-                        <button type="button" onClick={this.street}>Back To The Street</button>
+                    <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
                     </Col>
                     </Row>
                 </Container>
@@ -115,7 +116,7 @@ class Hospital extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <button type="button" onClick={this.street}>Back To The Street</button>
+                    <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
                     </Col>
                 </Row>
             </Container>
@@ -136,7 +137,7 @@ class Hospital extends Component {
                     <button type="button" onClick={this.heal}>Pay For Treatment</button>
                 </Col>
                 <Col>
-                    <button type="button" onClick={this.street}>Back To The Street</button>
+                <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
                 </Col>
             </Row>
         </Container>

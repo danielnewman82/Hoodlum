@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Level1Encounters from './Level1Encounters';
 
 function mapStateToProps(state) {
@@ -38,10 +39,10 @@ class TheTrack extends Component {
                         <button onClick={() => this.pveFight()}>Look for trouble</button>
                     </Col>
                     <Col>
-                        <button onClick={this.hospital}>Go to the clinic</button>
+                        <Link to="/hospital"><button onClick={this.hospital}>Go to the clinic</button></Link>
                     </Col>
                     <Col>
-                        <button onClick={this.street}>Back to the Street</button>
+                        <Link to="/street"><button onClick={this.street}>Back to the Street</button></Link>
                     </Col>
                 </Row>
             </Container>

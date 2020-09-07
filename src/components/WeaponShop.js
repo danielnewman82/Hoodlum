@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {state};
+}
+
+const weapons = {
+
 }
 
 class WeaponShop extends Component {
@@ -35,7 +40,15 @@ class WeaponShop extends Component {
             </Row>
             <Row>
                 <Col>
-                    <button onClick={this.street}>Back To The Street</button>
+                    <button>(3) Slingshot - $60</button>
+                </Col>
+                <Col>
+                    <button>(4) Pellet Rifle - $100</button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
                 </Col>
             </Row>
         </Container>
@@ -63,23 +76,66 @@ class WeaponShop extends Component {
             </Row>
             <Row>
                 <Col>
-                    <button>(3) Krueger Deuce-Deuce - $200</button>
+                    <button>(3) Slingshot - $60</button>
                 </Col>
                 <Col>
-                    <button>(4) Clock 17 - $500</button>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <button>(5) Bolt .45 - $800</button>
-                </Col>
-                <Col>
-                    <button>(6) Schmidt & Easton .357 Magnum - $1200</button>
+                    <button>(4) Pellet Rifle - $100</button>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <button onClick={this.street}>Back To The Street</button>
+                    <button>(5) Krueger Deuce-Deuce - $200</button>
+                </Col>
+                <Col>
+                    <button>(6) Clock 17 - $500</button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <button>(7) Bolt .45 - $800</button>
+                </Col>
+                <Col>
+                    <button>(8) S&E .357 Magnum - $1,200</button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <button>(9) Bloomberg 12 Gauge Pump - $1,500</button>
+                </Col>
+                <Col>
+                    <button>(10) Oozey Machine Pistol - $2,000</button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <button>(11) Lamington Bolt Rifle - $3,000</button>
+                </Col>
+                <Col>
+                    <button>(12) Simonov Karabin - $4,000</button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <button>(13) Arrr-15 - $5,000</button>
+                </Col>
+                <Col>
+                    <button>(14) Hacker & Kooch G3 - $6,000</button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <button>(15) Schtoyl Oogle - $7,000</button>
+                </Col>
+                <Col>
+                    <button>(15) Effin' Mini-Me Machinegun - $9,000</button>
+                </Col>
+            </Row>
+                <Col>
+                    <button>(16) a Goddamn Bazooka - $15,000</button>
+                </Col>
+            <Row>
+                <Col>
+                <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
                 </Col>
             </Row>
         </Container>

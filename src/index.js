@@ -3,16 +3,15 @@ import App from './App';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { Auth0Provider } from '@auth0/auth0-react';
 
 const initialState = {
   name: "Derp",
   sex: "Dude",
-  level: 1,
+  level: 3,
   xp: 0,
   curHitPoints: 20,
   maxHitPoints: 20,
-  cashInHand: 20,
+  cashInHand: 0,
   cashInStash: 0,
   cashInBank: 0,
   weapon: " Fists",
@@ -22,7 +21,7 @@ const initialState = {
   outfit: "Shabby Urchin Gear",
   reputation: "Anonymous Nobody",
   repScore: 0, 
-  location: "landing",
+  location: "",
   pveFights: 15,
   pvpFights: 3,
   lockedOut: false
@@ -74,15 +73,9 @@ const store = createStore(reducer);
 // maybe someday I'll figure out how to make Auth0 redirect dispatch a Redux action...
 
 const Index = () => (
-  <Auth0Provider
-    domain="dev-voamfjoa.us.auth0.com"
-    clientId="K0VmrctjLtGOExfSh2rtSX17hjtBB7qJ"
-    redirectUri={window.location.origin}
-  >
   <Provider store={store}>
     <App />
   </Provider>
-  </Auth0Provider>
 );
 
 render(<Index />, document.getElementById('root'));

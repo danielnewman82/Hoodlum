@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Col, Row, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return state
@@ -21,7 +22,7 @@ class ComponentX extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <button type="button" onClick={this.street}>Back To The Street</button>
+                        <Link to="/street"><button type="button" onClick={this.street}>Back To The Street</button></Link>
                     </Col>
                 </Row>
             </Container>

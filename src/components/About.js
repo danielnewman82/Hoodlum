@@ -1,18 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {state};
   }
 
-class About extends Component {
-    
-    backToLanding = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "landing" })
-    }
-
-    render() {
+function About() {
     return (
         <Container>
             <Row>
@@ -44,36 +39,35 @@ class About extends Component {
                     
                     Inspirations include:
                     <ul> 
-                    <li><a href="http://lord.lordlegacy.com/">Legend of the Red Dragon</a>
-                    (<a href="https://en.wikipedia.org/wiki/Legend_of_the_Red_Dragon">Wiki</a>)</li>
-                    <li><a href="https://www.kingdomofloathing.com">Kingdom of Loathing</a></li>
-                    <li><a href="http://misspentyouth.robertbohl.com/">Misspent Youth</a></li>
-                    <li><a href="https://en.wikipedia.org/wiki/Kingpin:_Life_of_Crime">Kingpin: Life of Crime (1999)</a></li>
-                    <li><a href="https://bluebottlegames.com/games/neo-scavenger">NEO Scavenger</a></li>
-                    <li>Living in <a href="https://en.wikipedia.org/wiki/West_Oakland,_Oakland,_California">West Oakland</a> most of my adult life</li>
+                    <li><a href="http://lord.lordlegacy.com/" target="_blank" rel="noopener noreferrer">Legend of the Red Dragon</a>
+                    (<a href="https://en.wikipedia.org/wiki/Legend_of_the_Red_Dragon" target="_blank" rel="noopener noreferrer">Wiki</a>)</li>
+                    <li><a href="https://www.kingdomofloathing.com" target="_blank" rel="noopener noreferrer">Kingdom of Loathing</a></li>
+                    <li><a href="http://misspentyouth.robertbohl.com/" target="_blank" rel="noopener noreferrer">Misspent Youth</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Kingpin:_Life_of_Crime" target="_blank" rel="noopener noreferrer">Kingpin: Life of Crime (1999)</a></li>
+                    <li><a href="https://bluebottlegames.com/games/neo-scavenger" target="_blank" rel="noopener noreferrer">NEO Scavenger</a></li>
+                    <li>Living in <a href="https://en.wikipedia.org/wiki/West_Oakland,_Oakland,_California" target="_blank" rel="noopener noreferrer">West Oakland</a> most of my adult life</li>
                     </ul>
 
                     This game was coded while listening to:
                     <ul>
-                        <li><a href="https://oozingwound.bandcamp.com/">Oozing Wound</a></li>
-                        <li><a href="https://maskedintruder.bandcamp.com/">Masked Intruder</a></li>
-                        <li><a href="https://thebombpops.bandcamp.com/">The Bombpops</a></li>
-                        <li><a href="https://www.metal-archives.com/bands/venom/">Venom</a></li>
-                        <li><a href="https://badcopbadcop.bandcamp.com/album/the-ride">Bad Cop / Bad Cop</a></li>
-                        <li><a href="https://www.facebook.com/thelastresortuk/">The Last Resort</a></li>
-                        <li><a href="https://www.facebook.com/Evil-Conduct-Official-137898319572260/">Evil Conduct</a></li>
-                        <li><a href="https://www.facebook.com/cocksparreruk/">Cock Sparrer</a></li>
+                        <li><a href="https://oozingwound.bandcamp.com/" target="_blank" rel="noopener noreferrer">Oozing Wound</a></li>
+                        <li><a href="https://maskedintruder.bandcamp.com/" target="_blank" rel="noopener noreferrer">Masked Intruder</a></li>
+                        <li><a href="https://thebombpops.bandcamp.com/" target="_blank" rel="noopener noreferrer">The Bombpops</a></li>
+                        <li><a href="https://www.metal-archives.com/bands/venom/" target="_blank" rel="noopener noreferrer">Venom</a></li>
+                        <li><a href="https://badcopbadcop.bandcamp.com/album/the-ride" target="_blank" rel="noopener noreferrer">Bad Cop / Bad Cop</a></li>
+                        <li><a href="https://www.facebook.com/thelastresortuk/" target="_blank" rel="noopener noreferrer">The Last Resort</a></li>
+                        <li><a href="https://www.facebook.com/Evil-Conduct-Official-137898319572260/" target="_blank" rel="noopener noreferrer">Evil Conduct</a></li>
+                        <li><a href="https://www.facebook.com/cocksparreruk/" target="_blank" rel="noopener noreferrer">Cock Sparrer</a></li>
                     </ul>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <button onClick={this.backToLanding}>Back to the landing page</button>
+                    <Link to="/"><button>Back to the landing page</button></Link>
                 </Col>
             </Row>
         </Container>
     )
-}
 }
 
 export default connect(mapStateToProps)(About);

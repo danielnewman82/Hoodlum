@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {state};
 }
 
-class Bar extends Component {
+class Club extends Component {
 
     street = () => {
         this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
@@ -23,7 +24,7 @@ class Bar extends Component {
                 </Row>
                 <Row>
                     <Col>
-                    <button onClick={this.street}>Back out to the Street</button>
+                    <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
                     </Col>
                 </Row>
             </Container>
@@ -42,7 +43,7 @@ class Bar extends Component {
             </Row>
             <Row>
                 <Col>
-                    <button onClick={this.street}>Back out to the Street</button>
+                    <Link to="/street"><button onClick={this.street}>Back out to the Street</button></Link>
                 </Col>
             </Row>
         </Container>
@@ -50,4 +51,4 @@ class Bar extends Component {
 }
 }
 
-export default connect(mapStateToProps)(Bar);
+export default connect(mapStateToProps)(Club);
