@@ -32,8 +32,9 @@ class Mob extends Component {
     fight() {
         //calculate damage dealt and taken this round
         this.setState({ turnResults : true,
-                        damageDealt : (Math.ceil(this.props.state.atkPower / 2)) + (Math.ceil(Math.random() * (this.props.state.atkPower / 2))),
-                        damageTaken : (Math.max(0, (Math.ceil(Math.random() * 4) - this.props.state.defPower))),
+                        damageDealt : (Math.ceil(this.props.state.weapon.atkPower / 2)) + (Math.ceil(Math.random() * 
+                        (this.props.state.weapon.atkPower / 2))),
+                        damageTaken : (Math.max(0, (Math.ceil(Math.random() * 4) - this.props.state.armor.defPower))),
                     })
         // subtract damage from mob and player HP totals
         this.setState({ mobHP : this.state.mobHP - this.state.damageDealt })

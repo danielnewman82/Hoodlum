@@ -8,8 +8,8 @@ function mapStateToProps(state) {
   }
 
 class CharSheet extends Component {
-    street = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
+    componentDidMount() {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Your Stats"})
     }
 
     render() {
@@ -57,18 +57,18 @@ class CharSheet extends Component {
             </Row>
             <Row>
                 <Col>
-                    Equipped Weapon: {this.props.state.weapon}
+                    Equipped Weapon: {this.props.state.weapon.name}
                 </Col>
                 <Col>
-                    Attack Power: {this.props.state.atkPower}
+                    Attack Power: {this.props.state.weapon.atkPower}
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    Equipped Armor: {this.props.state.armor}
+                    Equipped Armor: {this.props.state.armor.name}
                 </Col>
                 <Col>
-                    Defense Power: {this.props.state.defPower}
+                    Defense Power: {this.props.state.armor.defPower}
                 </Col>
             </Row>
             <Row>

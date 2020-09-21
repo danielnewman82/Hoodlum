@@ -8,8 +8,8 @@ function mapStateToProps(state) {
 }
 
 class Gym extends Component {
-    street = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
+    componentDidMount() {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "The Training Gym"})
     }
 
     render() {

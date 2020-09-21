@@ -14,8 +14,8 @@ class Hospital extends Component {
                     postFullHeal : false, postPartialHeal : false, tooBroke : false, partialHeal : 0 }
     }
 
-    street = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
+    componentDidMount() {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "At The Hospital"})
     }
 
     heal = () => {

@@ -1,25 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {state};
 }
 
-const weapons = {
+function WeaponShopEntrance(props) {
+    let { url } = useRouteMatch();
 
-}
-
-class WeaponShop extends Component {
-    street = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
-    }
-    
-    render() {
-        if (this.props.state.level < 3) {
-            return (
-        <Container>
+    if (props.state.level < 3) {
+        return (
+            <Container>
             <Row>
                 <Col>
                 Most of the gun shops in this neighborhood have gone out of business. Either they didn't
@@ -32,15 +25,15 @@ class WeaponShop extends Component {
             </Row>
             <Row>
                 <Col>
-                    <button>(1) Pocket Knife - $40</button>
+                    <Link to={`${url}/pocketKnife`}><button>(1) Pocket Knife - $40</button></Link>
                 </Col>
                 <Col>
-                    <button>(2) Baseball Bat - $80</button>
+                    <Link to={`${url}/baseballBat`}><button>(2) Baseball Bat - $60</button></Link>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <button>(3) Slingshot - $60</button>
+                    <button>(3) Slingshot - $80</button>
                 </Col>
                 <Col>
                     <button>(4) Pellet Rifle - $100</button>
@@ -48,12 +41,13 @@ class WeaponShop extends Component {
             </Row>
             <Row>
                 <Col>
-                    <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
+                    <Link to="/street"><button>Back To The Street</button></Link>
                 </Col>
             </Row>
         </Container>
         )
     }
+
         return (
         <Container>
             <Row>
@@ -135,11 +129,11 @@ class WeaponShop extends Component {
                 </Col>
             <Row>
                 <Col>
-                <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
+                <Link to="/street"><button>Back To The Street</button></Link>
                 </Col>
             </Row>
         </Container>
         )
     }
-}
-export default connect(mapStateToProps)(WeaponShop);
+
+export default connect(mapStateToProps)(WeaponShopEntrance)

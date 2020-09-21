@@ -18,6 +18,10 @@ class Bank extends Component {
         this.handleWithdrawalChange = this.handleWithdrawalChange.bind(this);
     }
 
+    componentDidMount() {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "The Credit Union"})
+    }
+
     depositForm = () => {
         this.setState({ depositForm : true });
     }

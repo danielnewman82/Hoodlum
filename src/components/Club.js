@@ -8,10 +8,10 @@ function mapStateToProps(state) {
 }
 
 class Club extends Component {
-
-    street = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
+    componentDidMount() {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "At The Club"})
     }
+    
     render() {
     if (this.props.state.level < 3) {
         return (

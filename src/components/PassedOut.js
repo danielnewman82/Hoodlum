@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Col, Row, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import LogoutButton from './logout-button';
 
 function mapStateToProps(state) {
     return {state}
 }
 
-class ComponentX extends Component {
+class PassedOut extends Component {
     componentDidMount() {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "You forgot to update this text, dummy!"})
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Passed Out"})
     }
     
     render() {
@@ -17,12 +17,12 @@ class ComponentX extends Component {
             <Container>
                 <Row>
                     <Col>
-                        This is the base template for Hoodlum components.
+                        Exhausted, you find a doorway to sleep in. Thanks for playing Hoodlum, go do something constructive.
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <Link to="/street"><button>Back To The Street</button></Link>
+                        <LogoutButton />
                     </Col>
                 </Row>
             </Container>
@@ -30,4 +30,4 @@ class ComponentX extends Component {
     }
 }
 
-export default connect(mapStateToProps)(ComponentX)
+export default connect(mapStateToProps)(PassedOut)

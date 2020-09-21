@@ -8,9 +8,8 @@ function mapStateToProps(state) {
 }
 
 class GraffitiWall extends Component {
-
-    street = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
+    componentDidMount() {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "The Graffiti Wall"})
     }
 
     render() {

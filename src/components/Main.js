@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
 import Landing from './Landing';
 import About from './About';
 import Header from './Header';
@@ -19,7 +19,11 @@ import { Auth0Provider } from '@auth0/auth0-react';
 function Main() {
     return (
     <BrowserRouter>
-        <Auth0Provider>
+          <Auth0Provider
+            domain="dev-voamfjoa.us.auth0.com"
+            clientId="K0VmrctjLtGOExfSh2rtSX17hjtBB7qJ"
+            redirectUri={window.location.origin}
+            >
         <Switch>
             <Route exact path="/">
                 <Landing />

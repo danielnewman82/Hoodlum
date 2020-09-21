@@ -2,24 +2,14 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-//import { useAuth0 } from '@auth0/auth0-react';
+import LoginButton from './login-button';
+import SignupButton from './signup-button';
 
 function mapStateToProps(state) {
     return {state};
   }
 
-function Landing(props) {
-
-    const street = () => {
-        props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
-    }
-
-/*     LoginButton = () => {
-        const { loginWithRedirect } = useAuth0();
-      
-        return <button onClick={() => loginWithRedirect()}>Hit The Streets Running</button>;
-      }; */
-
+function Landing() {
     return (
         <Container>
             <Row>
@@ -40,7 +30,12 @@ function Landing(props) {
             </Row>
             <Row>
                 <Col>
-                    <Link to="/street"><button onClick={street}>Hit The Streets Running</button></Link>
+                    <Link to="/street"><LoginButton /></Link>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <SignupButton />
                 </Col>
             </Row>
             <Row>

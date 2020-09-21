@@ -9,12 +9,8 @@ function mapStateToProps(state) {
 }
 
 class TheTrack extends Component {
-    street = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
-    }
-
-    hospital = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "At The Hospital"})
+    componentDidMount() {
+        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Looking For Trouble"})
     }
     
     pveFight() {
@@ -22,10 +18,43 @@ class TheTrack extends Component {
     }
 
     render() {
-        if (this.props.state.location === "In A Street Fight") {
+        if (this.props.state.location === "In A Street Fight" && this.props.state.level === 1) {
             return <Level1Encounters />
         }
-        if (this.props.state.location === "Looking For Trouble")
+        if (this.props.state.location === "In A Street Fight" && this.props.state.level === 2) {
+            return <Level1Encounters />
+        }
+        if (this.props.state.location === "In A Street Fight" && this.props.state.level === 3) {
+            return <Level1Encounters />
+        }
+        if (this.props.state.location === "In A Street Fight" && this.props.state.level === 4) {
+            return <Level1Encounters />
+        }
+        if (this.props.state.location === "In A Street Fight" && this.props.state.level === 5) {
+            return <Level1Encounters />
+        }
+        if (this.props.state.location === "In A Street Fight" && this.props.state.level === 6) {
+            return <Level1Encounters />
+        }
+        if (this.props.state.location === "In A Street Fight" && this.props.state.level === 7) {
+            return <Level1Encounters />
+        }
+        if (this.props.state.location === "In A Street Fight" && this.props.state.level === 8) {
+            return <Level1Encounters />
+        }
+        if (this.props.state.location === "In A Street Fight" && this.props.state.level === 9) {
+            return <Level1Encounters />
+        }
+        if (this.props.state.location === "In A Street Fight" && this.props.state.level === 10) {
+            return <Level1Encounters />
+        }
+        if (this.props.state.location === "In A Street Fight" && this.props.state.level === 11) {
+            return <Level1Encounters />
+        }
+        if (this.props.state.location === "In A Street Fight" && this.props.state.level === 12) {
+            return <Level1Encounters />
+        }
+
         return (
             <Container>
                 <Row>
@@ -39,10 +68,10 @@ class TheTrack extends Component {
                         <button onClick={() => this.pveFight()}>Look for trouble</button>
                     </Col>
                     <Col>
-                        <Link to="/hospital"><button onClick={this.hospital}>Go to the clinic</button></Link>
+                        <Link to="/hospital"><button>Go to the clinic</button></Link>
                     </Col>
                     <Col>
-                        <Link to="/street"><button onClick={this.street}>Back to the Street</button></Link>
+                        <Link to="/street"><button>Back to the Street</button></Link>
                     </Col>
                 </Row>
             </Container>

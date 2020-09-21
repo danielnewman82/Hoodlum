@@ -34,7 +34,7 @@ function About() {
                     accurate reflection of reality. It is a work of fiction, albeit intended to resemble reality 
                     closely enough to be a bit unsettling. My goals are to make people laugh, think, and feel 
                     uncomfortable.</p>
-                    <p>I hope you enjoy the game. L'chaim!</p>
+                    <p>I hope you enjoy the game, and welcome constructive feedback. L'chaim!</p>
                     <p>- <a href="mailto:daniel.newman82@gmail.com">Daniel</a>, the implementor</p>
                     
                     Inspirations include:
@@ -54,7 +54,7 @@ function About() {
                         <li><a href="https://maskedintruder.bandcamp.com/" target="_blank" rel="noopener noreferrer">Masked Intruder</a></li>
                         <li><a href="https://thebombpops.bandcamp.com/" target="_blank" rel="noopener noreferrer">The Bombpops</a></li>
                         <li><a href="https://www.metal-archives.com/bands/venom/" target="_blank" rel="noopener noreferrer">Venom</a></li>
-                        <li><a href="https://badcopbadcop.bandcamp.com/album/the-ride" target="_blank" rel="noopener noreferrer">Bad Cop / Bad Cop</a></li>
+                        <li><a href="https://badcopbadcop.bandcamp.com/" target="_blank" rel="noopener noreferrer">Bad Cop / Bad Cop</a></li>
                         <li><a href="https://www.facebook.com/thelastresortuk/" target="_blank" rel="noopener noreferrer">The Last Resort</a></li>
                         <li><a href="https://www.facebook.com/Evil-Conduct-Official-137898319572260/" target="_blank" rel="noopener noreferrer">Evil Conduct</a></li>
                         <li><a href="https://www.facebook.com/cocksparreruk/" target="_blank" rel="noopener noreferrer">Cock Sparrer</a></li>
