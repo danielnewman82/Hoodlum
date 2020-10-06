@@ -10,7 +10,7 @@ const initialState = {
   name: "Derp",
   sex: "Dude",
   level: 1,
-  xp: 0,
+  xp: 259,
   curHitPoints: 20,
   maxHitPoints: 20,
   cashInHand: 0,

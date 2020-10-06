@@ -57,7 +57,7 @@ class CharSheet extends Component {
             </Row>
             <Row>
                 <Col>
-                    Equipped Weapon: {this.props.state.weapon.name}
+                    Weapon: {this.props.state.weapon.name}
                 </Col>
                 <Col>
                     Attack Power: {this.props.state.weapon.atkPower}
@@ -65,7 +65,7 @@ class CharSheet extends Component {
             </Row>
             <Row>
                 <Col>
-                    Equipped Armor: {this.props.state.armor.name}
+                    Armor: {this.props.state.armor.name}
                 </Col>
                 <Col>
                     Defense Power: {this.props.state.armor.defPower}

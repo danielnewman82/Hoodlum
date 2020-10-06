@@ -19,8 +19,8 @@ class BaseballBat extends Component {
                 this.setState({ insufficientFunds : true })
             }
         else {
+            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: -(60 - this.props.state.weapon.sellPrice) })
             this.props.dispatch({ type: 'CHANGE_WEAPON', payload: {name : " Baseball Bat", sellPrice: 15, atkPower: 10} });
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: -60})
             this.setState({ transactionComplete : true })
         }
     }

@@ -1,17 +1,18 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import WeaponShopEntrance from './WeaponShopEntrance';
 import PocketKnife from './PocketKnife';
 import BaseballBat from './BaseballBat';
-//import BaseballBat from './BaseballBat';
+
 
 function mapStateToProps(state) {
     return {state};
 }
 
 function WeaponShop(props) {
-    useLayoutEffect(() => { props.dispatch({ type: 'CHANGE_LOCATION', payload: "Spider's Gun Shop"}) }, [] );
+    const { dispatch } = props;
+    useEffect(() => { dispatch({ type: 'CHANGE_LOCATION', payload: "Spider's Gun Shop"}) }, [dispatch] );
 
     let { url, path } = useRouteMatch();
         return (

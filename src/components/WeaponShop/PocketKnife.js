@@ -18,8 +18,8 @@ class PocketKnife extends Component {
                 this.setState({ insufficientFunds : true, transactionComplete : false })
             }
         else {
+            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: -(40 - this.props.state.weapon.sellPrice) }); 
             this.props.dispatch({ type: 'CHANGE_WEAPON', payload: {name : " Pocket Knife", sellPrice: 10, atkPower: 7} });
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: -40})
             this.setState({ transactionComplete : true })
         }
     }
