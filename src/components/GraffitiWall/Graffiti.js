@@ -10,7 +10,7 @@ function mapStateToProps(state) {
 class Graffiti extends Component {
 
     submit = () => {
-        
+
     }
     
     render() {
@@ -29,7 +29,7 @@ class Graffiti extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <button onClick={submit}>Write your tag</button>
+                        <button>Write your tag</button>
                     </Col>
                 </Row>
                 <Row>
