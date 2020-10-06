@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Graffiti from './Graffiti';
 
 function mapStateToProps(state) {
     return {state};
@@ -28,6 +29,11 @@ class GraffitiWall extends Component {
                         you, but spouting asinine, bigoted nonsense will get you banned. Also, keep in mind that
                         this is a gang-infested neighborhood. Write too much, and you risk going over someone else's
                         tag, and they will be REALLY mad. - God </span>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Graffiti />
                     </Col>
                 </Row>
                 <Row>
