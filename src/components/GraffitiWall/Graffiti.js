@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Col, Row, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {state}
 }
 
 class Graffiti extends Component {
+    constructor(props){
+        super(props);
+        this.state = { tags: [] }
+    }
 
-    submit = () => {
+    componentDidMount() {
+        this.getTags();
+    }
 
+    getTags = () => {
+        fetch('/api/getTags')
+        .then(res => res.json())
+        .then(tags => this.setState({ tags }))
     }
     
     render() {
+        const { tags } = this.state;
+
         return (
             <Container>
                 <Row>
@@ -23,7 +34,7 @@ class Graffiti extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <textarea name="grafInput" maxlength="255" cols="51" rows="5" required="true" 
+                        <textarea name="grafInput" maxLength="200" cols="50" rows="4" required={true}
                         minLength="3" />
                     </Col>
                 </Row>
@@ -39,7 +50,22 @@ class Graffiti extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        
+                        {tags.length ? (
+                            <div>
+                                {tags.map((item) => {
+                                    return(
+                                        <div>
+                                            {item}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        ) : (
+                            <div>
+                                <h2>Looks like they just repainted the wall.</h2>
+                            </div>
+                        )
+                        }
                     </Col>
                 </Row>
             </Container>

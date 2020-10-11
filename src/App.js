@@ -13,7 +13,7 @@ import ArmorShop from './components/ArmorShop';
 import Hospital from './components/Hospital';
 import Bank from './components/Bank';
 import GraffitiWall from './components/GraffitiWall/GraffitiWall';
-import Gym from './Gym/Gym';
+import Gym from './components/Gym/Gym';
 import Club from './components/Club';
 import PassedOut from './components/PassedOut';
 
