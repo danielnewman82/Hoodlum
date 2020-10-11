@@ -41,7 +41,7 @@ class Mob extends Component {
         this.props.dispatch({ type: 'CHANGE_HP', payload: -this.state.damageTaken})
         // if mob HP reaches 0 first, give cash and XP
         if (this.state.mobHP - this.state.damageDealt <= 0) {
-            this.setState({ turnResults : false, fightResults : "win", cashGained : Math.ceil(Math.random() * 16) + 4,
+            this.setState({ turnResults : false, fightResults : "win", cashGained : Math.ceil(Math.random() * 16) + 16,
                             xpGained : Math.ceil((Math.random() * 6) + 4) })
             this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: this.state.cashGained})
             this.props.dispatch({ type: 'GAIN_XP', payload: this.state.xpGained})
@@ -50,7 +50,6 @@ class Mob extends Component {
         if (this.props.state.curHitPoints - this.state.damageTaken <= 0) {
             this.setState({ turnResults : false, fightResults : "lose", cashGained : -(this.props.state.cashInHand * Math.ceil(0.5)) })
             this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: this.state.cashGained})
-            this.props.dispatch({ type: 'CHANGE_LOCKOUT', payload: true })
         }
         // this guy exists solely as a workaround, so React will render current HP totals
         this.setState({ flipFlop : !this.state.flipFlop })
@@ -70,6 +69,7 @@ class Mob extends Component {
                             cashGained : (Math.ceil(this.props.state.cashInHand * 0.5)) })
             this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: (this.state.cashGained) })
             this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "landing" })
+            this.props.dispatch({ type: 'CHANGE_LOCKOUT', payload: true })
         }
     }
 

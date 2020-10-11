@@ -1,1 +1,0 @@
-mongo "mongodb+srv://cluster0.cnht3.mongodb.net/HoodlumData" --username Tagger
