@@ -7,7 +7,7 @@ function mapStateToProps(state) {
 }
 
 class Graffiti extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = { tags: [] }
     }
@@ -52,10 +52,10 @@ class Graffiti extends Component {
                     <Col>
                         {tags.length ? (
                             <div>
-                                {tags.map((item) => {
+                                {tags.map( ({text, author, time}) => {
                                     return(
                                         <div>
-                                            {item}
+                                            {text} - {author} at {time}
                                         </div>
                                     );
                                 })}

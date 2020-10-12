@@ -28,7 +28,7 @@ class GraffitiWall extends Component {
                         <span id="wordOfGod"> Speak your mind here. I'm not going to try and censor
                         you, but spouting asinine, bigoted nonsense will get you banned. Also, keep in mind that
                         this is a gang-infested neighborhood. Write too much, and you risk going over someone else's
-                        tag, and they will be REALLY mad. - God </span>
+                        tag, and they will be REALLY mad. - Trap God </span>
                     </Col>
                 </Row>
                 <Row>
@@ -38,7 +38,7 @@ class GraffitiWall extends Component {
                 </Row>
                 <Row>
                     <Col>
-                    <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
+                    <Link to="/street"><button>Back To The Street</button></Link>
                     </Col>
                 </Row>
             </Container>
