@@ -6,55 +6,17 @@ function mapStateToProps(state) {
     return {state}
 }
 
-class Graffiti extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { tags: [] }
-    }
-
-    componentDidMount() {
-        this.getTags();
-    }
-
-    getTags = () => {
-        fetch('/api/getTags')
-        .then(res => res.json())
-        .then(tags => this.setState({ tags }))
-    }
-    
+class Graffiti extends Component { 
     render() {
-        const { tags } = this.state;
-
         return (
             <Container>
                 <Row>
                     <Col>
-                        Enter your tag here:
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <textarea name="grafInput" maxLength="200" cols="50" rows="4" required={true}
-                        minLength="3" />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <button>Write your tag</button>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        Other recent tags are scrawled on the wall in marker and spraypaint:
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        {tags.length ? (
+                    {this.props.tags.length ? (
                             <div>
-                                {tags.map( ({text, author, time}) => {
+                                {this.props.tags.slice(0,9).reverse().map( ({text, author, _id, time}) => {
                                     return(
-                                        <div>
+                                        <div key={_id}>
                                             {text} - {author} at {time}
                                         </div>
                                     );

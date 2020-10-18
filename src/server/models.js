@@ -35,7 +35,3 @@ const userSchema = new mongoose.Schema({
     lockedOut: Boolean,
 })
 
-const Graffiti = mongoose.model('Graffiti', grafSchema);
-const grafTest1 = new Graffiti({ text: {input}, author: {/*user.name*/}, 
-    date: new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString() });
-

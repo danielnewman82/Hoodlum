@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Auth0ProviderWithHistory from './auth0-provider-with-history';
 
 const initialState = {
-  name: "Derp",
+  name: "Trap God",
   sex: "Dude",
   level: 1,
   xp: 0,
@@ -25,8 +25,9 @@ const initialState = {
   pveFights: 15,
   pvpFights: 3,
   lockedOut: false,
+  tagsToday: 3,
 
-  fists : { buyPrice : 0, sellprice : 0, atkPower : 4 },
+/*   fists : { buyPrice : 0, sellprice : 0, atkPower : 4 },
   pocketKnife : { buyPrice : 40, sellPrice : 10, atkPower : 7},
   baseballBat : { buyPrice : 60, sellPrice : 15, atkPower : 10},
   slingshot : { buyPrice : 80, sellPrice : 20, atkPower : 13},
@@ -43,7 +44,7 @@ const initialState = {
   g3 : { buyPrice : 6000, sellPrice : 2500, atkPower : 120},
   aug : { buyPrice : 8000, sellPrice : 3000, atkPower : 150},
   minimi : { buyPrice : 10000, sellPrice : 4000, atkPower : 180},
-  bazooka : { buyPrice : 15000, sellPrice : 6000, atkPower : 200},
+  bazooka : { buyPrice : 15000, sellPrice : 6000, atkPower : 200}, */
 
 }
 
@@ -88,7 +89,11 @@ function reducer(state = initialState, action) {
       return {
         ...state, weapon: state.weapon = action.payload
       }
-    
+    case 'CHANGE_TAGSTODAY' :
+      return {
+        ...state, tagsToday: state.tagsToday + action.payload
+      }
+
     default:
       return state;
   }

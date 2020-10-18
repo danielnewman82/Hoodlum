@@ -18,7 +18,7 @@ function Lockout() {
             </Row>
             <Row>
                 <Col>
-                    <Link to="/"><button>Back To The Street</button></Link>
+                    <Link to="/"><button>Back To The Front Page</button></Link>
                 </Col>
             </Row>
         </Container>
