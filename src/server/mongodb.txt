@@ -1,1 +1,1 @@
-mongo "mongodb+srv://cluster0.cnht3.mongodb.net/HoodlumData" --username Tagger
+mongo "mongodb+srv://cluster0.cnht3.mongodb.net/HoodlumData" --username User --password 0D7JkExG5kRLUdrx

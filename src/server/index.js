@@ -1,9 +1,13 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const app = express();
+
+const dotenv = require('dotenv').config();
+const taggerURI = process.env.MONGODB_TAGGER_URI;
+const userURI = process.env.MONGODB_USER_URI;
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, '../../public/')));
@@ -43,21 +47,19 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-app.get('/api/findUserByEmail', (req, res) => {
-    mongoose.connect('mongodb+srv://User:0D7JkExG5kRLUdrx@cluster0.cnht3.mongodb.net/HoodlumData',
-        {useNewUrlParser: true, useUnifiedTopology: true});
+app.get('/api/findUserByEmail/:email', (req, res) => {
+    mongoose.connect(userURI, {useNewUrlParser: true, useUnifiedTopology: true});
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
-    User.findOne({ email: req.body.email }, function (err, users) {
+    User.findOne({ email: req.params.email }, function (err, user) {
         if (err) return console.error(err);
-        res.send(users);
-    });
-    console.log()
+        res.send(user);
+    }).exec();
+    console.log('Found user by email');
 })
 
 app.get('/api/getTags', (req, res) => {
-    mongoose.connect('mongodb+srv://Tagger:X0VVQtA1U1UTCZa7@cluster0.cnht3.mongodb.net/HoodlumData', 
-        {useNewUrlParser: true, useUnifiedTopology: true});
+    mongoose.connect(taggerURI, {useNewUrlParser: true, useUnifiedTopology: true});
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     Tag.find(function (err, tags) {
@@ -65,14 +67,16 @@ app.get('/api/getTags', (req, res) => {
         res.send(tags);
     });
     console.log('Sent array of tag objects')
+    console.log('URI = ' + taggerURI)
 });
 
 app.post('/api/postTag', (req, res) => {
-    mongoose.connect('mongodb+srv://Tagger:X0VVQtA1U1UTCZa7@cluster0.cnht3.mongodb.net/HoodlumData', {useNewUrlParser: true, useUnifiedTopology: true});
+    mongoose.connect(taggerURI, {useNewUrlParser: true, useUnifiedTopology: true});
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     Tag.create({ text: req.body.text, author: req.body.author, time: req.body.time });
     res.send(console.log('Tag posted to DB'))
+    console.log('URI = ' + taggerURI)
 });
 
 // Handles any requests that don't match the ones above
