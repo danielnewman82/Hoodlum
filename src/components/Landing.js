@@ -2,8 +2,6 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import LoginButton from './login-button';
-import SignupButton from './signup-button';
 
 function mapStateToProps(state) {
     return {state};
@@ -30,12 +28,20 @@ function Landing() {
             </Row>
             <Row>
                 <Col>
-                    <Link to="/street"><LoginButton /></Link>
+                    <form label="login">
+                        Email: <input label="login"></input><br />
+                        Password: <input label="login"></input>
+                    </form>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <SignupButton />
+                    <Link to="/street"><button type="submit">Hit the Streets Running</button></Link>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    Social identity (Google, Facebook, etc) providers coming soon!
                 </Col>
             </Row>
             <Row>

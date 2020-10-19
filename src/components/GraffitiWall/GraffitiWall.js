@@ -42,6 +42,7 @@ class GraffitiWall extends Component {
         })
         this.getTags();
         this.props.dispatch({ type: 'CHANGE_TAGSTODAY', payload: 1});
+        this.setState({ input: '' })
         } else {
             this.props.dispatch({ type: 'CHANGE_LOCKOUT', payload: true})
             this.setState({ shutUp: true });
@@ -101,8 +102,8 @@ class GraffitiWall extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <textarea name="grafInput" maxLength="140" cols="35" rows="4" required={true}
-                        minLength="3" onChange={this.handleTagInput} />
+                        <textarea name="grafInput" id="grafInput" maxLength="140" cols="35" rows="4" required={true}
+                        minLength="3" value={this.state.input} onChange={this.handleTagInput} />
                     </Col>
                 </Row>
                 <Row>

@@ -25,7 +25,7 @@ const initialState = {
   pveFights: 15,
   pvpFights: 3,
   lockedOut: false,
-  tagsToday: 3,
+  tagsToday: 2,
 
 /*   fists : { buyPrice : 0, sellprice : 0, atkPower : 4 },
   pocketKnife : { buyPrice : 40, sellPrice : 10, atkPower : 7},
