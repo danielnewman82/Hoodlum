@@ -10,7 +10,7 @@ const taggerURI = process.env.MONGODB_TAGGER_URI;
 const userURI = process.env.MONGODB_USER_URI;
 
 // Serve the static files from the React app
-app.use(express.static(path.join(__dirname, '../../public/')));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(bodyParser.json());
 
 const tagSchema = new mongoose.Schema({
@@ -22,27 +22,29 @@ const tagSchema = new mongoose.Schema({
 const Tag = mongoose.model('Tag', tagSchema);
 
 const userSchema = new mongoose.Schema({
-    email: String,
-    password: String,
-    name: String,
-    sex: String,
-    level: Number,
-    xp: Number,
-    curHitPoints: Number,
-    maxHitPoints: Number,
-    cashInHand: Number,
-    cashInStash: Number,
-    cashInBank: Number,
+    email: {type: String, required: true},
+    password: {type: String, required: true},
+    creationDate: {type: Date, default: new Date().toDateString(), required: true},
+    lastLogin: {type: Date, required: true},
+    name: {type: String, required: true},
+    sex: {type: String, required: true},
+    level: {type: Number, required: true},
+    xp: {type: Number, required: true},
+    curHitPoints: {type: Number, required: true},
+    maxHitPoints: {type: Number, required: true},
+    cashInHand: {type: Number, required: true},
+    cashInStash: {type: Number, required: true},
+    cashInBank: {type: Number, required: true},
     weapon: Object,
     armor: Object,
-    outfit: String,
-    reputation: String,
-    repScore: Number, 
+    outfit: {type: String, required: true},
+    reputation: {type: String, required: true},
+    repScore: {type: Number, required: true}, 
     location: String,
-    pveFights: Number,
-    pvpFights: Number,
+    pveFights: {type: Number, required: true},
+    pvpFights: {type: Number, required: true},
     lockedOut: Boolean,
-    tagsToday: Number
+    tagsToday: {type: Number, required: true},
 })
 
 const User = mongoose.model('User', userSchema);
@@ -67,7 +69,6 @@ app.get('/api/getTags', (req, res) => {
         res.send(tags);
     });
     console.log('Sent array of tag objects')
-    console.log('URI = ' + taggerURI)
 });
 
 app.post('/api/postTag', (req, res) => {
@@ -76,12 +77,11 @@ app.post('/api/postTag', (req, res) => {
     db.on('error', console.error.bind(console, 'connection error:'));
     Tag.create({ text: req.body.text, author: req.body.author, time: req.body.time });
     res.send(console.log('Tag posted to DB'))
-    console.log('URI = ' + taggerURI)
 });
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'../../../public/index.html'));
+    res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 const port = process.env.PORT || 5000;

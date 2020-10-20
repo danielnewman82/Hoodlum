@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Col, Row, Container } from 'react-bootstrap';
-import LogoutButton from './logout-button';
+import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {state}
@@ -22,7 +22,7 @@ class PassedOut extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <LogoutButton />
+                        <Link to="/"><button>Log Out</button></Link>
                     </Col>
                 </Row>
             </Container>

@@ -4,7 +4,6 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
-import Auth0ProviderWithHistory from './auth0-provider-with-history';
 
 const initialState = {
   name: "Trap God",
@@ -103,11 +102,9 @@ const store = createStore(reducer);
 
 const Index = () => (
   <BrowserRouter>
-    <Auth0ProviderWithHistory>
       <Provider store={store}>
         <App />
       </Provider>
-    </Auth0ProviderWithHistory>
   </BrowserRouter>
 );
 
