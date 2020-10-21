@@ -13,6 +13,11 @@ const userURI = process.env.MONGODB_USER_URI;
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(bodyParser.json());
 
+// Handles any requests that don't match the ones above
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+});
+
 const tagSchema = new mongoose.Schema({
     text: String,
     author: String,
@@ -77,11 +82,6 @@ app.post('/api/postTag', (req, res) => {
     db.on('error', console.error.bind(console, 'connection error:'));
     Tag.create({ text: req.body.text, author: req.body.author, time: req.body.time });
     res.send(console.log('Tag posted to DB'))
-});
-
-// Handles any requests that don't match the ones above
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 const port = process.env.PORT || 5000;

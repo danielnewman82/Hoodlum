@@ -6,7 +6,6 @@
 .pnp.js
 .env
 mongodb.txt
-Procfile
 
 # testing
 /coverage
