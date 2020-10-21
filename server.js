@@ -9,8 +9,6 @@ const dotenv = require('dotenv').config();
 const taggerURI = process.env.MONGODB_TAGGER_URI;
 const userURI = process.env.MONGODB_USER_URI;
 
-// Serve the static files from the React app
-app.use(express.static(path.join(__dirname, '/public/')));
 app.use(bodyParser.json());
 
 const tagSchema = new mongoose.Schema({
@@ -76,6 +74,8 @@ app.post('/api/postTag', (req, res) => {
     Tag.create({ text: req.body.text, author: req.body.author, time: req.body.time });
     res.send(console.log('Tag posted to DB'))
 });
+
+app.use(express.static(path.join(__dirname, '/public/')));
 
 // Handles any requests that don't match the ones above
 /* app.get('/*', (req, res) => {
