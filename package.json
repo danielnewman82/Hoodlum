@@ -28,11 +28,10 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5"
   },
+  "main": "server.js",
   "scripts": {
-    "start": "concurrently \"nodemon server\" \"react-scripts start\"",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node server.js",
+    "heroku-postbuild": "npm install --only=dev && npm install && npm run build"
   },
   "proxy": "http://localhost:5000",
   "eslintConfig": {
