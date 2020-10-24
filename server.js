@@ -9,7 +9,17 @@ const dotenv = require('dotenv').config();
 const taggerURI = process.env.MONGODB_TAGGER_URI;
 const userURI = process.env.MONGODB_USER_URI;
 
+<<<<<<< HEAD
+=======
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, '/public')));
+>>>>>>> parent of dc0c010... Made a mess of things, at least got it back to working locally.
 app.use(bodyParser.json());
+
+// Handles any requests that don't match the ones above
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+});
 
 const tagSchema = new mongoose.Schema({
     text: String,
@@ -20,27 +30,29 @@ const tagSchema = new mongoose.Schema({
 const Tag = mongoose.model('Tag', tagSchema);
 
 const userSchema = new mongoose.Schema({
-    email: String,
-    password: String,
-    name: String,
-    sex: String,
-    level: Number,
-    xp: Number,
-    curHitPoints: Number,
-    maxHitPoints: Number,
-    cashInHand: Number,
-    cashInStash: Number,
-    cashInBank: Number,
+    email: {type: String, required: true},
+    password: {type: String, required: true},
+    creationDate: {type: Date, default: new Date().toDateString(), required: true},
+    lastLogin: {type: Date, required: true},
+    name: {type: String, required: true},
+    sex: {type: String, required: true},
+    level: {type: Number, required: true},
+    xp: {type: Number, required: true},
+    curHitPoints: {type: Number, required: true},
+    maxHitPoints: {type: Number, required: true},
+    cashInHand: {type: Number, required: true},
+    cashInStash: {type: Number, required: true},
+    cashInBank: {type: Number, required: true},
     weapon: Object,
     armor: Object,
-    outfit: String,
-    reputation: String,
-    repScore: Number, 
+    outfit: {type: String, required: true},
+    reputation: {type: String, required: true},
+    repScore: {type: Number, required: true}, 
     location: String,
-    pveFights: Number,
-    pvpFights: Number,
+    pveFights: {type: Number, required: true},
+    pvpFights: {type: Number, required: true},
     lockedOut: Boolean,
-    tagsToday: Number
+    tagsToday: {type: Number, required: true},
 })
 
 const User = mongoose.model('User', userSchema);
@@ -75,6 +87,7 @@ app.post('/api/postTag', (req, res) => {
     res.send(console.log('Tag posted to DB'))
 });
 
+<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Handles any requests that don't match the ones above
@@ -82,6 +95,8 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
+=======
+>>>>>>> parent of dc0c010... Made a mess of things, at least got it back to working locally.
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log('Express server is running on ' + port));
 

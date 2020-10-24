@@ -13,8 +13,9 @@ function About() {
             <Row>
                 <Col>
                     <p>Hoodlum is a browser-based text RPG, set in a bleak, dystopian urban environment. It is coded
-                    in JavaScript, using <a href="https://reactjs.org/">ReactJS</a> and <a href="https://redux.js.org/">
-                    Redux</a>. (Man, was that a pain in the ass to get working!) I first started development
+                    in JavaScript, using the <a href="https://www.mongodb.com/">M</a><a href="http://expressjs.com/">E</a> 
+                    <a href="https://reactjs.org/">R</a><a href="https://nodejs.org/en/">N</a> stack.
+                    I first started development
                     in late June 2020, whilst I was in the Nucamp web / mobile development bootcamp. Previously, I 
                     implemented a simpler browser game as a project for my Bootstrap class: a remake of an old
                     C64 game I remember fondly from my childhood, "Hike" or "Forest Walk". That was all Bootstrap
