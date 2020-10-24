@@ -75,14 +75,12 @@ app.post('/api/postTag', (req, res) => {
     res.send(console.log('Tag posted to DB'))
 });
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname,'/build')));
 
 // Handles any requests that don't match the ones above
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/build', 'index.html'));
+app.get('/', function (req, res, next) {
+    res.sendFile(path.resolve('build/index.html'));
 });
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log('Express server is running on ' + port));
-
-console.log('App is listening on port ' + port);
