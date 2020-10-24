@@ -9,11 +9,8 @@ const dotenv = require('dotenv').config();
 const taggerURI = process.env.MONGODB_TAGGER_URI;
 const userURI = process.env.MONGODB_USER_URI;
 
-<<<<<<< HEAD
-=======
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, '/public')));
->>>>>>> parent of dc0c010... Made a mess of things, at least got it back to working locally.
 app.use(bodyParser.json());
 
 // Handles any requests that don't match the ones above
@@ -87,16 +84,6 @@ app.post('/api/postTag', (req, res) => {
     res.send(console.log('Tag posted to DB'))
 });
 
-<<<<<<< HEAD
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Handles any requests that don't match the ones above
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
-});
-
-=======
->>>>>>> parent of dc0c010... Made a mess of things, at least got it back to working locally.
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log('Express server is running on ' + port));
 

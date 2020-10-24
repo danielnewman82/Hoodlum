@@ -27,13 +27,9 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5"
   },
-<<<<<<< HEAD
-  "main": "server.js",
-=======
   "devDependencies": {
     "concurrently": "^4.1.2"
   },
->>>>>>> parent of dc0c010... Made a mess of things, at least got it back to working locally.
   "scripts": {
     "start": "node server.js"
   },
