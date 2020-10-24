@@ -119,7 +119,7 @@ class GraffitiWall extends Component {
                     <Col>
                     {this.state.tags.length ? (
                             <div>
-                                {this.state.tags.slice(0,9).reverse().map( ({text, author, _id, time}) => {
+                                {this.props.tags.slice(0,9).reverse().map( ({text, author, _id, time}) => {
                                     return(
                                         <div key={_id}>
                                             {text} - {author} at {time}
