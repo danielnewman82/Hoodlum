@@ -12,10 +12,11 @@ import WeaponShop from './components/WeaponShop/WeaponShop';
 import ArmorShop from './components/ArmorShop';
 import Hospital from './components/Hospital';
 import Bank from './components/Bank';
-import GraffitiWall from './components/GraffitiWall/GraffitiWall';
+import GraffitiWall from './components/GraffitiWall';
 import Gym from './components/Gym/Gym';
 import Club from './components/Club';
 import PassedOut from './components/PassedOut';
+import SignUp from "./components/SignUp";
 
 function mapStateToProps(state) {
   return {state};
@@ -29,6 +30,9 @@ function App() {
       </Route>
       <Route path="/about">
         <About />
+      </Route>
+      <Route path="/signup">
+        <SignUp />
       </Route>
       <Route path="/street">
         <Header />
