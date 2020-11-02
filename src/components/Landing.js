@@ -10,40 +10,26 @@ function mapStateToProps(state) {
 class Landing extends Component {
     constructor(props) {
         super(props);
-        this.state = { emailInput : "", passwordInput : "", email : [] };
-        this.validateEmailInput = this.validateEmailInput.bind(this);
+        this.state = { email : "", password : "" };
     }
 
-    handleEmailInput = (e) => {
-        this.setState({ emailInput: e.target.value })
-    }
-    handlePasswordInput = (e) => {
-        this.setState({ passwordInput: e.target.value })
+    handleInputChange = (e) => {
+        const { value, name } = e.target
+        this.setState({ [name]: value });
     }
 
-    getEmails = () => {
-        fetch('/api/getEmails')
-        .then(res => res.json())
-        .then(emails => emails.map(({email}) => email))
-        .then(email => this.setState({ email }))
-        return new Promise(resolve => {
-            setTimeout(() => {
-              resolve('Email list fetched.');
-            }, 100);
-          });
-    };
-
-    validateEmailInput = async () => {
-        const result = await this.getEmails();
-        console.log(result);
-        if (this.state.email.includes(this.state.emailInput) === true) {
-            console.log("Email address matched!");
-            this.setState({ newAccount : false })
-        } else this.setState({ newAccount : true })
-    }
-    
-
-    //validatePassword = () => {}
+    onSubmit = (e) => {
+        e.preventDefault();
+        fetch('/api/authenticate', {
+            method: 'POST',
+            body: JSON.stringify(this.state),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        .then(res => {res.json()})
+        .then(error => console.log(error))
+        }
 
     render() {
         if (this.state.newAccount === false) {
@@ -73,25 +59,35 @@ class Landing extends Component {
                 <Row>
                     <Col>
                         <form label="login">
-                            Email: <input label="login" value={this.state.emailInput} onChange={this.handleEmailInput}></input><br />
-                            Password: <input label="login" value={this.state.passwordInput} onChange={this.handlePasswordInput}></input>
+                            Email: <input
+                                type="email"
+                                name="email"
+                                placeholder="Enter email"
+                                value={this.state.email}
+                                onChange={this.handleInputChange}
+                                required
+                                /> <br />
+                            Password: <input 
+                                type="password"
+                                name="password"
+                                placeholder="Enter password"
+                                value={this.state.password}
+                                onChange={this.handleInputChange}
+                                required
+                                /> <br />
+                            <button type="submit" value="Submit">Hit the Streets Running</button>
                         </form>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <button type="submit" onClick={this.validateEmailInput}>Hit the Streets Running</button>
+                        Social identity (Google, Facebook, etc) providers coming soon!
                     </Col>
                 </Row>
-                    <Row>
-                        <Col>
-                            Social identity (Google, Facebook, etc) providers coming soon!
-                        </Col>
-                    </Row>
-                    <Row>
-                    <Col>
-                        <Link to="/about"><button>About Hoodlum</button></Link>
-                    </Col>
+                <Row>
+                <Col>
+                    <Link to="/about"><button>About Hoodlum</button></Link>
+                </Col>
                 </Row>                
             </Container>
             )
