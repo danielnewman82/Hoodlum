@@ -41,6 +41,14 @@ class Hospital extends Component {
                 <Container>
                     <Row>
                         <Col>
+                        <h3>At The Hospital</h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
+                    <Row>
+                        <Col>
                             You can't afford health care. Good luck with your life.
                         </Col>
                     </Row>
@@ -55,6 +63,14 @@ class Hospital extends Component {
         if (this.state.postFullHeal === true) {
             return (
                 <Container>
+                    <Row>
+                        <Col>
+                        <h3>At The Hospital</h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
                     <Row>
                         <Col>
                             The trauma docs treat your injuries with impressive skill and alacrity. You are ready to
@@ -74,6 +90,14 @@ class Hospital extends Component {
                 <Container>
                     <Row>
                         <Col>
+                        <h3>At The Hospital</h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
+                    <Row>
+                        <Col>
                             The trauma docs do what they can, and it helps a little, but you still feel kind of run-down.
                         </Col>
                     </Row>
@@ -88,6 +112,14 @@ class Hospital extends Component {
         if (this.state.tooBroke === true && this.props.state.cashInHand > 0) {
             return (
                 <Container>
+                    <Row>
+                        <Col>
+                        <h3>At The Hospital</h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
                     <Row>
                         <Col>
                             You sheepishly explain to the doctor that you don't have that kind of money. He rolls his 
@@ -108,6 +140,14 @@ class Hospital extends Component {
         if (this.props.state.curHitPoints === this.props.state.maxHitPoints) {
         return (
             <Container>
+                    <Row>
+                        <Col>
+                        <h3>At The Hospital</h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
                 <Row>
                     <Col>
                         The hospital intake nurse looks you up and down and tells you, "You're fine. Don't waste my 
@@ -124,6 +164,14 @@ class Hospital extends Component {
     }
     return ( 
         <Container>
+            <Row>
+                <Col>
+                    <h3>At The Hospital</h3>
+                </Col> 
+            </Row>
+            <Row>
+                <hr />
+            </Row>
             <Row>
                 <Col>
                     You arrive in the waiting room of the hospital downtown. It is surprisingly clean, and the staff

@@ -26,9 +26,6 @@ class SignUp extends Component {
     }
 
     setName = () => {
-        this.props.dispatch({ type : 'CHANGE_NAME', payload : this.state.name })
-        this.props.dispatch({ type : 'CHANGE_SEX', payload : this.state.sex })
-        this.props.dispatch({ type : 'CHANGE_EMAIL', payload : this.props.email })
         fetch('/api/register', {
             method: 'POST',
             body: JSON.stringify({email: this.props.email, password: this.props.password, name: this.state.name, sex: this.state.sex}),

@@ -11,41 +11,37 @@ function mapStateToProps(state) {
 class Street extends Component {
     componentDidMount() {
         this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
-        //this.getCharStats();
     }
-
-/*     getCharStats = () => {
-        fetch('/api/getCharStats', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: this.props.state.email })
-        })
-        .then(res => res.json())
-        .then(user => console.log(user))
-    } */
 
     render() {
         if (this.props.state.lockedOut === true) {
             return <Lockout />
         }
+        
         return ( 
         <Container id="mainMenu">
+            <Row>
+                <Col>
+                    <h3>Out On The Street</h3>
+                </Col> 
+            </Row>
+            <Row>
+                <hr />
+            </Row>
             <Row id="narration">
                 <Col>
-            You are 15 years old, alone on the streets of a bad neighborhood, after dark. Most exterior 
-            walls are marred by graffiti. You can hear hardcore hip hop booming from a nearby house. There
-            are mean looking dudes loitering on the corners.
-            What do you do?
+                You are 15 years old, alone on the streets of a bad neighborhood, after dark. Most exterior 
+                walls are marred by graffiti. You can hear hardcore hip hop booming from a nearby house. There
+                are mean looking dudes loitering on the corners.
+                What do you do?
                 </Col>
             </Row>
             <Row>
                 <Col>
-                <Link to="/theTrack"><button>(W)alk The Track</button></Link>
+                    <Link to="/theTrack"><button>(W)alk The Track</button></Link>
                 </Col>
                 <Col>
-                <Link to="/charSheet"><button>(V)iew Your Stats</button></Link>
+                    <Link to="/charSheet"><button>(V)iew Your Stats</button></Link>
                 </Col>
             </Row>
             <Row>

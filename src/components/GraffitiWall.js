@@ -53,6 +53,14 @@ class GraffitiWall extends Component {
                 <Container>
                     <Row>
                         <Col>
+                        <h3>The Beatdown</h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
+                    <Row>
+                        <Col>
                             As you scrawl away, covering the wall with your brilliant artwork, you get so absorbed in it
                             that you don't notice the crew of gang-bangers approaching. There's seven of them and one of
                             you. "The fuck you think you doin'? You going over my shit? You must be dusted, homeboy." You
@@ -81,6 +89,14 @@ class GraffitiWall extends Component {
         }
         return (
             <Container>
+                <Row>
+                    <Col>
+                        <h3>Graffiti Wall</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
                 <Row>
                     <Col>
                         This wall of a disused warehouse is always getting tagged by neighborhood artists. Someone 

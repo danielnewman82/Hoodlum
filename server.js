@@ -52,7 +52,7 @@ app.post('/api/getCharStats', function(req, res) {
   const { email } = req.body;
   User.findOne({email}, {_id: 0, password: 0}, function(err, user) {
     if (err) return console.error(err);
-    res.send(user);
+    res.json(user);
   })
 })
 

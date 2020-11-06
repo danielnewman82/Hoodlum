@@ -8,13 +8,18 @@ function mapStateToProps(state) {
   }
 
 class CharSheet extends Component {
-    componentDidMount() {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Your Stats"})
-    }
 
     render() {
-    return (
+        return (
         <Container>
+            <Row>
+                <Col>
+                    <h3>Your Stats</h3>
+                </Col> 
+            </Row>
+            <Row>
+                <hr />
+            </Row>
             <Row>
                 <Col>
                     Name: {this.props.state.name}

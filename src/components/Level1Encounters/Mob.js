@@ -79,6 +79,14 @@ class Mob extends Component {
             <Container>
                 <Row>
                     <Col>
+                        <h3>Looking For Trouble</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
+                <Row>
+                    <Col>
                         You are too tired to go starting shit with anyone, right now. Chill out, get some rest, and
                         try again tomorrow.
                     </Col>
@@ -94,6 +102,14 @@ class Mob extends Component {
     if (this.state.turnResults === true && this.state.damageTaken > 0) {
         return (
             <Container>
+                <Row>
+                    <Col>
+                        <h3>In A Street Fight</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
                 <Row>
                     <Col>
                         Your HP: <span id="hitPoints">{this.props.state.curHitPoints - this.state.damageTaken}</span>
@@ -125,6 +141,14 @@ class Mob extends Component {
             <Container>
                 <Row>
                     <Col>
+                        <h3>In A Street Fight</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
+                <Row>
+                    <Col>
                         Your HP: <span id="hitPoints">{this.props.state.curHitPoints - this.state.damageTaken}</span>
                     </Col>
                 </Row>
@@ -154,6 +178,14 @@ class Mob extends Component {
             <Container>
                 <Row>
                     <Col>
+                        <h3>In A Street Fight</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
+                <Row>
+                    <Col>
                         You won! You roll your victim for <span id="cash">${this.state.cashGained}</span>, and
                         gain {this.state.xpGained} experience points for mercilessly beating their ass in the street.
                     </Col>
@@ -171,6 +203,14 @@ class Mob extends Component {
         <Container>
             <Row>
                 <Col>
+                    <h3>In A Street Fight</h3>
+                </Col> 
+            </Row>
+            <Row>
+                <hr />
+            </Row>
+            <Row>
+                <Col>
                     You just got your ass kicked by a mob. They roll your pockets for <span id="cash">
                     ${-this.state.cashGained}</span> before you can crawl away, battered and bloody.
                 </Col>
@@ -185,6 +225,14 @@ class Mob extends Component {
     }
     return (
         <Container>
+            <Row>
+                <Col>
+                    <h3>In A Street Fight</h3>
+                </Col> 
+            </Row>
+            <Row>
+                <hr />
+            </Row>
             <Row>
                 <Col>
                     Your HP: <span id="hitPoints">{this.props.state.curHitPoints}</span>

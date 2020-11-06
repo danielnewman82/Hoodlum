@@ -57,6 +57,14 @@ function TheTrack(props) {
             <Container>
                 <Row>
                     <Col>
+                        <h3>Looking For Trouble</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
+                <Row>
+                    <Col>
                         You're wandering the blighted streets. Danger lurks around every corner, but there
                         is plenty of loot to be found. 
                     </Col>

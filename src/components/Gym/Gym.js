@@ -13,10 +13,6 @@ class Gym extends Component {
         this.state = { notReady : false, ready : false, trainerFight : false }
     }
 
-    componentDidMount = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "The Training Gym"})
-    }
-
     questionTrainer = () => {
         if ( this.props.state.level === 1 && this.props.state.xp < 250) {
             this.setState({ notReady : true })
@@ -38,6 +34,14 @@ class Gym extends Component {
                 <Container>
                     <Row>
                         <Col>
+                        <h3>The Training Gym</h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
+                    <Row>
+                        <Col>
                             The ring manager appraises your physique critically and says, "Nah, you ain't ready. Any of my
                             guys would mop the floor with you, right now. You need about {250 - this.props.state.xp} points
                             worth of experience before you'd even stand a chance against Pookie."
@@ -54,6 +58,14 @@ class Gym extends Component {
         if (this.props.state.level === 1 && this.state.ready === true) {
             return (
                 <Container>
+                    <Row>
+                        <Col>
+                        <h3><span id="location">{this.props.state.location}</span></h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
                     <Row>
                         <Col>
                             The ring manager appraises your physique critically, before telling you, "Yeah, alright, you
@@ -75,6 +87,14 @@ class Gym extends Component {
         }
         return (
             <Container>
+                <Row>
+                    <Col>
+                        <h3><span id="location">{this.props.state.location}</span></h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
                 <Row>
                     <Col>
                         The neighborhood boxing gym smells of dried sweat and blood. Big, muscly looking dudes are

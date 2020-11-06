@@ -15,6 +15,14 @@ function ArmorShop(props) {
         <Container>
             <Row>
                 <Col>
+                    <h3>Milsurp Armor Shop</h3>
+                </Col> 
+            </Row>
+            <Row>
+                <hr />
+            </Row>
+            <Row>
+                <Col>
                 This milsurp shop is cluttered, dusty, and disorganized. 
                 </Col>
             </Row>

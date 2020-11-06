@@ -8,13 +8,18 @@ function mapStateToProps(state) {
 }
 
 class PassedOut extends Component {
-    componentDidMount() {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Passed Out"})
-    }
     
     render() {
         return (
             <Container>
+                <Row>
+                    <Col>
+                        <h3>Passed Out</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
                 <Row>
                     <Col>
                         Exhausted, you find a doorway to sleep in. Thanks for playing Hoodlum, go do something constructive.

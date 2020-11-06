@@ -4,7 +4,6 @@ import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Landing from './components/Landing';
 import About from './components/About';
-import Header from './components/Header';
 import Street from './components/Street';
 import TheTrack from './components/TheTrack';
 import CharSheet from './components/CharSheet';
@@ -35,43 +34,33 @@ function App() {
         <SignUp />
       </Route>
       <Route path="/street">
-        <Header />
         <Street />
       </Route>
       <Route path="/theTrack">
-        <Header />
         <TheTrack />
       </Route>
       <Route path="/charSheet">
-        <Header />
         <CharSheet />
       </Route>
       <Route path="/weaponShop">
-        <Header />
         <WeaponShop />
       </Route>
       <Route path="/armorShop">
-        <Header />
         <ArmorShop />
       </Route>
       <Route path="/hospital">
-        <Header />
         <Hospital />
       </Route>
       <Route path="/bank">
-        <Header />
         <Bank />
       </Route>
       <Route path="/graffitiWall">
-        <Header />
         <GraffitiWall />
       </Route>
       <Route path="/gym">
-        <Header />
         <Gym />
       </Route>
       <Route path="/club">
-        <Header />
         <Club />
       </Route>
       <Route path="/passedOut">

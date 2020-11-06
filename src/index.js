@@ -110,10 +110,9 @@ function reducer(state = initialState, action) {
       return {
         ...state, name: state.name = action.payload
       }
-    case 'RECEIVE_STATS' :
-      return {
-        
-      }
+    case 'GET_CHARDATA' :
+      return action.payload
+      
     default:
       return state;
   }

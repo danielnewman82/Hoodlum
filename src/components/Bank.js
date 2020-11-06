@@ -86,6 +86,14 @@ class Bank extends Component {
                 <Container>
                     <Row>
                         <Col>
+                        <h3>The Credit Union</h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
+                    <Row>
+                        <Col>
                             And how much would you like to withdraw?
                         </Col>
                     </Row>
@@ -113,6 +121,14 @@ class Bank extends Component {
                 <Container>
                     <Row>
                         <Col>
+                        <h3>The Credit Union</h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
+                    <Row>
+                        <Col>
                             You don't have that much money to withdraw. You clean out your account, a total of 
                             <span id="cash"> ${this.props.state.cashInHand}</span>.
                         </Col>
@@ -130,6 +146,14 @@ class Bank extends Component {
                 <Container>
                     <Row>
                         <Col>
+                        <h3>The Credit Union</h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
+                    <Row>
+                        <Col>
                             You have withdrawn <span id="cash">${this.state.withdrawal}</span> from the bank. 
                             Don't squander it on stupid bullshit.
                         </Col>
@@ -145,6 +169,14 @@ class Bank extends Component {
         if (this.state.depositForm === true) {
             return (
                 <Container>
+                    <Row>
+                        <Col>
+                        <h3>The Credit Union</h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
                     <Row>
                         <Col>
                             And how much would you like to deposit?
@@ -174,6 +206,14 @@ class Bank extends Component {
                 <Container>
                     <Row>
                         <Col>
+                        <h3>The Credit Union</h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
+                    <Row>
+                        <Col>
                             You don't have that much money to deposit. You deposit what you have on hand, for a total balance of 
                             <span id="cash"> ${this.props.state.cashInBank}</span>.
                         </Col>
@@ -191,6 +231,14 @@ class Bank extends Component {
                 <Container>
                     <Row>
                         <Col>
+                        <h3>The Credit Union</h3>
+                        </Col> 
+                    </Row>
+                    <Row>
+                        <hr />
+                    </Row>
+                    <Row>
+                        <Col>
                             You have deposited <span id="cash">${this.state.deposit}</span> in the bank. Very sensible of you.
                         </Col>
                     </Row>
@@ -204,6 +252,14 @@ class Bank extends Component {
         }
         return (
             <Container>
+                <Row>
+                    <Col>
+                        <h3>The Credit Union</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
                 <Row>
                     <Col>
                         You are in the lobby of the neighborhood credit union. The upmarket banks downtown don't really
