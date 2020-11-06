@@ -11,7 +11,20 @@ function mapStateToProps(state) {
 class Street extends Component {
     componentDidMount() {
         this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
+        //this.getCharStats();
     }
+
+/*     getCharStats = () => {
+        fetch('/api/getCharStats', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: this.props.state.email })
+        })
+        .then(res => res.json())
+        .then(user => console.log(user))
+    } */
 
     render() {
         if (this.props.state.lockedOut === true) {

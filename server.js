@@ -45,13 +45,23 @@ app.get('/checkToken', withAuth, function(req, res) {
   }
 )
 
+app.post('/api/getCharStats', function(req, res) {
+  mongoose.connect(userURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+  const db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'connection error:'));
+  const { email } = req.body;
+  User.findOne({email}, {_id: 0, password: 0}, function(err, user) {
+    if (err) return console.error(err);
+    res.send(user);
+  })
+})
+
 // POST route to register a user
 app.post('/api/register', function(req, res) {
     mongoose.connect(userURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
-    const { email, password } = req.body;
-    User.create({email, password, name: req.body.name, sex: req.body.sex, 
+    User.create({ email : req.body.email, password : req.body.password, name: req.body.name, sex: req.body.sex, 
         level: 1, 
         xp: 0, 
         curHitPoints: 20, 
@@ -98,6 +108,7 @@ app.post('/api/authenticate', function(req, res) {
           .json({
             error: 'Incorrect email'
           });
+        console.log('Incorrect email')
       } else {
         user.isCorrectPassword(password, function(err, same) {
           if (err) {
@@ -110,6 +121,7 @@ app.post('/api/authenticate', function(req, res) {
               .json({
                 error: 'Incorrect password'
             });
+            console.log('Incorrect password')
           } else {
             // Issue token
             const payload = { email };
@@ -118,6 +130,7 @@ app.post('/api/authenticate', function(req, res) {
             });
             res.cookie('token', token, { httpOnly: true })
               .sendStatus(200);
+            console.log('Authentication successful!')
           }
         });
       }
@@ -125,7 +138,7 @@ app.post('/api/authenticate', function(req, res) {
   });
   
 app.get('/api/getTags', (req, res) => {
-    mongoose.connect(taggerURI, {useNewUrlParser: true, useUnifiedTopology: true});
+    mongoose.connect(taggerURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     Tag.find(function (err, tags) {
@@ -136,18 +149,18 @@ app.get('/api/getTags', (req, res) => {
 });
 
 app.post('/api/postTag', (req, res) => {
-    mongoose.connect(taggerURI, {useNewUrlParser: true, useUnifiedTopology: true});
+    mongoose.connect(taggerURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     Tag.create({ text: req.body.text, author: req.body.author, time: req.body.time });
     res.send(console.log('Tag posted to DB'))
 });
 
-app.use(express.static(path.join(__dirname,'/build')));
+app.use(express.static(path.join(__dirname,'/public')));
 
 // Handles any requests that don't match the ones above
 app.get('/', function (req, res, next) {
-    res.sendFile(path.resolve('build/index.html'));
+    res.sendFile(path.resolve('public/index.html'));
 });
 
 const port = process.env.PORT || 5000;

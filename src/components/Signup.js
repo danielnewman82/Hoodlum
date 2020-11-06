@@ -1,18 +1,75 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Col, Row, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {state}
 }
 
 class SignUp extends Component {
-    componentDidMount() {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "You forgot to update this text, dummy!"})
+    constructor(props) {
+        super(props);
+        this.state = { sex : "", name : "" }
+    }
+
+    backUp = () => {
+        this.props.back()
+    }
+
+    setSexDude = () => {
+        this.setState({ sex : "Dude" })
+    }
+
+    setSexChick = () => {
+        this.setState({ sex : "Chick" })
+    }
+
+    setName = () => {
+        this.props.dispatch({ type : 'CHANGE_NAME', payload : this.state.name })
+        this.props.dispatch({ type : 'CHANGE_SEX', payload : this.state.sex })
+        this.props.dispatch({ type : 'CHANGE_EMAIL', payload : this.props.email })
+        fetch('/api/register', {
+            method: 'POST',
+            body: JSON.stringify({email: this.props.email, password: this.props.password, name: this.state.name, sex: this.state.sex}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        this.setState({ done: true })
+    }
+
+    handleInput = (e) => {
+        this.setState({ name: e.target.value })
     }
     
     render() {
+        if (this.state.done === true ) {
+            console.log("New account created")
+            return <Redirect to="/street" />
+        }
+        if (this.state.sex === "Dude" || this.state.sex === "Chick") {
+            return (
+                <Container>
+                    <Row>
+                        <Col>
+                            <p>What's your name, kid?</p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <p><input type="text" name="nameInput" id="nameInput" maxLength="20" 
+                            minLength="3" value={this.state.name} onChange={this.handleInput} /></p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <p><button onClick={this.setName}>And don't wear it out!</button></p>
+                        </Col>
+                    </Row>
+                </Container>
+            )
+        }
         return (
             <Container>
                 <Row>
@@ -25,11 +82,22 @@ class SignUp extends Component {
                         who don't toe the line, so you have to make your own way. You made it to the city,
                         but now you're on your own with nothing but the discount-store clothes on your 
                         back.</p>
+                        <p>How do you identify?</p>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <Link to="/"><button>Back To The Login Page</button></Link>
+                        <p><button onClick={this.setSexDude}>Dude</button></p>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <p><button onClick={this.setSexChick}>Chick</button></p>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <p><button onClick={this.backUp}>Whoa, hold up, I must have entered my email address wrong.</button></p>
                     </Col>
                 </Row>
             </Container>

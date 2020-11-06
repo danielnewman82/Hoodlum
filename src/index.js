@@ -7,6 +7,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 const initialState = {
   name: "Trap God",
+  email: "",
+  password: "",
   sex: "Dude",
   level: 1,
   xp: 0,
@@ -24,7 +26,7 @@ const initialState = {
   pveFights: 15,
   pvpFights: 3,
   lockedOut: false,
-  tagsToday: 2,
+  tagsToday: 0,
 
 /*   fists : { buyPrice : 0, sellprice : 0, atkPower : 4 },
   pocketKnife : { buyPrice : 40, sellPrice : 10, atkPower : 7},
@@ -88,11 +90,30 @@ function reducer(state = initialState, action) {
       return {
         ...state, weapon: state.weapon = action.payload
       }
+
     case 'CHANGE_TAGSTODAY' :
       return {
         ...state, tagsToday: state.tagsToday + action.payload
       }
 
+    case 'CHANGE_EMAIL' :
+      return {
+        ...state, email: state.email = action.payload
+      }
+
+    case 'CHANGE_PASSWORD' :
+      return {
+        ...state, password: state.password = action.payload
+      }
+    
+    case 'CHANGE_NAME' :
+      return {
+        ...state, name: state.name = action.payload
+      }
+    case 'RECEIVE_STATS' :
+      return {
+        
+      }
     default:
       return state;
   }

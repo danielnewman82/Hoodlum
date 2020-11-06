@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
+import SignUp from './SignUp';
 
 function mapStateToProps(state) {
     return {state};
@@ -18,26 +19,40 @@ class Landing extends Component {
         this.setState({ [name]: value });
     }
 
+    backUp = () => {
+        this.setState({ error: "" })
+    }
+
     onSubmit = (e) => {
         e.preventDefault();
         fetch('/api/authenticate', {
             method: 'POST',
-            body: JSON.stringify(this.state),
+            body: JSON.stringify({email: this.state.email, password: this.state.password}),
             headers: {
               'Content-Type': 'application/json'
             }
           })
-        .then(res => {res.json()})
-        .then(error => console.log(error))
+          .then(res => {
+            if (res.status === 200) {
+              this.setState({ auth : true });
+            } else return res.json()
+          })
+          .then(res => this.setState(res))
+          .catch(res => this.setState(res))
         }
 
     render() {
-        if (this.state.newAccount === false) {
+        let incorrectPassword;
+        if (this.state.auth === true) {
             return <Redirect to="/street" />
         }
-        if (this.state.newAccount === true) {
-            return <Redirect to="/signup" />
+        if (this.state.error === "Incorrect email") {
+            return <SignUp email={this.state.email} password={this.state.password} back={this.backUp}/>
         }
+        if (this.state.error === "Incorrect password") {
+            incorrectPassword = "Incorrect password. Perhaps you'd like to reset your password?";
+        }
+        
         return (
             <Container>
                 <Row>
@@ -59,29 +74,34 @@ class Landing extends Component {
                 <Row>
                     <Col>
                         <form label="login">
-                            Email: <input
+                            <p>Email: <input
                                 type="email"
                                 name="email"
                                 placeholder="Enter email"
                                 value={this.state.email}
                                 onChange={this.handleInputChange}
                                 required
-                                /> <br />
-                            Password: <input 
+                                /> </p>
+                            <p>Password: <input 
                                 type="password"
                                 name="password"
                                 placeholder="Enter password"
                                 value={this.state.password}
                                 onChange={this.handleInputChange}
                                 required
-                                /> <br />
-                            <button type="submit" value="Submit">Hit the Streets Running</button>
+                                /> </p>
+                            <button type="submit" onClick={this.onSubmit}>Hit the Streets Running</button>
                         </form>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        Social identity (Google, Facebook, etc) providers coming soon!
+                        <p>{incorrectPassword}</p>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <p>Social identity (Google, Facebook, etc) providers coming soon!</p>
                     </Col>
                 </Row>
                 <Row>

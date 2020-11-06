@@ -30,14 +30,13 @@ class GraffitiWall extends Component {
 
     postTag = () => {
         if (this.props.state.tagsToday < 3) {
-        var data = { text: this.state.input, author: this.props.state.name, 
-            time: new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString() }
         fetch('/api/postTag', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify({text: this.state.input, author: this.props.state.name, 
+                time: new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString() })
         })
         this.getTags();
         this.props.dispatch({ type: 'CHANGE_TAGSTODAY', payload: 1});
