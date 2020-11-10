@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -8,48 +8,51 @@ function mapStateToProps(state) {
     return {state};
 }
 
-function TheTrack(props) {
-    const { dispatch } = props;
-    useEffect( () => { dispatch({ type: 'CHANGE_LOCATION', payload: "Looking For Trouble"}) }, [dispatch] );
-    
-    const pveFight = () =>  {
-        props.dispatch({ type: 'CHANGE_LOCATION', payload: "In A Street Fight"})
+class TheTrack extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { location: ""}
     }
 
-        if (props.state.location === "In A Street Fight" && props.state.level === 1) {
+    pveFight = () => {
+        this.setState({ location: "In A Street Fight" })
+    }
+
+    render() {
+        if (this.state.location === "In A Street Fight" && this.props.state.level === 1) {
             return <Level1Encounters />
         }
-        if (props.state.location === "In A Street Fight" && props.state.level === 2) {
+        if (this.state.location === "In A Street Fight" && this.props.state.level === 2) {
             return <Level1Encounters />
         }
-        if (props.state.location === "In A Street Fight" && props.state.level === 3) {
+        if (this.state.location === "In A Street Fight" && this.props.state.level === 3) {
             return <Level1Encounters />
         }
-        if (props.state.location === "In A Street Fight" && props.state.level === 4) {
+        if (this.state.location === "In A Street Fight" && this.props.state.level === 4) {
             return <Level1Encounters />
         }
-        if (props.state.location === "In A Street Fight" && props.state.level === 5) {
+        if (this.state.location === "In A Street Fight" && this.props.state.level === 5) {
             return <Level1Encounters />
         }
-        if (props.state.location === "In A Street Fight" && props.state.level === 6) {
+        if (this.state.location === "In A Street Fight" && this.props.state.level === 6) {
             return <Level1Encounters />
         }
-        if (props.state.location === "In A Street Fight" && props.state.level === 7) {
+        if (this.state.location === "In A Street Fight" && this.props.state.level === 7) {
             return <Level1Encounters />
         }
-        if (props.state.location === "In A Street Fight" && props.state.level === 8) {
+        if (this.state.location === "In A Street Fight" && this.props.state.level === 8) {
             return <Level1Encounters />
         }
-        if (props.state.location === "In A Street Fight" && props.state.level === 9) {
+        if (this.state.location === "In A Street Fight" && this.props.state.level === 9) {
             return <Level1Encounters />
         }
-        if (props.state.location === "In A Street Fight" && props.state.level === 10) {
+        if (this.state.location === "In A Street Fight" && this.props.state.level === 10) {
             return <Level1Encounters />
         }
-        if (props.state.location === "In A Street Fight" && props.state.level === 11) {
+        if (this.state.location === "In A Street Fight" && this.props.state.level === 11) {
             return <Level1Encounters />
         }
-        if (props.state.location === "In A Street Fight" && props.state.level === 12) {
+        if (this.state.location === "In A Street Fight" && this.props.state.level === 12) {
             return <Level1Encounters />
         }
 
@@ -71,7 +74,7 @@ function TheTrack(props) {
                 </Row>
                 <Row>
                     <Col>
-                        <button onClick={() => pveFight()}>Look for trouble</button>
+                        <button onClick={this.pveFight}>Look for trouble</button>
                     </Col>
                     <Col>
                         <Link to="/hospital"><button>Go to the clinic</button></Link>
@@ -83,5 +86,6 @@ function TheTrack(props) {
             </Container>
         )
     }
+}
 
 export default connect(mapStateToProps)(TheTrack);

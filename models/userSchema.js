@@ -57,4 +57,4 @@ userSchema.methods.isCorrectPassword = function(password, callback){
   });
 }
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = userSchema;

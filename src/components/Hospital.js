@@ -14,10 +14,6 @@ class Hospital extends Component {
                     postFullHeal : false, postPartialHeal : false, tooBroke : false, partialHeal : 0 }
     }
 
-    componentDidMount() {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "At The Hospital"})
-    }
-
     heal = () => {
         if (this.props.state.cashInHand < this.state.totalDamage * 5) {
             this.setState({ tooBroke : true, partialHeal : (Math.floor(this.props.state.cashInHand / 5)), })

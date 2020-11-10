@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,9 +7,7 @@ function mapStateToProps(state) {
     return {state};
 }
 
-function ArmorShop(props) {
-    const { dispatch } = props;
-    useEffect(() => { dispatch({ type: 'CHANGE_LOCATION', payload: "Milsurp Armor Shop"}) }, [dispatch] );
+function ArmorShop() {
     
         return (
         <Container>

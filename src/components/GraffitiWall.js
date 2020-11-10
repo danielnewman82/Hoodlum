@@ -13,13 +13,12 @@ class GraffitiWall extends Component {
         this.state = { tags: [], input: '', shutUp: false }
     }
 
-    componentDidMount() {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "The Graffiti Wall"});
-        this.getTags();
-    }
-
     handleTagInput = (e) => {
         this.setState({ input: e.target.value })
+    }
+
+    componentDidMount() {
+        this.getTags();
     }
 
     getTags = () => {
@@ -38,9 +37,7 @@ class GraffitiWall extends Component {
             body: JSON.stringify({text: this.state.input, author: this.props.state.name, 
                 time: new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString() })
         })
-        this.getTags();
         this.props.dispatch({ type: 'CHANGE_TAGSTODAY', payload: 1});
-        this.setState({ input: '' })
         } else {
             this.props.dispatch({ type: 'CHANGE_LOCKOUT', payload: true})
             this.setState({ shutUp: true });
@@ -48,7 +45,7 @@ class GraffitiWall extends Component {
     };
 
     render() {
-        if (this.state.shutUp === true) {
+        if (this.props.state.lockedOut === true) {
             return (
                 <Container>
                     <Row>

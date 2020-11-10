@@ -38,7 +38,7 @@ class Landing extends Component {
               this.getCharStats();
             } else return res.json()
           })
-          //.then(res => this.setState(res))
+          .then(res => this.setState(res))
           .catch(res => this.setState(res))
         }
     
@@ -57,8 +57,11 @@ class Landing extends Component {
 
     render() {
         let incorrectPassword;
-        if (this.state.auth === true) {
+        if (this.state.auth === true  && this.props.state.lockedOut === false ) {
             return <Redirect to="/street" />
+        }
+        if (this.state.auth === true  && this.props.state.lockedOut === true ) {
+            return <Redirect to="/lockout" />
         }
         if (this.state.error === "Incorrect email") {
             return <SignUp email={this.state.email} password={this.state.password} back={this.backUp}/>
@@ -87,7 +90,7 @@ class Landing extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <form label="login">
+                        <form label="login" onSubmit={this.onSubmit}>
                             <p>Email: <input
                                 type="email"
                                 name="email"
@@ -104,7 +107,7 @@ class Landing extends Component {
                                 onChange={this.handleInputChange}
                                 required
                                 /> </p>
-                            <button type="submit" onClick={this.onSubmit}>Hit the Streets Running</button>
+                            <button type="submit">Hit the Streets Running</button>
                         </form>
                     </Col>
                 </Row>

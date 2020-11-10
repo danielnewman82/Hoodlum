@@ -4,15 +4,22 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const Tag = require('./models/tagSchema');
-const User = require('./models/userSchema');
+const userSchema = require('./models/userSchema');
 const cookieParser = require('cookie-parser');
+const tagSchema = require('./models/tagSchema');
 
 const app = express();
 
 const dotenv = require('dotenv').config();
-const taggerURI = process.env.MONGODB_TAGGER_URI;
 const userURI = process.env.MONGODB_USER_URI;
 const JWTSecret = process.env.JWT_SECRET;
+
+const tagConn = mongoose.createConnection(process.env.MONGODB_TAGGER_URI, 
+  {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+const TagModel = tagConn.model('Tag', tagSchema);
+const userConn = mongoose.createConnection(process.env.MONGODB_USER_URI, 
+  {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+const UserModel = userConn.model('User', userSchema);
 
 // Bodyparser middleware
 app.use(
@@ -45,23 +52,30 @@ app.get('/checkToken', withAuth, function(req, res) {
   }
 )
 
-app.post('/api/getCharStats', function(req, res) {
-  mongoose.connect(userURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+app.post('/api/getCharStats', withAuth, function(req, res) {
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
   const { email } = req.body;
-  User.findOne({email}, {_id: 0, password: 0}, function(err, user) {
+  UserModel.findOne({email}, {_id: 0, password: 0, __v: 0}, function(err, user) {
     if (err) return console.error(err);
     res.json(user);
   })
 })
 
+/* app.post('/api/updateCharStats', withAuth, function(req, res) {
+  mongoose.connect(userURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+  const db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'connection error:'));
+  User.findOneAndUpdate({email: req.body.email}, {} 
+  })
+}) */
+
 // POST route to register a user
 app.post('/api/register', function(req, res) {
-    mongoose.connect(userURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
-    User.create({ email : req.body.email, password : req.body.password, name: req.body.name, sex: req.body.sex, 
+    const { email, password, name, sex } = req.body
+    UserModel.create({ email, password, name, sex, 
         level: 1, 
         xp: 0, 
         curHitPoints: 20, 
@@ -85,18 +99,22 @@ app.post('/api/register', function(req, res) {
         res.status(500)
           .send("Error registering new user please try again.");
       } else {
-        res.status(200).send("Welcome to the jungle, baby!");
+        const payload = {email} ;
+        const token = jwt.sign(payload, JWTSecret, {
+          expiresIn: '1h'
+        });
+        res.cookie('token', token, { httpOnly: true })
+          .status(200).send("Welcome to the jungle, baby!");
       }
     });
   });
 
 // POST route to authenticate email and password
 app.post('/api/authenticate', function(req, res) {
-    mongoose.connect(userURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     const { email, password } = req.body;
-    User.findOne({ email }, function(err, user) {
+    UserModel.findOne({ email }, function(err, user) {
       if (err) {
         console.error(err);
         res.status(500)
@@ -138,10 +156,9 @@ app.post('/api/authenticate', function(req, res) {
   });
   
 app.get('/api/getTags', (req, res) => {
-    mongoose.connect(taggerURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
-    Tag.find(function (err, tags) {
+    TagModel.find(function (err, tags) {
         if (err) return console.error(err);
         res.send(tags);
     });
@@ -149,10 +166,9 @@ app.get('/api/getTags', (req, res) => {
 });
 
 app.post('/api/postTag', (req, res) => {
-    mongoose.connect(taggerURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
-    Tag.create({ text: req.body.text, author: req.body.author, time: req.body.time });
+    TagModel.create({ text: req.body.text, author: req.body.author, time: req.body.time });
     res.send(console.log('Tag posted to DB'))
 });
 

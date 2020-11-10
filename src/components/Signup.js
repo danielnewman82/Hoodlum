@@ -33,7 +33,17 @@ class SignUp extends Component {
               'Content-Type': 'application/json'
             }
           })
-        this.setState({ done: true })
+        console.log("New account created");
+        fetch('/api/getCharStats', {
+            method: 'POST',
+            body: JSON.stringify({email: this.props.email}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
+        this.setState({ done : true })
     }
 
     handleInput = (e) => {
@@ -42,7 +52,7 @@ class SignUp extends Component {
     
     render() {
         if (this.state.done === true ) {
-            console.log("New account created")
+            
             return <Redirect to="/street" />
         }
         if (this.state.sex === "Dude" || this.state.sex === "Chick") {

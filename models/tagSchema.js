@@ -6,4 +6,4 @@ const tagSchema = new mongoose.Schema({
     time: String
     });
     
-module.exports = mongoose.model('Tag', tagSchema);
+module.exports = tagSchema;

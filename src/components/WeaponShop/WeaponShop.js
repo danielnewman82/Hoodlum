@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import WeaponShopEntrance from './WeaponShopEntrance';
@@ -10,9 +10,7 @@ function mapStateToProps(state) {
     return {state};
 }
 
-function WeaponShop(props) {
-    const { dispatch } = props;
-    useEffect(() => { dispatch({ type: 'CHANGE_LOCATION', payload: "Spider's Gun Shop"}) }, [dispatch] );
+function WeaponShop() {
 
     let { url, path } = useRouteMatch();
         return (

@@ -6,7 +6,7 @@ import { createStore } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
 
 const initialState = {
-  name: "Trap God",
+/*   name: "Trap God",
   email: "",
   password: "",
   sex: "Dude",
@@ -22,13 +22,12 @@ const initialState = {
   outfit: "Shabby Urchin Gear",
   reputation: "Anonymous Nobody",
   repScore: 0, 
-  location: "",
   pveFights: 15,
   pvpFights: 3,
   lockedOut: false,
   tagsToday: 0,
-
-/*   fists : { buyPrice : 0, sellprice : 0, atkPower : 4 },
+  
+  fists : { buyPrice : 0, sellprice : 0, atkPower : 4 },
   pocketKnife : { buyPrice : 40, sellPrice : 10, atkPower : 7},
   baseballBat : { buyPrice : 60, sellPrice : 15, atkPower : 10},
   slingshot : { buyPrice : 80, sellPrice : 20, atkPower : 13},
@@ -50,12 +49,7 @@ const initialState = {
 }
 
 function reducer(state = initialState, action) {
-  switch(action.type) {
-    case 'CHANGE_LOCATION':
-      return {
-        ...state, location: state.location = action.payload
-    };
-      
+  switch(action.type) {      
     case 'CHANGE_HP' :
       return {
       ...state, curHitPoints: state.curHitPoints + action.payload

@@ -9,9 +9,6 @@ function mapStateToProps(state) {
   }
 
 class Street extends Component {
-    componentDidMount() {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
-    }
 
     render() {
         if (this.props.state.lockedOut === true) {
