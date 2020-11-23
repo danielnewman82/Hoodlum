@@ -6,27 +6,7 @@ import { createStore } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
 
 const initialState = {
-/*   name: "Trap God",
-  email: "",
-  password: "",
-  sex: "Dude",
-  level: 1,
-  xp: 0,
-  curHitPoints: 20,
-  maxHitPoints: 20,
-  cashInHand: 0,
-  cashInStash: 0,
-  cashInBank: 0,
-  weapon: { name: " fists", sellPrice : 0, atkPower : 4},
-  armor: { name: " none", sellPrice : 0, defPower : 2},
-  outfit: "Shabby Urchin Gear",
-  reputation: "Anonymous Nobody",
-  repScore: 0, 
-  pveFights: 15,
-  pvpFights: 3,
-  lockedOut: false,
-  tagsToday: 0,
-  
+  /*
   fists : { buyPrice : 0, sellprice : 0, atkPower : 4 },
   pocketKnife : { buyPrice : 40, sellPrice : 10, atkPower : 7},
   baseballBat : { buyPrice : 60, sellPrice : 15, atkPower : 10},
@@ -44,7 +24,7 @@ const initialState = {
   g3 : { buyPrice : 6000, sellPrice : 2500, atkPower : 120},
   aug : { buyPrice : 8000, sellPrice : 3000, atkPower : 150},
   minimi : { buyPrice : 10000, sellPrice : 4000, atkPower : 180},
-  bazooka : { buyPrice : 15000, sellPrice : 6000, atkPower : 200}, */
+ */
 
 }
 
@@ -105,8 +85,11 @@ function reducer(state = initialState, action) {
         ...state, name: state.name = action.payload
       }
     case 'GET_CHARDATA' :
-      return action.payload
-      
+      return action.payload;
+    
+    case 'LOGOUT' :
+      return state = initialState;
+
     default:
       return state;
   }
@@ -115,11 +98,11 @@ function reducer(state = initialState, action) {
 const store = createStore(reducer);
 
 const Index = () => (
-  <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
 
 render(<Index />, document.getElementById('root'));

@@ -7,6 +7,7 @@ const Tag = require('./models/tagSchema');
 const userSchema = require('./models/userSchema');
 const cookieParser = require('cookie-parser');
 const tagSchema = require('./models/tagSchema');
+const { resolveNaptr } = require('dns');
 
 const app = express();
 
@@ -18,7 +19,7 @@ const tagConn = mongoose.createConnection(process.env.MONGODB_TAGGER_URI,
   {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 const TagModel = tagConn.model('Tag', tagSchema);
 const userConn = mongoose.createConnection(process.env.MONGODB_USER_URI, 
-  {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+  {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false});
 const UserModel = userConn.model('User', userSchema);
 
 // Bodyparser middleware
@@ -52,7 +53,7 @@ app.get('/checkToken', withAuth, function(req, res) {
   }
 )
 
-app.post('/api/getCharStats', withAuth, function(req, res) {
+app.post('/api/getCharStats', /* withAuth, */ function(req, res) {
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
   const { email } = req.body;
@@ -62,13 +63,16 @@ app.post('/api/getCharStats', withAuth, function(req, res) {
   })
 })
 
-/* app.post('/api/updateCharStats', withAuth, function(req, res) {
-  mongoose.connect(userURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+app.put('/api/updateCharStats', /* withAuth,*/ function(req, res) {
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
-  User.findOneAndUpdate({email: req.body.email}, {} 
-  })
-}) */
+  const { email } = req.body
+  UserModel.findOneAndUpdate({email}, req.body, { new: true }, function(err, user) {
+    if (err) return console.error(err);
+    res.json(user)
+  });
+  }) 
+
 
 // POST route to register a user
 app.post('/api/register', function(req, res) {
@@ -83,8 +87,8 @@ app.post('/api/register', function(req, res) {
         cashInHand: 0, 
         cashInStash: 0, 
         cashInBank: 0, 
-        weapon: { name: " fists", sellPrice : 0, atkPower : 4}, 
-        armor: { name: " none", sellPrice : 0, defPower : 2}, 
+        weapon: { name: " fists", sellPrice : 0, atkPower : 3}, 
+        armor: { name: " none", sellPrice : 0, defPower : 1}, 
         outfit: "Shabby Urchin Gear", 
         reputation: "Anonymous Nobody",
         repScore: 0, 

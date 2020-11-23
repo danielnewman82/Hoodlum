@@ -49,6 +49,14 @@ function About() {
                     <li>Living in <a href="https://en.wikipedia.org/wiki/West_Oakland,_Oakland,_California" target="_blank" rel="noopener noreferrer">West Oakland</a> most of my adult life</li>
                     </ul>
 
+                    Recommended listening while playing this game:
+                    <ul>
+                        <li>"6 In Tha Morning" by Ice T</li>
+                        <li>"Everyday Struggle" by Notorious BIG</li>
+                        <li>"Dopeman" by NWA</li>
+                        <li>"PSK (What Does It Mean)" by Schoolly D</li>
+                        <li>"Tearz" by the Wu Tang Clan</li>
+                    </ul>
                     This game was coded while listening to:
                     <ul>
                         <li><a href="https://oozingwound.bandcamp.com/" target="_blank" rel="noopener noreferrer">Oozing Wound</a></li>

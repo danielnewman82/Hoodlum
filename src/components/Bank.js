@@ -13,9 +13,6 @@ class Bank extends Component {
         this.state = { deposit : this.props.state.cashInHand , withdrawal : this.props.state.cashInBank, 
         depositForm : false, depositFailed : false, depositSuccess : false, withdrawalForm: false, 
         withdrawalFailed : false, withdrawalSuccess : false }
-        
-        this.handleDepositChange = this.handleDepositChange.bind(this);
-        this.handleWithdrawalChange = this.handleWithdrawalChange.bind(this);
     }
 
     depositForm = () => {
@@ -26,53 +23,77 @@ class Bank extends Component {
         this.setState({ withdrawalForm : true })
     }
 
-    handleDepositChange(event) {
-        this.setState({ deposit : event.target.value });
+    handleDepositChange = (e) => {
+        this.setState({ deposit : e.target.value });
     }
 
-    handleWithdrawalChange(event) {
-        this.setState({ withdrawal : event.target.value });
+    handleWithdrawalChange = (e) => {
+        this.setState({ withdrawal : e.target.value });
     }
 
-    street = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Out On The Street"})
+    sync = () => {
+        fetch('/api/getCharStats', {
+            method: 'POST',
+            body: JSON.stringify({email: this.props.state.email}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
     }
 
     deposit = () => {
+        if (this.state.deposit < 0) {this.setState({ deposit : this.props.state.cashInHand }) }
         if (this.state.deposit > this.props.state.cashInHand) {
-            this.setState({ depositFailed : true, depositForm : false })
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: -(parseInt(this.props.state.cashInHand, 10)) })
-            this.props.dispatch({ type: 'CHANGE_CASHINBANK', payload: (parseInt(this.props.state.cashInHand, 10)) })
-        } 
-        if (this.state.deposit < 0) {
-            this.setState({ deposit : (this.state.deposit * -1) })
-            this.setState({ depositFailed : true, depositForm : false })
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: -(parseInt(this.props.state.cashInHand, 10)) })
-            this.props.dispatch({ type: 'CHANGE_CASHINBANK', payload: (parseInt(this.props.state.cashInHand, 10)) })
-        }
-            else {
-            this.setState({ depositSuccess : true, depositForm : false })
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: -(parseInt(this.state.deposit, 10)) })
-            this.props.dispatch({ type: 'CHANGE_CASHINBANK', payload: (parseInt(this.state.deposit, 10)) })
+            fetch('/api/updateCharStats', {
+                method: 'PUT',
+                body: JSON.stringify({ email: this.props.state.email, cashInBank: (this.props.state.cashInBank + this.state.deposit), 
+                    cashInHand: (this.props.state.cashInHand - this.state.deposit) }),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              })
+            .then(this.setState({ depositForm : false, depositFailed : true }) )
+        }   else {
+                fetch('/api/updateCharStats', {
+                    method: 'PUT',
+                    body: JSON.stringify({ email: this.props.state.email, 
+                        cashInBank: (this.props.state.cashInBank + this.state.deposit), 
+                        cashInHand: (this.props.state.cashInHand - this.state.deposit) }),
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                  })
+                  .then(this.setState({ depositSuccess : true, depositForm : false }))
+ 
         }
     }
 
     withdrawal = () => {
+        if (this.state.withdrawal < 0) {this.setState({ withdrawal : this.props.state.cashInBank }) }
         if (this.state.withdrawal > this.props.state.cashInBank) {
-            this.setState({ withdrawalFailed : true, withdrawalForm : false })
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: (parseInt(this.props.state.cashInBank, 10)) })
-            this.props.dispatch({ type: 'CHANGE_CASHINBANK', payload: -(parseInt(this.props.state.cashInBank, 10)) })
-        } 
-        if (this.state.withdrawal < 0) {
-            this.setState({ withdrawal : (this.state.withdrawal * -1) })
-            this.setState({ withdrawalFailed : true, withdrawalForm : false })
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: (parseInt(this.props.state.cashInBank, 10)) })
-            this.props.dispatch({ type: 'CHANGE_CASHINBANK', payload: -(parseInt(this.props.state.cashInBank, 10)) })
-        }
-            else {
-            this.setState({ withdrawalSuccess : true, withdrawalForm : false })
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: (parseInt(this.state.withdrawal, 10)) })
-            this.props.dispatch({ type: 'CHANGE_CASHINBANK', payload: -(parseInt(this.state.withdrawal, 10)) })
+            fetch('/api/updateCharStats', {
+                method: 'PUT',
+                body: JSON.stringify({ email: this.props.state.email, cashInBank: (this.props.state.cashInBank - this.state.withdrawal), 
+                    cashInHand: (this.props.state.cashInHand + this.state.withdrawal) }),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              })
+            .then(this.setState({ withdrawalForm : false, withdrawalFailed : true }) )
+        }   else {
+                fetch('/api/updateCharStats', {
+                    method: 'PUT',
+                    body: JSON.stringify({ email: this.props.state.email, 
+                        cashInBank: (this.props.state.cashInBank - this.state.withdrawal), 
+                        cashInHand: (this.props.state.cashInHand + this.state.withdrawal) }),
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                  })
+                  .then(this.setState({ withdrawalSuccess : true, withdrawalForm : false }))
+ 
         }
     }
 
@@ -106,7 +127,7 @@ class Bank extends Component {
                     </Row>
                     <Row>
                         <Col>
-                        <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
+                        <Link to="/street"><button>Back To The Street</button></Link>
                         </Col>
                 </Row>
                 </Container>
@@ -131,7 +152,7 @@ class Bank extends Component {
                     </Row>
                     <Row>
                         <Col>
-                        <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
+                        <Link to="/street"><button onClick={this.sync}>Back To The Street</button></Link>
                         </Col>
                 </Row>
                 </Container>
@@ -156,7 +177,7 @@ class Bank extends Component {
                     </Row>
                     <Row>
                         <Col>
-                        <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
+                        <Link to="/street"><button onClick={this.sync}>Back To The Street</button></Link>
                         </Col>
                 </Row>
                 </Container>
@@ -191,7 +212,7 @@ class Bank extends Component {
                     </Row>
                     <Row>
                         <Col>
-                        <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
+                        <Link to="/street"><button>Back To The Street</button></Link>
                         </Col>
                 </Row>
                 </Container>
@@ -211,12 +232,12 @@ class Bank extends Component {
                     <Row>
                         <Col>
                             You don't have that much money to deposit. You deposit what you have on hand, for a total balance of 
-                            <span id="cash"> ${this.props.state.cashInBank}</span>.
+                            <span id="cash"> ${this.props.state.cashInBank + this.props.state.cashInHand}</span>.
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                        <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
+                        <Link to="/street"><button onClick={this.sync}>Back To The Street</button></Link>
                         </Col>
                 </Row>
                 </Container>
@@ -240,7 +261,7 @@ class Bank extends Component {
                     </Row>
                     <Row>
                         <Col>
-                        <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
+                        <Link to="/street"><button onClick={this.sync}>Back To The Street</button></Link>
                         </Col>
                 </Row>
                 </Container>
@@ -273,7 +294,7 @@ class Bank extends Component {
                 </Row>
                 <Row>
                     <Col>
-                    <Link to="/street"><button onClick={this.street}>Back To The Street</button></Link>
+                    <Link to="/street"><button>Back To The Street</button></Link>
                     </Col>
                 </Row>
             </Container>

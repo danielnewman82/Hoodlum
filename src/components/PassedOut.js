@@ -8,6 +8,10 @@ function mapStateToProps(state) {
 }
 
 class PassedOut extends Component {
+
+    logOut = () => {
+        this.props.dispatch({ type: 'LOGOUT' });
+    }
     
     render() {
         return (
@@ -27,7 +31,7 @@ class PassedOut extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <Link to="/"><button>Log Out</button></Link>
+                        <Link to="/"><button onClick={this.logOut}>Log Out</button></Link>
                     </Col>
                 </Row>
             </Container>

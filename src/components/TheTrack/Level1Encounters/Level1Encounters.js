@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Mob from './Level1Encounters/Mob'
+import Mob from './Mob'
 
 function mapStateToProps(state) {
     return {state};

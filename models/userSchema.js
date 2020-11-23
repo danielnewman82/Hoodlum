@@ -20,7 +20,6 @@ const userSchema = new mongoose.Schema({
     outfit: String,
     reputation: String,
     repScore: Number, 
-    location: String,
     pveFights: Number,
     pvpFights: Number,
     lockedOut: Boolean,

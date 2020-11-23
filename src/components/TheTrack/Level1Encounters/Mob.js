@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {state};
@@ -9,27 +10,36 @@ function mapStateToProps(state) {
 class Mob extends Component {
     constructor(props) {
         super(props);
-        this.state = { turnResults : false, mobHP : 12, 
+        this.state = { turnResults : false, mobHP : 12, playerHP : this.props.state.curHitPoints,
                         damageDealt : 0, 
                         damageTaken : 0,
                         fightResults : null,
                         cashGained: 0,
                         xpGained: 0,
                         flipFlop: false }
-        this.fight = this.fight.bind(this)
-        this.resolution = this.resolution.bind(this)
-    }
-    
-    walkTheTrack = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Looking For Trouble" })
     }
 
     flee = () => {
-        this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Looking For Trouble" })
-        this.props.dispatch({ type: 'CHANGE_PVEFIGHTS', payload: -1 })
+        fetch('/api/updateCharStats', {
+            method: 'PUT',
+            body: JSON.stringify({ email: this.props.state.email, 
+                pveFights : this.props.state.pveFights - 1, curHitPoints : this.state.playerHP }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then( fetch('/api/getCharStats', {
+            method: 'POST',
+            body: JSON.stringify({email: this.props.state.email}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }) )
+        .then(res => res.json())
+        .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
     }
     
-    fight() {
+    fight = () => {
         //calculate damage dealt and taken this round
         this.setState({ turnResults : true,
                         damageDealt : (Math.ceil(this.props.state.weapon.atkPower / 2)) + (Math.ceil(Math.random() * 
@@ -37,68 +47,48 @@ class Mob extends Component {
                         damageTaken : (Math.max(0, (Math.ceil(Math.random() * 4) - this.props.state.armor.defPower))),
                     })
         // subtract damage from mob and player HP totals
-        this.setState({ mobHP : this.state.mobHP - this.state.damageDealt })
-        this.props.dispatch({ type: 'CHANGE_HP', payload: -this.state.damageTaken})
+        this.setState({ mobHP : this.state.mobHP - this.state.damageDealt, playerHP : this.state.playerHP - this.state.damageTaken })
+        // if player HP reaches 0 first, subtract half from cash in hand and lockout for the day
+        if (this.state.playerHP - this.state.damageTaken <= 0) {
+            this.setState({ turnResults : false, fightResults : "lose", 
+                cashGained : -(Math.ceil(this.props.state.cashInHand * 0.5)), 
+                lockedOut: true })
+        }        
         // if mob HP reaches 0 first, give cash and XP
-        if (this.state.mobHP - this.state.damageDealt <= 0) {
-            this.setState({ turnResults : false, fightResults : "win", cashGained : Math.ceil(Math.random() * 16) + 4,
-                            xpGained : Math.ceil((Math.random() * 6) + 4) })
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: this.state.cashGained})
-            this.props.dispatch({ type: 'GAIN_XP', payload: this.state.xpGained})
-        }
-        // if player HP reaches 0 first, subtract half from cash in hand
-        if (this.props.state.curHitPoints - this.state.damageTaken <= 0) {
-            this.setState({ turnResults : false, fightResults : "lose", cashGained : -(this.props.state.cashInHand * Math.ceil(0.5)) })
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: this.state.cashGained})
-            this.props.dispatch({ type: 'CHANGE_LOCKOUT', payload: true })
+        if ((this.state.mobHP - this.state.damageDealt) <= 0 && (this.state.playerHP - this.state.damageTaken) > 0) {
+            this.setState({ cashGained : Math.ceil(Math.random() * 16) + 4, xpGained : Math.ceil((Math.random() * 6) + 4), 
+                turnResults : false, fightResults : "win"  })
         }
         // this guy exists solely as a workaround, so React will render current HP totals
         this.setState({ flipFlop : !this.state.flipFlop })
     }
 
-    resolution() {
-        if (this.state.fightResults === "win") {
-            this.setState({ cashGained : Math.ceil(Math.random() * 4),
-                            xpGained : Math.ceil((Math.random() * 5) * 2) })
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: this.state.cashGained })
-            this.props.dispatch({ type: 'GAIN_XP', payload: this.state.xpGained })
-            this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "Looking For Trouble" })
-            this.props.dispatch({ type: 'CHANGE_PVEFIGHTS', payload: -1 })
-        }
-        if (this.state.fightResults === "lose") {
-            this.setState({ turnResults : false, 
-                            cashGained : (Math.ceil(this.props.state.cashInHand * 0.5)) })
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: (this.state.cashGained) })
-            this.props.dispatch({ type: 'CHANGE_LOCATION', payload: "landing" })
-        }
+    resolution = () => {
+        fetch('/api/updateCharStats', {
+            method: 'PUT',
+            body: JSON.stringify({ email: this.props.state.email, 
+                cashInHand: (this.props.state.cashInHand + this.state.cashGained),
+                xp: (this.props.state.xp + this.state.xpGained),
+                pveFights : this.props.state.pveFights - 1,
+                curHitPoints : this.state.playerHP,
+                lockedOut : this.state.lockedOut }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        .then( fetch('/api/getCharStats', {
+            method: 'POST',
+            body: JSON.stringify({email: this.props.state.email}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }) )
+        .then(res => res.json())
+        .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
     }
 
     render() {
-    if (this.props.state.pveFights <= 0) {
-        return (
-            <Container>
-                <Row>
-                    <Col>
-                        <h3>Looking For Trouble</h3>
-                    </Col> 
-                </Row>
-                <Row>
-                    <hr />
-                </Row>
-                <Row>
-                    <Col>
-                        You are too tired to go starting shit with anyone, right now. Chill out, get some rest, and
-                        try again tomorrow.
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <button onClick={this.walkTheTrack}>Go Do Something More Constructive</button>
-                    </Col>
-                </Row>
-            </Container>
-        )
-    }
+    
     if (this.state.turnResults === true && this.state.damageTaken > 0) {
         return (
             <Container>
@@ -112,7 +102,7 @@ class Mob extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        Your HP: <span id="hitPoints">{this.props.state.curHitPoints - this.state.damageTaken}</span>
+                        Your HP: <span id="hitPoints">{this.state.playerHP - this.state.damageTaken}</span>
                     </Col>
                 </Row>
                 <Row>
@@ -149,7 +139,7 @@ class Mob extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        Your HP: <span id="hitPoints">{this.props.state.curHitPoints - this.state.damageTaken}</span>
+                        Your HP: <span id="hitPoints">{this.state.playerHP - this.state.damageTaken}</span>
                     </Col>
                 </Row>
                 <Row>
@@ -217,7 +207,7 @@ class Mob extends Component {
             </Row>
             <Row>
                 <Col>
-                    <button onClick={this.resolution}>Give It A Rest</button>
+                    <Link to="/"><button onClick={this.resolution}>Give It A Rest</button></Link>
                 </Col>
             </Row>
         </Container>
@@ -253,7 +243,7 @@ class Mob extends Component {
                     <button onClick={this.fight}>Attack!</button>
                 </Col>
                 <Col>
-                    <button onClick={this.walkTheTrack}>Punk Out And Run</button>
+                    <Link to="/street"><button>Punk Out And Run</button></Link>
                 </Col>
             </Row>
         </Container>

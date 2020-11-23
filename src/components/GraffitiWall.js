@@ -38,8 +38,22 @@ class GraffitiWall extends Component {
                 time: new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString() })
         })
         this.props.dispatch({ type: 'CHANGE_TAGSTODAY', payload: 1});
+        fetch('/api/updateCharStats', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({tagsToday: this.props.state.tagsToday + 1})
+        })
         } else {
             this.props.dispatch({ type: 'CHANGE_LOCKOUT', payload: true})
+            fetch('/api/updateCharStats', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({lockedOut: true})
+            })
             this.setState({ shutUp: true });
         }
     };

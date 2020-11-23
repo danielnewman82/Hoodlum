@@ -18,9 +18,15 @@ class PocketKnife extends Component {
                 this.setState({ insufficientFunds : true, transactionComplete : false })
             }
         else {
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: -(40 - this.props.state.weapon.sellPrice) }); 
-            this.props.dispatch({ type: 'CHANGE_WEAPON', payload: {name : " Pocket Knife", sellPrice: 10, atkPower: 7} });
-            this.setState({ transactionComplete : true })
+            fetch('/api/updateCharStats', {
+                method: 'PUT',
+                body: JSON.stringify({ email: this.props.state.email, weapon: {name: "pocket knife", atkPower: 7, sellPrice: 10}, 
+                    cashInHand: (this.props.state.cashInHand + this.props.state.weapon.sellPrice - 40) }),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              })
+            .then( this.setState({ transactionComplete : true }) )
         }
     }
     
@@ -35,7 +41,7 @@ class PocketKnife extends Component {
                     </Row>
                     <Row>
                         <Col>
-                        <Link to="/street"><button>Back To The Streets</button></Link>
+                            <Link to="/street"><button onClick={this.props.sync}>Back To The Streets</button></Link>
                         </Col>
                     </Row>
                 </Container>
@@ -50,9 +56,14 @@ class PocketKnife extends Component {
                         </Col>
                     </Row>
                     <Row>
-                    <Col>
-                        <Link to="/weaponShop"><button>Back To The Weapon Menu</button></Link>
-                    </Col>
+                        <Col>
+                            <Link to="/weaponShop"><button>Back To The Weapon Menu</button></Link>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Link to="/street"><button>Back To The Streets</button></Link>
+                        </Col>
                     </Row>
                 </Container>
             )

@@ -60,7 +60,7 @@ class Gym extends Component {
                 <Container>
                     <Row>
                         <Col>
-                        <h3><span id="location">{this.props.state.location}</span></h3>
+                        <h3>The Training Gym</h3>
                         </Col> 
                     </Row>
                     <Row>
@@ -89,7 +89,7 @@ class Gym extends Component {
             <Container>
                 <Row>
                     <Col>
-                        <h3><span id="location">{this.props.state.location}</span></h3>
+                        <h3>The Training Gym</h3>
                     </Col> 
                 </Row>
                 <Row>

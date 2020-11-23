@@ -19,12 +19,14 @@ class Landing extends Component {
         this.setState({ [name]: value });
     }
 
+    // this is here solely so it can be passed as props to SignUp
     backUp = () => {
         this.setState({ error: "" })
     }
 
     onSubmit = (e) => {
         e.preventDefault();
+        // send email and password to the backend
         fetch('/api/authenticate', {
             method: 'POST',
             body: JSON.stringify({email: this.state.email, password: this.state.password}),
@@ -32,6 +34,8 @@ class Landing extends Component {
               'Content-Type': 'application/json'
             }
           })
+          // if both match a document in the user database, fetch that user's stats and dispatch them to the client Redux store
+          // otherwise, return the error as JSON so the app can respond accordingly
           .then(res => {
             if (res.status === 200) {
               this.setState({ auth : true });
@@ -43,6 +47,7 @@ class Landing extends Component {
         }
     
     getCharStats = () => {
+        //send email address to the backend, so it can respond with user stats and dispatch them to the Redux store
         fetch('/api/getCharStats', {
             method: 'POST',
             headers: {
@@ -97,6 +102,7 @@ class Landing extends Component {
                                 placeholder="Enter email"
                                 value={this.state.email}
                                 onChange={this.handleInputChange}
+                                autoComplete="username"
                                 required
                                 /> </p>
                             <p>Password: <input 
@@ -105,6 +111,7 @@ class Landing extends Component {
                                 placeholder="Enter password"
                                 value={this.state.password}
                                 onChange={this.handleInputChange}
+                                autoComplete="current-password"
                                 required
                                 /> </p>
                             <button type="submit">Hit the Streets Running</button>

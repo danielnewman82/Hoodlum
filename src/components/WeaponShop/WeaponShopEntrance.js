@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {state};
 }
 
-function WeaponShopEntrance(props) {
-    let { url } = useRouteMatch();
-
-    if (props.state.level < 3) {
+class WeaponShopEntrance extends Component {
+    
+    render() {
+    if (this.props.state.level < 3) {
         return (
             <Container>
                 <Row>
@@ -33,10 +33,10 @@ function WeaponShopEntrance(props) {
             </Row>
             <Row>
                 <Col>
-                    <Link to={`${url}/pocketKnife`}><button>(1) Pocket Knife - $40</button></Link>
+                    <Link to="/weaponShop/pocketKnife"><button>(1) Pocket Knife - $40</button></Link>
                 </Col>
                 <Col>
-                    <Link to={`${url}/baseballBat`}><button>(2) Baseball Bat - $60</button></Link>
+                    <Link to="/weaponShop/baseballBat"><button>(2) Baseball Bat - $60</button></Link>
                 </Col>
             </Row>
             <Row>
@@ -151,5 +151,6 @@ function WeaponShopEntrance(props) {
             </Container>
         )
     }
+}
 
 export default connect(mapStateToProps)(WeaponShopEntrance)

@@ -14,14 +14,19 @@ class BaseballBat extends Component {
     }
 
     buy = () => {
-        if (this.props.state.cashInHand < (60 - 
-            this.props.state.weapon.sellPrice) ) {
+        if (this.props.state.cashInHand < (60 - this.props.state.weapon.sellPrice) ) {
                 this.setState({ insufficientFunds : true })
             }
         else {
-            this.props.dispatch({ type: 'CHANGE_CASHINHAND', payload: -(60 - this.props.state.weapon.sellPrice) })
-            this.props.dispatch({ type: 'CHANGE_WEAPON', payload: {name : " Baseball Bat", sellPrice: 15, atkPower: 10} });
-            this.setState({ transactionComplete : true })
+            fetch('/api/updateCharStats', {
+                method: 'PUT',
+                body: JSON.stringify({ email: this.props.state.email, weapon: {name: "baseball bat", atkPower: 10, sellPrice: 15}, 
+                    cashInHand: (this.props.state.cashInHand + this.props.state.weapon.sellPrice - 60) }),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              })
+            .then( this.setState({ transactionComplete : true }) )
         }
     }
     
