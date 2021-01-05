@@ -15,12 +15,12 @@ class TheTrack extends Component {
     }
 
     pveFight = () => {
-        this.setState({ inCombat : true })
+        this.setState({ inCombat : true, encounterNum : (Math.floor(Math.random() * 100)) })
     }
     
     render() {
         if (this.props.state.level === 1 && this.state.inCombat === true) {
-            return <Level1Encounters />
+            return <Level1Encounters encounterNum = {this.state.encounterNum} />
         }
 
         if (this.props.state.pveFights <= 0) {

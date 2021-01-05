@@ -28,7 +28,11 @@ class SignUp extends Component {
     setName = () => {
         fetch('/api/register', {
             method: 'POST',
-            body: JSON.stringify({email: this.props.email, password: this.props.password, name: this.state.name, sex: this.state.sex}),
+            body: JSON.stringify( { email: this.props.email, 
+                password: this.props.password, 
+                name: this.state.name, 
+                sex: this.state.sex, 
+                creationDate: new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString() } ),
             headers: {
               'Content-Type': 'application/json'
             }

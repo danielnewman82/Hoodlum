@@ -89,8 +89,7 @@ class Landing extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <p>Experience life on the streets. Hustle, fight, do what you have to do to 
-                        survive.</p>
+                        <p>Experience life on the streets. Hustle, fight, do what you have to do to survive.</p>
                     </Col>
                 </Row>
                 <Row>

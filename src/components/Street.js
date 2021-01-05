@@ -43,34 +43,34 @@ class Street extends Component {
             </Row>
             <Row>
                 <Col>
-                    <Link to="/weaponShop"><button>Spider's (G)un Shop</button></Link>
+                    <Link to="/weaponShop"><button>(S)pider's Gun Shop</button></Link>
                 </Col>
                 <Col>
-                    <Link to="/armorShop"><button>The Milsurp (A)rmor Shop</button></Link>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <Link to="/hospital"><button>Go To The (H)ospital</button></Link>
-                </Col>
-                <Col>
-                    <Link to="/bank"><button>Go To The (B)ank</button></Link>
+                    <Link to="/armorShop"><button>(A)rmor Shop</button></Link>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <Link to="/graffitiWall"><button>Hit Up The Graffiti (W)all</button></Link>
+                    <Link to="/hospital"><button>The (H)ospital</button></Link>
                 </Col>
                 <Col>
-                    <Link to="/gym"><button>(L)evel Up At The Gym</button></Link>
+                    <Link to="/bank"><button>The (B)ank</button></Link>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <Link to="/passedOut"><button>Go Pass (O)ut Somewhere</button></Link>
+                    <Link to="/graffitiWall"><button>The Graffiti (W)all</button></Link>
                 </Col>
                 <Col>
-                    <Link to="/club"><button>Go To The (C)lub</button></Link>
+                    <Link to="/gym"><button>The (G)ym</button></Link>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Link to="/passedOut"><button>Log (O)ut</button></Link>
+                </Col>
+                <Col>
+                    <Link to="/club"><button>The (C)lub</button></Link>
                 </Col>
             </Row>
         </Container>

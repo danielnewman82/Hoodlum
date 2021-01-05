@@ -23,7 +23,8 @@ const userSchema = new mongoose.Schema({
     pveFights: Number,
     pvpFights: Number,
     lockedOut: Boolean,
-    tagsToday: Number
+    tagsToday: Number,
+    creationDate: Date
 });
 
 userSchema.pre('save', function(next) {

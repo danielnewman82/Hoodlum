@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Mob from './Mob'
+import SmallerKid from './SmallerKid';
+import Crackhead from './Crackhead';
 
 function mapStateToProps(state) {
     return {state};
   }
 
 class Level1Encounters extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {yourTurnResults : false}
+    }
     render() {
-/*         var encounterNum = (Math.floor(Math.random() * 50)); */
-            return <Mob />
-/*         if (encounterNum < 50 && yourTurnResults === false) {
+        if (this.props.encounterNum < 50 && this.state.yourTurnResults === false) {
             return <SmallerKid />
-        } */
+        } else if (this.props.encounterNum >= 50 && this.state.yourTurnResults === false) {
+            return <Crackhead />
+        }
     }
 }
 

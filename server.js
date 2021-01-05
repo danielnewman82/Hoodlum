@@ -3,7 +3,6 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-const Tag = require('./models/tagSchema');
 const userSchema = require('./models/userSchema');
 const cookieParser = require('cookie-parser');
 const tagSchema = require('./models/tagSchema');
@@ -23,11 +22,7 @@ const userConn = mongoose.createConnection(process.env.MONGODB_USER_URI,
 const UserModel = userConn.model('User', userSchema);
 
 // Bodyparser middleware
-app.use(
-    bodyParser.urlencoded({
-      extended: false
-    })
-  );
+app.use( bodyParser.urlencoded({ extended: false }) );
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -53,7 +48,7 @@ app.get('/checkToken', withAuth, function(req, res) {
   }
 )
 
-app.post('/api/getCharStats', /* withAuth, */ function(req, res) {
+app.post('/api/getCharStats', withAuth, function(req, res) {
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
   const { email } = req.body;
@@ -63,7 +58,7 @@ app.post('/api/getCharStats', /* withAuth, */ function(req, res) {
   })
 })
 
-app.put('/api/updateCharStats', /* withAuth,*/ function(req, res) {
+app.put('/api/updateCharStats', withAuth, function(req, res) {
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
   const { email } = req.body
@@ -78,7 +73,7 @@ app.put('/api/updateCharStats', /* withAuth,*/ function(req, res) {
 app.post('/api/register', function(req, res) {
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
-    const { email, password, name, sex } = req.body
+    const { email, password, name, sex, creationDate } = req.body
     UserModel.create({ email, password, name, sex, 
         level: 1, 
         xp: 0, 
@@ -96,7 +91,8 @@ app.post('/api/register', function(req, res) {
         pveFights: 15,
         pvpFights: 3,
         lockedOut: false,
-        tagsToday: 0
+        tagsToday: 0,
+        creationDate
         }, 
         function(err) {
       if (err) {
