@@ -56,7 +56,7 @@ class SmallerKid extends Component {
         }        
         // if mob HP reaches 0 first, give cash and XP
         if ((this.state.mobHP - this.state.damageDealt) <= 0 && (this.state.playerHP - this.state.damageTaken) > 0) {
-            this.setState({ cashGained : Math.ceil(Math.random() * 10) + 10, xpGained : Math.ceil((Math.random() * 6) + 4), 
+            this.setState({ cashGained : Math.ceil(Math.random() * 10) + 20, xpGained : Math.ceil((Math.random() * 6) + 4), 
                 turnResults : false, fightResults : "win"  })
         }
         // this guy exists solely as a workaround, so React will render current HP totals
@@ -235,7 +235,7 @@ class SmallerKid extends Component {
             </Row>
             <Row>
                 <Col>
-                    A Smaller Kid shuffles out of the cut and accosts you! What do you do?
+                    You come up on a Smaller Kid, alone on the street. He's got a smug look on his face. What do you do?
                 </Col>
             </Row>
             <Row>
