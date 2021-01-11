@@ -10,6 +10,19 @@ function mapStateToProps(state) {
 
 class Street extends Component {
 
+    getCharStats = () => {
+        //send email address to the backend, so it can respond with user stats and dispatch them to the Redux store
+        fetch('/api/getCharStats', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: this.props.state.email })
+        })
+        .then(res => {return res.json()})
+        .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
+    }
+
     render() {
         if (this.props.state.lockedOut === true) {
             return <Lockout />
@@ -38,7 +51,7 @@ class Street extends Component {
                     <Link to="/theTrack"><button>(W)alk The Track</button></Link>
                 </Col>
                 <Col>
-                    <Link to="/charSheet"><button>(V)iew Your Stats</button></Link>
+                    <Link to="/charSheet"><button onClick={this.getCharStats}>(V)iew Your Stats</button></Link>
                 </Col>
             </Row>
             <Row>

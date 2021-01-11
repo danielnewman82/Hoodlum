@@ -201,7 +201,7 @@ class SmallerKid extends Component {
             </Row>
             <Row>
                 <Col>
-                    You just got your ass kicked by a Smaller Kid. They roll your pockets for <span id="cash">
+                    You just got your ass kicked by a Smaller Kid. They run your pockets for <span id="cash">
                     ${-this.state.cashGained}</span> before you can crawl away, battered and bloody.
                 </Col>
             </Row>

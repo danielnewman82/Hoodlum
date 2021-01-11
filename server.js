@@ -62,7 +62,7 @@ app.put('/api/updateCharStats', withAuth, function(req, res) {
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
   const { email } = req.body
-  UserModel.findOneAndUpdate({email}, req.body, { new: true }, function(err, user) {
+  UserModel.findOneAndUpdate({email}, req.body, { new: true, upsert: true }, function(err, user) {
     if (err) return console.error(err);
     res.json(user)
   });

@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
     lockedOut: Boolean,
     tagsToday: Number,
     creationDate: Date
-});
+}, {strict : false});
 
 userSchema.pre('save', function(next) {
     // Check if document is new or a new password has been set

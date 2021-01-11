@@ -7,7 +7,7 @@ function mapStateToProps(state) {
     return {state};
   }
 
-class Mob extends Component {
+class Assault0 extends Component {
     constructor(props) {
         super(props);
         this.state = { intervene : false, join : false, walk : false, curHitPoints: this.props.state.curHitPoints }
@@ -55,9 +55,10 @@ class Mob extends Component {
                 body: JSON.stringify({ email: this.props.state.email, 
                     repScore: (this.props.state.repScore + 5),
                     xp: (this.props.state.xp + 25),
+                    assault0 : true,
                     pveFights : this.props.state.pveFights - 1,
                     curHitPoints : this.state.curHitPoints,
-                    assault0 : true }),
+                    }),
                 headers: {
                   'Content-Type': 'application/json'
                 }
@@ -79,9 +80,10 @@ class Mob extends Component {
                     repScore: (this.props.state.repScore + 5),
                     xp: (this.props.state.xp + 25),
                     pveFights : this.props.state.pveFights - 1,
+                    assault0 : true,
                     curHitPoints : this.state.curHitPoints,
-                    lockedOut : true,
-                    assault0 : true }),
+                    lockedOut : true
+                    }),
                 headers: {
                   'Content-Type': 'application/json'
                 }
@@ -102,8 +104,9 @@ class Mob extends Component {
                 body: JSON.stringify({ email: this.props.state.email, 
                     repScore: (this.props.state.repScore - 10),
                     xp: (this.props.state.xp + 10),
-                    pveFights : this.props.state.pveFights - 1,
-                    assault0 : true }),
+                    assault0 : true,
+                    pveFights : this.props.state.pveFights - 1
+                    }),
                 headers: {
                   'Content-Type': 'application/json'
                 }
@@ -124,8 +127,9 @@ class Mob extends Component {
                 body: JSON.stringify({ email: this.props.state.email, 
                     repScore: (this.props.state.repScore - 5),
                     xp: (this.props.state.xp + 15),
+                    assault0 : true,
                     pveFights : this.props.state.pveFights - 1,
-                    assault0 : true }),
+                    }),
                 headers: {
                   'Content-Type': 'application/json'
                 }
@@ -198,7 +202,7 @@ class Mob extends Component {
             </Container>
         )
     }
-    if (this.state.intervene === true && this.state.curHitPoints <= 15) {
+    if (this.state.intervene === true && this.state.curHitPoints <= 0) {
         return (
         <Container>
             <Row>
@@ -227,7 +231,7 @@ class Mob extends Component {
         </Container>
         )
     }
-    if (this.state.intervene === true && this.props.state.curHitPoints > 15) {
+    if (this.state.intervene === true && this.state.curHitPoints > 0) {
         return (
         <Container>
             <Row>
@@ -296,4 +300,4 @@ class Mob extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Mob)
+export default connect(mapStateToProps)(Assault0)
