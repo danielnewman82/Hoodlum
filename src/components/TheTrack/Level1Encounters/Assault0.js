@@ -65,15 +65,7 @@ class Assault0 extends Component {
                   'Content-Type': 'application/json'
                 }
               })
-            .then( fetch('/api/getCharStats', {
-                method: 'POST',
-                body: JSON.stringify({email: this.props.state.email}),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }) )
-            .then(res => res.json())
-            .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
+            .then(this.props.dispatch({ type: 'LOGOUT' }))
         }
         if (this.state.join === true) {
             fetch('/api/updateCharStats', {
@@ -192,12 +184,14 @@ class Assault0 extends Component {
             </Row>
             <Row>
                 <Col>
-                    Like a brave little toaster, you march right up to the men and tell them to leave the girl alone. They let her
-                    go, alright, but turn their attention to you. Irked at your rude interruption, the three of them swat you back
-                    and forth like a pinball on the bumpers. You finally collapse in a bloody, crumpled heap on the concrete, 
-                    watching through swollen-shut eyes as your assailants swagger off down the street in search of further amusement,
-                    chuckling amongst themselves at your misguided bravery. You could swear you caught a glimpse of their previous 
-                    victim, lurking in a nearby shadow, before you lose consciousness.
+                    <p>Like a brave little toaster, you march right up to the men and tell them to leave the girl alone. They let 
+                    her go, alright, but turn their attention to you. </p>
+                    <p>Irked at your rude interruption, the three of them swat you back and forth like a pinball on the bumpers. 
+                    You finally collapse in a bloody, crumpled heap on the concrete, watching through swollen-shut eyes as your 
+                    assailants swagger off down the street in search of further amusement, chuckling amongst themselves at your 
+                    misguided bravery.</p> 
+                    <p>You could swear you caught a glimpse of their previous victim, lurking in a nearby shadow, 
+                    before you lose consciousness.</p>
                 </Col>
             </Row>
             <Row>
@@ -221,13 +215,15 @@ class Assault0 extends Component {
             </Row>
             <Row>
                 <Col>
-                    Like a brave little toaster, you march right up to the men and tell them to leave the girl alone. They let her
-                    go, alright, but turn their attention to you. Irked at your rude interruption, the three of them swat you back
-                    and forth like a pinball on the bumpers. You survive the beating, barely, but ultimately they leave you in a 
-                    bloody, crumpled heap on the concrete, chuckling amongst themselves at your misguided bravery as they swagger 
-                    down the street in search of further amusement. Once you've staggered a couple blocks, bruised and bloody,
-                    the girl flags you down from the stoop of a brick rowhouse. "Oh my God, are you okay? Thank you so much for
-                    getting my back, that was fucked up. I'm Jeanette, I guess I'll see you around?"
+                    <p>Like a brave little toaster, you march right up to the men and tell them to leave the girl alone. They let 
+                    her go, alright, but turn their attention to you. </p>
+                    <p>Irked at your rude interruption, the three of them swat you back and forth like a pinball on the bumpers. You 
+                    survive the beating, barely, but ultimately they leave you in a bloody, crumpled heap on the concrete, 
+                    chuckling amongst themselves at your misguided bravery as they swagger down the street in search of further 
+                    amusement. </p>
+                    <p>Once you've staggered a couple blocks, bruised and bloody, the girl flags you down from the stoop of a brick 
+                    rowhouse. "Oh my God, are you okay? Thank you so much for getting my back, that was fucked up. I'm Jeanette, 
+                    I guess I'll see you around?"</p>
                 </Col>
             </Row>
             <Row>

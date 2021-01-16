@@ -9,7 +9,7 @@ function mapStateToProps(state) {
   }
 
 class Street extends Component {
-
+    
     getCharStats = () => {
         //send email address to the backend, so it can respond with user stats and dispatch them to the Redux store
         fetch('/api/getCharStats', {
@@ -19,7 +19,7 @@ class Street extends Component {
             },
             body: JSON.stringify({ email: this.props.state.email })
         })
-        .then(res => {return res.json()})
+        .then(res => res.json())
         .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
     }
 

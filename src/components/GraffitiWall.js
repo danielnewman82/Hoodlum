@@ -37,29 +37,48 @@ class GraffitiWall extends Component {
             body: JSON.stringify({text: this.state.input, author: this.props.state.name, 
                 time: new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString() })
         })
-        this.props.dispatch({ type: 'CHANGE_TAGSTODAY', payload: 1});
         fetch('/api/updateCharStats', {
             method: 'PUT',
+            body: JSON.stringify({ email: this.props.state.email, 
+                tagsToday: this.props.state.tagsToday + 1 }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        .then( fetch('/api/getCharStats', {
+            method: 'POST',
+            body: JSON.stringify({email: this.props.state.email}),
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({tagsToday: this.props.state.tagsToday + 1})
-        })
-        } else {
-            this.props.dispatch({ type: 'CHANGE_LOCKOUT', payload: true})
+            }
+        }) )
+        .then(res => res.json())
+        .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
+    }
+        if (this.props.state.tagsToday >= 3) {
             fetch('/api/updateCharStats', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({lockedOut: true, curHitPoints: 0})
+                body: JSON.stringify({ email: this.props.state.email, lockedOut: true, curHitPoints: 0})
             })
-            this.setState({ shutUp: true });
+            .then( fetch('/api/getCharStats', {
+                method: 'POST',
+                body: JSON.stringify({email: this.props.state.email}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }) )
+            .then(res => res.json())
+            .then(this.setState({ shutUp: true }) );
         }
     };
 
+    logOut = () => { this.props.dispatch({ type: 'LOGOUT' }) }
+
     render() {
-        if (this.props.state.lockedOut === true) {
+        if (this.state.shutUp === true) {
             return (
                 <Container>
                     <Row>
@@ -72,27 +91,27 @@ class GraffitiWall extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            As you scrawl away, covering the wall with your magnum opus, you get so absorbed in it
+                            <p>As you scrawl away, covering the wall with your magnum opus, you get so absorbed in it
                             that you don't notice the crew of gang-bangers approaching. There's seven of them and one of
                             you. "The fuck you think you doin'? You going over my shit? You must be dusted, homeboy." You
-                            realize, a bit too late, that you have committed a serious faux pas, and are about to pay for it.
+                            realize, a bit too late, that you have committed a serious faux pas, and are about to pay for it. </p>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            Maybe three seconds later, that bill comes due, in the form of a right cross to the nose. They
-                            beat you mercilessly, leaving you in a crumpled heap on the sidewalk, marker still in hand.
+                            <p>Maybe three seconds later, that bill comes due, in the form of a right cross to the nose. They
+                            beat you mercilessly, leaving you in a crumpled heap on the sidewalk, marker still in hand.</p>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <span id="wordOfGod">You just got stomped out for spamming the graffiti wall. In the future,
-                            no more than three tags per day.</span>
+                            <p><span id="wordOfGod">You just got stomped out for spamming the graffiti wall. In the future,
+                            no more than three tags per day.</span></p>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <Link to="/"><button>Go Pass Out Somewhere</button></Link>
+                            <Link to="/"><button onClick={this.logOut}>Go Pass Out Somewhere</button></Link>
                         </Col>
                     </Row>
                 </Container>

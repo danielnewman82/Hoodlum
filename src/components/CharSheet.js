@@ -8,7 +8,6 @@ function mapStateToProps(state) {
   }
 
 class CharSheet extends Component {
-
     render() {
         return (
         <Container>

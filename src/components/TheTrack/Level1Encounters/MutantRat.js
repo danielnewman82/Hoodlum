@@ -7,10 +7,10 @@ function mapStateToProps(state) {
     return {state};
   }
 
-class SmallerKid extends Component {
+class MutantRat extends Component {
     constructor(props) {
         super(props);
-        this.state = { turnResults : false, mobHP : 9, playerHP : this.props.state.curHitPoints,
+        this.state = { turnResults : false, mobHP : 12, playerHP : this.props.state.curHitPoints,
                         damageDealt : 0, 
                         damageTaken : 0,
                         fightResults : null,
@@ -56,7 +56,7 @@ class SmallerKid extends Component {
         }        
         // if mob HP reaches 0 first, give cash and XP
         if ((this.state.mobHP - this.state.damageDealt) <= 0 && (this.state.playerHP - this.state.damageTaken) > 0) {
-            this.setState({ cashGained : Math.ceil(Math.random() * 10) + 20, xpGained : Math.ceil((Math.random() * 6) + 4), 
+            this.setState({ cashGained : Math.ceil(Math.random() * 16) + 4, xpGained : Math.ceil((Math.random() * 6) + 4), 
                 turnResults : false, fightResults : "win"  })
         }
         // this guy exists solely as a workaround, so React will render current HP totals
@@ -124,22 +124,22 @@ class SmallerKid extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        Smaller Kid's HP: {this.state.mobHP - this.state.damageDealt}
+                        Mutant Rat's HP: {this.state.mobHP - this.state.damageDealt}
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        You hit the Smaller Kid with your {this.props.state.weapon.name} for {this.state.damageDealt}!
+                        You hit the Mutant Rat with your {this.props.state.weapon.name} for {this.state.damageDealt}! 
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        He goes down, crying like a bitch!
+                        You killed it!
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <button onClick={this.fight}>Rob The Little Turd</button>
+                        <button onClick={this.fight}>Claim the Spoils</button>
                     </Col>
                 </Row>
             </Container>
@@ -163,22 +163,22 @@ class SmallerKid extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        Smaller Kid's HP: {this.state.mobHP - this.state.damageDealt}
+                        Mutant Rat's HP: {this.state.mobHP - this.state.damageDealt}
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        You hit the Smaller Kid with your {this.props.state.weapon.name} for {this.state.damageDealt}!
+                        You hit the Mutant Rat with your {this.props.state.weapon.name} for {this.state.damageDealt}! 
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        He hits you with a bony little fist for {this.state.damageTaken}, knocking you out cold!
+                        He hits you back for {this.state.damageTaken}, and you go down!
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <button onClick={this.fight}>Collapse, Defeated</button>
+                        <button onClick={this.fight}>Admit Defeat</button>
                     </Col>
                 </Row>
             </Container>
@@ -202,17 +202,17 @@ class SmallerKid extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        Smaller Kid's HP: {this.state.mobHP - this.state.damageDealt}
+                        Mutant Rat's HP: {this.state.mobHP - this.state.damageDealt}
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        You hit the Smaller Kid with your {this.props.state.weapon.name} for {this.state.damageDealt}!
+                        You hit the Mutant Rat with your {this.props.state.weapon.name} for {this.state.damageDealt}! 
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        He hits you with a bony little fist for {this.state.damageTaken}!
+                        He hits you back for {this.state.damageTaken}!
                     </Col>
                 </Row>
                 <Row>
@@ -244,12 +244,12 @@ class SmallerKid extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        Smaller Kid's HP: {this.state.mobHP - this.state.damageDealt}
+                        Mutant Rat's HP: {this.state.mobHP - this.state.damageDealt}
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        You hit the Smaller Kid with your {this.props.state.weapon.name} for {this.state.damageDealt}!
+                        You hit the Mutant Rat with your {this.props.state.weapon.name} for {this.state.damageDealt}! 
                     </Col>
                 </Row>
                 <Row>
@@ -281,8 +281,8 @@ class SmallerKid extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        You won! You roll your victim for <span id="cash">${this.state.cashGained}</span>, and
-                        gain {this.state.xpGained} experience points for mercilessly beating their ass in the street.
+                        You won! You haul the carcass to a biotech lab and sell it for <span id="cash">${this.state.cashGained}</span>, 
+                        and gain {this.state.xpGained} experience points for mercilessly beating their ass in the street.
                     </Col>
                 </Row>
                 <Row>
@@ -306,7 +306,7 @@ class SmallerKid extends Component {
             </Row>
             <Row>
                 <Col>
-                    You just got your ass kicked by a Smaller Kid. They run your pockets for <span id="cash">
+                    You just got your ass kicked by a Mutant Rat. It rolls your pockets for <span id="cash">
                     ${-this.state.cashGained}</span> before you can crawl away, battered and bloody.
                 </Col>
             </Row>
@@ -335,17 +335,17 @@ class SmallerKid extends Component {
             </Row>
             <Row>
                 <Col>
-                    Smaller Kid's HP: {this.state.mobHP}
+                    Mutant Rat's HP: {this.state.mobHP}
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    You come up on a Smaller Kid, alone on the street. He's got a smug look on his face. What do you do?
+                    A massive Mutant Rat jumps out of the shadows at you! What do you do?
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <button onClick={this.fight}>Attack!</button>
+                    <button onClick={this.fight}>Kill it!</button>
                 </Col>
                 <Col>
                     <Link to="/street"><button>Punk Out And Run</button></Link>
@@ -356,4 +356,4 @@ class SmallerKid extends Component {
     }
 }
 
-export default connect(mapStateToProps)(SmallerKid)
+export default connect(mapStateToProps)(MutantRat)

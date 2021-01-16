@@ -64,7 +64,8 @@ class LittleDog extends Component {
     }
 
     resolution = () => {
-        fetch('/api/updateCharStats', {
+        if (this.state.fightResults === "win") { 
+            fetch('/api/updateCharStats', {
             method: 'PUT',
             body: JSON.stringify({ email: this.props.state.email, 
                 cashInHand: (this.props.state.cashInHand + this.state.cashGained),
@@ -86,6 +87,22 @@ class LittleDog extends Component {
         .then(res => res.json())
         .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
     }
+    if (this.state.fightResults === "lose") {
+        fetch('/api/updateCharStats', {
+            method: 'PUT',
+            body: JSON.stringify({ email: this.props.state.email, 
+                cashInHand: (this.props.state.cashInHand + this.state.cashGained),
+                xp: (this.props.state.xp + this.state.xpGained),
+                pveFights : this.props.state.pveFights - 1,
+                curHitPoints : this.state.playerHP,
+                lockedOut : this.state.lockedOut }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        .then(this.props.dispatch({ type: 'LOGOUT' }) )
+    }
+}
 
     render() {
     
@@ -264,7 +281,7 @@ class LittleDog extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        You won! You roll your victim for <span id="cash">${this.state.cashGained}</span>, and
+                        You won! You sell the yappy dog's collar for <span id="cash">${this.state.cashGained}</span>, and
                         gain {this.state.xpGained} experience points for mercilessly beating their ass in the street.
                     </Col>
                 </Row>
