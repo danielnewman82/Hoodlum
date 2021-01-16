@@ -89,6 +89,84 @@ class Mob extends Component {
 
     render() {
     
+    if (this.state.turnResults === true && (this.state.mobHP - this.state.damageDealt <= 0)) {
+        return (
+            <Container>
+                <Row>
+                    <Col>
+                        <h3>In A Street Fight</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
+                <Row>
+                    <Col>
+                        Your HP: <span id="hitPoints">{this.state.playerHP - this.state.damageTaken}</span>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        mob's HP: {this.state.mobHP - this.state.damageDealt}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        You hit the mob for {this.state.damageDealt}! 
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        You killed it!
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <button onClick={this.fight}>Loot the Body</button>
+                    </Col>
+                </Row>
+            </Container>
+        )
+    } 
+    if (this.state.turnResults === true && (this.state.playerHP - this.state.damageTaken <= 0)) {
+        return (
+            <Container>
+                <Row>
+                    <Col>
+                        <h3>In A Street Fight</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
+                <Row>
+                    <Col>
+                        Your HP: <span id="hitPoints">{this.state.playerHP - this.state.damageTaken}</span>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        mob's HP: {this.state.mobHP - this.state.damageDealt}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        You hit the mob for {this.state.damageDealt}! 
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He hits you back for {this.state.damageTaken}, and you go down!
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <button onClick={this.fight}>Admit Defeat</button>
+                    </Col>
+                </Row>
+            </Container>
+        )
+    } 
     if (this.state.turnResults === true && this.state.damageTaken > 0) {
         return (
             <Container>
@@ -112,7 +190,12 @@ class Mob extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        You hit the mob for {this.state.damageDealt}! He hits you back for {this.state.damageTaken}!
+                        You hit the mob for {this.state.damageDealt}! 
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He hits you back for {this.state.damageTaken}!
                     </Col>
                 </Row>
                 <Row>
@@ -149,7 +232,12 @@ class Mob extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        You hit the mob for {this.state.damageDealt}! He misses you completely!
+                        You hit the mob for {this.state.damageDealt}! 
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He misses you completely!
                     </Col>
                 </Row>
                 <Row>

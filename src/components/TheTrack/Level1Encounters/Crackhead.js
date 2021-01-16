@@ -89,6 +89,85 @@ class Crackhead extends Component {
 
     render() {
     
+    if (this.state.turnResults === true && (this.state.mobHP - this.state.damageDealt <= 0)) {
+        return (
+            <Container>
+                <Row>
+                    <Col>
+                        <h3>In A Street Fight</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
+                <Row>
+                    <Col>
+                        Your HP: <span id="hitPoints">{this.state.playerHP - this.state.damageTaken}</span>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        Crackhead's HP: {this.state.mobHP - this.state.damageDealt}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        You hit the Crackhead with your {this.props.state.weapon.name} for {this.state.damageDealt}! 
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He collapses to the ground, defeated!
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <button onClick={this.fight}>Roll Him For Cash</button>
+                    </Col>
+                </Row>
+            </Container>
+        )
+    }
+    if (this.state.turnResults === true && (this.state.playerHP - this.state.damageTaken <= 0)) {
+        return (
+            <Container>
+                <Row>
+                    <Col>
+                        <h3>In A Street Fight</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
+                <Row>
+                    <Col>
+                        Your HP: <span id="hitPoints">{this.state.playerHP - this.state.damageTaken}</span>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        Crackhead's HP: {this.state.mobHP - this.state.damageDealt}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        You hit the Crackhead with your {this.props.state.weapon.name} for {this.state.damageDealt}! 
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He hits you with his long yellow nails for {this.state.damageTaken}! You go down!
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <button onClick={this.fight}>Admit Defeat</button>
+                    </Col>
+                </Row>
+            </Container>
+        )
+    }
+
     if (this.state.turnResults === true && this.state.damageTaken > 0) {
         return (
             <Container>
@@ -112,7 +191,12 @@ class Crackhead extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        You hit the Crackhead for {this.state.damageDealt}! He hits you with his long yellow nails for {this.state.damageTaken}!
+                        You hit the Crackhead with your {this.props.state.weapon.name} for {this.state.damageDealt}! 
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He hits you with his long yellow nails for {this.state.damageTaken}!
                     </Col>
                 </Row>
                 <Row>
@@ -149,7 +233,12 @@ class Crackhead extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        You hit the Crackhead for {this.state.damageDealt}! He misses you completely!
+                        You hit the Crackhead with your {this.props.state.weapon.name} for {this.state.damageDealt}! 
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He misses you completely!
                     </Col>
                 </Row>
                 <Row>

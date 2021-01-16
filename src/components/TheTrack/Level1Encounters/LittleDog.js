@@ -89,6 +89,84 @@ class LittleDog extends Component {
 
     render() {
     
+    if (this.state.turnResults === true && (this.state.mobHP - this.state.damageDealt) <= 0) {
+        return (
+            <Container>
+                <Row>
+                    <Col>
+                        <h3>In A Street Fight</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
+                <Row>
+                    <Col>
+                        Your HP: <span id="hitPoints">{this.state.playerHP - this.state.damageTaken}</span>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        Small, Aggressive Dog's HP: {this.state.mobHP - this.state.damageDealt}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        You hit the Small, Aggressive Dog with your {this.props.state.weapon.name} for {this.state.damageDealt}! 
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        That mighty blow was more than it could stand! The vicious beast collapses before you!
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <button onClick={this.fight}>Loot The Body</button>
+                    </Col>
+                </Row>
+            </Container>
+        )
+    } 
+    if (this.state.turnResults === true && (this.state.playerHP - this.state.damageTaken <= 0)) {
+        return (
+            <Container>
+                <Row>
+                    <Col>
+                        <h3>In A Street Fight</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
+                <Row>
+                    <Col>
+                        Your HP: <span id="hitPoints">{this.state.playerHP - this.state.damageTaken}</span>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        Small, Aggressive Dog's HP: {this.state.mobHP - this.state.damageDealt}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        You hit the Small, Aggressive Dog with your {this.props.state.weapon.name} for {this.state.damageDealt}! 
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He mauls you for {this.state.damageTaken}! You go down!
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <button onClick={this.fight}>Admit Defeat</button>
+                    </Col>
+                </Row>
+            </Container>
+        )
+    } 
     if (this.state.turnResults === true && this.state.damageTaken > 0) {
         return (
             <Container>
@@ -112,7 +190,12 @@ class LittleDog extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        You hit the Small, Aggressive Dog for {this.state.damageDealt}! He nibbles on you for {this.state.damageTaken}!
+                        You hit the Small, Aggressive Dog with your {this.props.state.weapon.name} for {this.state.damageDealt}! 
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He nibbles on you for {this.state.damageTaken}!
                     </Col>
                 </Row>
                 <Row>
@@ -149,7 +232,12 @@ class LittleDog extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        You hit the Small, Aggressive Dog for {this.state.damageDealt}! He misses you completely!
+                        You hit the Small, Aggressive Dog with your {this.props.state.weapon.name} for {this.state.damageDealt}! 
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He misses you completely!
                     </Col>
                 </Row>
                 <Row>

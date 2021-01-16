@@ -89,6 +89,84 @@ class SmallerKid extends Component {
 
     render() {
     
+    if (this.state.turnResults === true && (this.state.mobHP - this.state.damageDealt <= 0)) {
+        return (
+            <Container>
+                <Row>
+                    <Col>
+                        <h3>In A Street Fight</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
+                <Row>
+                    <Col>
+                        Your HP: <span id="hitPoints">{this.state.playerHP - this.state.damageTaken}</span>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        Smaller Kid's HP: {this.state.mobHP - this.state.damageDealt}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        You hit the Smaller Kid with your {this.props.state.weapon.name} for {this.state.damageDealt}!
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He goes down, crying like a bitch!
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <button onClick={this.fight}>Rob The Little Turd</button>
+                    </Col>
+                </Row>
+            </Container>
+        )
+    } 
+    if (this.state.turnResults === true && (this.state.playerHP - this.state.damageTaken <= 0)) {
+        return (
+            <Container>
+                <Row>
+                    <Col>
+                        <h3>In A Street Fight</h3>
+                    </Col> 
+                </Row>
+                <Row>
+                    <hr />
+                </Row>
+                <Row>
+                    <Col>
+                        Your HP: <span id="hitPoints">{this.state.playerHP - this.state.damageTaken}</span>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        Smaller Kid's HP: {this.state.mobHP - this.state.damageDealt}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        You hit the Smaller Kid with your {this.props.state.weapon.name} for {this.state.damageDealt}!
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He hits you with a bony little fist for {this.state.damageTaken}, knocking you out cold!
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <button onClick={this.fight}>Collapse, Defeated</button>
+                    </Col>
+                </Row>
+            </Container>
+        )
+    } 
     if (this.state.turnResults === true && this.state.damageTaken > 0) {
         return (
             <Container>
@@ -112,7 +190,12 @@ class SmallerKid extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        You hit the Smaller Kid for {this.state.damageDealt}! He hits you with a bony little fist for {this.state.damageTaken}!
+                        You hit the Smaller Kid with your {this.props.state.weapon.name} for {this.state.damageDealt}!
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He hits you with a bony little fist for {this.state.damageTaken}!
                     </Col>
                 </Row>
                 <Row>
@@ -149,7 +232,12 @@ class SmallerKid extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        You hit the Smaller Kid for {this.state.damageDealt}! He misses you completely!
+                        You hit the Smaller Kid with your {this.props.state.weapon.name} for {this.state.damageDealt}!
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        He misses you completely!
                     </Col>
                 </Row>
                 <Row>

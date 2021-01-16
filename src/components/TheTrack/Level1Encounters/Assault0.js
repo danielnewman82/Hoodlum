@@ -24,29 +24,6 @@ class Assault0 extends Component {
     walk = () => {
         this.setState({ walk : true })
     }
-    fight = () => {
-        //calculate damage dealt and taken this round
-        this.setState({ turnResults : true,
-                        damageDealt : (Math.ceil(this.props.state.weapon.atkPower / 2)) + (Math.ceil(Math.random() * 
-                        (this.props.state.weapon.atkPower / 2))),
-                        damageTaken : (Math.max(0, (Math.ceil(Math.random() * 4) - this.props.state.armor.defPower))),
-                    })
-        // subtract damage from mob and player HP totals
-        this.setState({ mobHP : this.state.mobHP - this.state.damageDealt, playerHP : this.state.playerHP - this.state.damageTaken })
-        // if player HP reaches 0 first, subtract half from cash in hand and lockout for the day
-        if (this.state.playerHP - this.state.damageTaken <= 0) {
-            this.setState({ turnResults : false, fightResults : "lose", 
-                cashGained : -(Math.ceil(this.props.state.cashInHand * 0.5)), 
-                lockedOut: true })
-        }        
-        // if mob HP reaches 0 first, give cash and XP
-        if ((this.state.mobHP - this.state.damageDealt) <= 0 && (this.state.playerHP - this.state.damageTaken) > 0) {
-            this.setState({ cashGained : Math.ceil(Math.random() * 16) + 4, xpGained : Math.ceil((Math.random() * 6) + 4), 
-                turnResults : false, fightResults : "win"  })
-        }
-        // this guy exists solely as a workaround, so React will render current HP totals
-        this.setState({ flipFlop : !this.state.flipFlop })
-    }
 
     resolution = () => {
         if (this.state.intervene === true && this.state.curHitPoints > 0) {
@@ -248,7 +225,7 @@ class Assault0 extends Component {
                     go, alright, but turn their attention to you. Irked at your rude interruption, the three of them swat you back
                     and forth like a pinball on the bumpers. You survive the beating, barely, but ultimately they leave you in a 
                     bloody, crumpled heap on the concrete, chuckling amongst themselves at your misguided bravery as they swagger 
-                    down the street in search of further amusement. Once you've staggered a couple blocks, bruised, and bloody,
+                    down the street in search of further amusement. Once you've staggered a couple blocks, bruised and bloody,
                     the girl flags you down from the stoop of a brick rowhouse. "Oh my God, are you okay? Thank you so much for
                     getting my back, that was fucked up. I'm Jeanette, I guess I'll see you around?"
                 </Col>
