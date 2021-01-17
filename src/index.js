@@ -3,30 +3,29 @@ import App from './App';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import { encryptTransform } from 'redux-persist-transform-encrypt';
+import storage from 'redux-persist/lib/storage';
+import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter } from 'react-router-dom';
 
-const initialState = {
-  /*
-  fists : { buyPrice : 0, sellprice : 0, atkPower : 4 },
-  pocketKnife : { buyPrice : 40, sellPrice : 10, atkPower : 7},
-  baseballBat : { buyPrice : 60, sellPrice : 15, atkPower : 10},
-  slingshot : { buyPrice : 80, sellPrice : 20, atkPower : 13},
-  pelletRifle : { buyPrice : 100, sellPrice : 25, atkPower : 16},
-  deuceDeuce : { buyPrice : 200, sellPrice : 50, atkPower: 20},
-  clock17 : { buyPrice : 500, sellPrice : 200, atkPower: 25},
-  bolt45 : { buyPrice : 800, sellPrice : 300, atkPower : 30},
-  magnum : { buyPrice : 1200, sellPrice : 400, atkPower : 40},
-  shotgun : { buyPrice : 1500, sellPrice : 500, atkPower : 50},
-  uzi : { buyPrice : 2000, sellPrice : 750, atkPower : 60},
-  boltRifle : { buyPrice : 3000, sellPrice : 1000, atkPower : 70},
-  sks : { buyPrice : 4000, sellPrice : 1300, atkPower : 80},
-  ar15 : { buyPrice: 5000, sellPrice : 1800, atkPower : 100},
-  g3 : { buyPrice : 6000, sellPrice : 2500, atkPower : 120},
-  aug : { buyPrice : 8000, sellPrice : 3000, atkPower : 150},
-  minimi : { buyPrice : 10000, sellPrice : 4000, atkPower : 180},
- */
+const initialState = {}
+var key = document.cookie.substring(0, 99);
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  transforms: [
+    encryptTransform({
+      secretKey: key,
+      onError: function (error) {
+        // Handle the error.
+      },
+    }),
+  ],
 }
+
+const persistedReducer = persistReducer(persistConfig, reducer);
 
 function reducer(state = initialState, action) {
   switch(action.type) {      
@@ -96,12 +95,15 @@ function reducer(state = initialState, action) {
   }
 }
 
-const store = createStore(reducer);
+let store = createStore(persistedReducer);
+let persistor = persistStore(store);
 
 const Index = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </BrowserRouter>
   </Provider>
 );

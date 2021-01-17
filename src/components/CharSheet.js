@@ -7,7 +7,8 @@ function mapStateToProps(state) {
     return {state};
   }
 
-class CharSheet extends Component {
+class CharSheet extends Component {npm 
+
     render() {
         return (
         <Container>

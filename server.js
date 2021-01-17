@@ -3,15 +3,16 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-const userSchema = require('./models/userSchema');
+const userSchema = require('./src/models/userSchema');
 const cookieParser = require('cookie-parser');
-const tagSchema = require('./models/tagSchema');
-const { resolveNaptr } = require('dns');
+const tagSchema = require('./src/models/tagSchema');
+// why the shit was this here? I have no idea.
+// const { resolveNaptr } = require('dns');
 
 const app = express();
 
-const dotenv = require('dotenv').config();
-const userURI = process.env.MONGODB_USER_URI;
+require('dotenv').config();
+
 const JWTSecret = process.env.JWT_SECRET;
 
 const tagConn = mongoose.createConnection(process.env.MONGODB_TAGGER_URI, 
@@ -146,7 +147,7 @@ app.post('/api/authenticate', function(req, res) {
             const token = jwt.sign(payload, JWTSecret, {
               expiresIn: '1h'
             });
-            res.cookie('token', token, { httpOnly: true })
+            res.cookie('token', token, { httpOnly: false })
               .sendStatus(200);
             console.log('Authentication successful!')
           }

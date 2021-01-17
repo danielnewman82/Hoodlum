@@ -39,7 +39,15 @@ class Landing extends Component {
           .then(res => {
             if (res.status === 200) {
               this.setState({ auth : true });
-              this.getCharStats();
+              fetch('/api/getCharStats', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: this.state.email })
+                })
+                .then(res => res.json() )
+                .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
             } else return res.json()
           })
           .then(res => this.setState(res))
@@ -55,9 +63,8 @@ class Landing extends Component {
             },
             body: JSON.stringify({ email: this.state.email })
         })
-        .then(res => {return res.json()})
+        .then(res => res.json() )
         .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
-        
     }
 
     render() {
