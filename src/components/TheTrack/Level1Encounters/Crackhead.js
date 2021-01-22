@@ -37,6 +37,7 @@ class Crackhead extends Component {
         }) )
         .then(res => res.json())
         .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
+        .then(this.props.combat)
     }
     
     fight = () => {

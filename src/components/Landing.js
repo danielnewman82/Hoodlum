@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
 import SignUp from './SignUp';
+import About from './About';
 
 function mapStateToProps(state) {
     return {state};
@@ -11,12 +12,16 @@ function mapStateToProps(state) {
 class Landing extends Component {
     constructor(props) {
         super(props);
-        this.state = { email : "", password : "" };
+        this.state = { email : "", password : "", about: false, lockedOut: false };
     }
 
     handleInputChange = (e) => {
         const { value, name } = e.target
         this.setState({ [name]: value });
+    }
+
+    about = () => {
+        this.setState({ about : !this.state.about })
     }
 
     // this is here solely so it can be passed as props to SignUp
@@ -38,7 +43,6 @@ class Landing extends Component {
           // otherwise, return the error as JSON so the app can respond accordingly
           .then(res => {
             if (res.status === 200) {
-              this.setState({ auth : true });
               fetch('/api/getCharStats', {
                 method: 'POST',
                 headers: {
@@ -47,7 +51,8 @@ class Landing extends Component {
                 body: JSON.stringify({ email: this.state.email })
                 })
                 .then(res => res.json() )
-                .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
+                .then(res => this.props.dispatch( { type: 'GET_CHARDATA', payload: res } ) )
+                .then(this.setState({ auth : true }) )
             } else return res.json()
           })
           .then(res => this.setState(res))
@@ -64,16 +69,23 @@ class Landing extends Component {
             body: JSON.stringify({ email: this.state.email })
         })
         .then(res => res.json() )
-        .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
+        .then(res => this.setState({ res }))
+    }
+
+    about = () => {
+        this.setState({ about: !this.state.about })
     }
 
     render() {
         let incorrectPassword;
-        if (this.state.auth === true  && this.props.state.lockedOut === false ) {
-            return <Redirect to="/street" />
+        if (this.state.auth === true  && this.state.lockedOut === false ) {
+            return <Redirect to='/street' />
         }
-        if (this.state.auth === true  && this.props.state.lockedOut === true ) {
-            return <Redirect to="/lockout" />
+        if (this.state.auth === true  && this.state.lockedOut === true ) {
+            return <Redirect to='/lockout' />
+        }
+        if (this.state.about === true) {
+            return <About about={this.about} />
         }
         if (this.state.error === "Incorrect email") {
             return <SignUp email={this.state.email} password={this.state.password} back={this.backUp}/>
@@ -136,7 +148,7 @@ class Landing extends Component {
                 </Row>
                 <Row>
                 <Col>
-                    <Link to="/about"><button>About Hoodlum</button></Link>
+                    <button onClick={this.about}>About Hoodlum</button>
                 </Col>
                 </Row>                
             </Container>

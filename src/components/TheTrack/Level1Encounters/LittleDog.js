@@ -86,6 +86,7 @@ class LittleDog extends Component {
         }) )
         .then(res => res.json())
         .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
+        .then(this.props.combat)
     }
     if (this.state.fightResults === "lose") {
         fetch('/api/updateCharStats', {

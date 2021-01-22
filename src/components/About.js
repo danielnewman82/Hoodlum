@@ -1,13 +1,12 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {state};
   }
 
-function About() {
+function About(props) {
     return (
         <Container>
             <Row>
@@ -72,7 +71,7 @@ function About() {
             </Row>
             <Row>
                 <Col>
-                    <Link to="/"><button>Back to the landing page</button></Link>
+                    <button onClick={props.about}>Back to the landing page</button>
                 </Col>
             </Row>
         </Container>
