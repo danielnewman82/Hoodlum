@@ -18,9 +18,9 @@ class Level1Encounters extends Component {
     render() {
         if (this.props.state.xp > 100 && this.state.yourTurnResults === false && this.props.state.assault0 !== true) {
             return <Assault0 />
-        } else if (this.props.state.cashInHand >= 5 && this.state.yourTurnResults === false && this.props.state.beggar0 === false) {
+        } /* else if (this.props.state.cashInHand >= 5 && this.state.yourTurnResults === false && this.props.state.beggar0 === false) {
             return <Beggar0 />
-        } else if (this.props.encounterNum < 25 && this.state.yourTurnResults === false) {
+        }*/ else if (this.props.encounterNum < 25 && this.state.yourTurnResults === false) {
             return <SmallerKid combat={this.props.combat} />
         } else if (this.props.encounterNum >= 25 && this.props.encounterNum < 50 && this.state.yourTurnResults === false) {
             return <Crackhead combat={this.props.combat} />
