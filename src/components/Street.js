@@ -9,19 +9,6 @@ function mapStateToProps(state) {
   }
 
 class Street extends Component {
-    
-    getCharStats = () => {
-        //send email address to the backend, so it can respond with user stats and dispatch them to the Redux store
-        fetch('/api/getCharStats', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: this.props.state.email })
-        })
-        .then(res => res.json())
-        .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
-    }
 
     render() {
         if (this.props.state.lockedOut === true) {
@@ -40,50 +27,50 @@ class Street extends Component {
             </Row>
             <Row id="narration">
                 <Col>
-                You are 15 years old, alone on the streets of a bad neighborhood, after dark. Most exterior 
+                <p>You are 15 years old, alone on the streets of a bad neighborhood, after dark. Most exterior 
                 walls are marred by graffiti. You can hear hardcore hip hop booming from a nearby house. There
-                are mean looking dudes loitering on the corners.
-                What do you do?
+                are mean looking dudes loitering on the corners.</p>
+                <p>What do you do?</p>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <Link to="/theTrack"><button>(W)alk The Track</button></Link>
+                    <p><Link to="/theTrack"><button>(W)alk The Track</button></Link></p>
                 </Col>
                 <Col>
-                    <Link to="/charSheet"><button onClick={this.getCharStats}>(V)iew Your Stats</button></Link>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <Link to="/weaponShop"><button>(S)pider's Gun Shop</button></Link>
-                </Col>
-                <Col>
-                    <Link to="/armorShop"><button>(A)rmor Shop</button></Link>
+                    <p><Link to="/charSheet"><button>(V)iew Your Stats</button></Link></p>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <Link to="/hospital"><button>The (H)ospital</button></Link>
+                    <p><Link to="/weaponShop"><button>(S)pider's Gun Shop</button></Link></p>
                 </Col>
                 <Col>
-                    <Link to="/bank"><button>The (B)ank</button></Link>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <Link to="/graffitiWall"><button>The Graffiti (W)all</button></Link>
-                </Col>
-                <Col>
-                    <Link to="/gym"><button>The (G)ym</button></Link>
+                    <p><Link to="/armorShop"><button>(A)rmor Shop</button></Link></p>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <Link to="/passedOut"><button>Log (O)ut</button></Link>
+                    <p><Link to="/hospital"><button>The (H)ospital</button></Link></p>
                 </Col>
                 <Col>
-                    <Link to="/club"><button>The (C)lub</button></Link>
+                    <p><Link to="/bank"><button>The (B)ank</button></Link></p>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <p><Link to="/graffitiWall"><button>The Graffiti (W)all</button></Link></p>
+                </Col>
+                <Col>
+                    <p><Link to="/gym"><button>The (G)ym</button></Link></p>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <p><Link to="/passedOut"><button>Log (O)ut</button></Link></p>
+                </Col>
+                <Col>
+                    <p><Link to="/club"><button>The (C)lub</button></Link></p>
                 </Col>
             </Row>
         </Container>

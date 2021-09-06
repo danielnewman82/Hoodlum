@@ -1,107 +1,50 @@
 import React from 'react';
-import App from './App';
 import { render } from 'react-dom';
+import './App.css';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter } from 'react-router-dom';
-
-const initialState = {
-  /*
-  fists : { buyPrice : 0, sellprice : 0, atkPower : 4 },
-  pocketKnife : { buyPrice : 40, sellPrice : 10, atkPower : 7},
-  baseballBat : { buyPrice : 60, sellPrice : 15, atkPower : 10},
-  slingshot : { buyPrice : 80, sellPrice : 20, atkPower : 13},
-  pelletRifle : { buyPrice : 100, sellPrice : 25, atkPower : 16},
-  deuceDeuce : { buyPrice : 200, sellPrice : 50, atkPower: 20},
-  clock17 : { buyPrice : 500, sellPrice : 200, atkPower: 25},
-  bolt45 : { buyPrice : 800, sellPrice : 300, atkPower : 30},
-  magnum : { buyPrice : 1200, sellPrice : 400, atkPower : 40},
-  shotgun : { buyPrice : 1500, sellPrice : 500, atkPower : 50},
-  uzi : { buyPrice : 2000, sellPrice : 750, atkPower : 60},
-  boltRifle : { buyPrice : 3000, sellPrice : 1000, atkPower : 70},
-  sks : { buyPrice : 4000, sellPrice : 1300, atkPower : 80},
-  ar15 : { buyPrice: 5000, sellPrice : 1800, atkPower : 100},
-  g3 : { buyPrice : 6000, sellPrice : 2500, atkPower : 120},
-  aug : { buyPrice : 8000, sellPrice : 3000, atkPower : 150},
-  minimi : { buyPrice : 10000, sellPrice : 4000, atkPower : 180},
- */
-
-}
-
-function reducer(state = initialState, action) {
-  switch(action.type) {      
-    case 'CHANGE_HP' :
-      return {
-      ...state, curHitPoints: state.curHitPoints + action.payload
-    }
-
-    case 'CHANGE_CASHINHAND' :
-      return {
-      ...state, cashInHand: state.cashInHand + action.payload
-    }
-
-    case 'CHANGE_CASHINBANK' :
-      return {
-      ...state, cashInBank : state.cashInBank + action.payload
-    }
-
-    case 'GAIN_XP' :
-      return {
-      ...state, xp: state.xp + action.payload
-    }
-
-    case 'CHANGE_LOCKOUT' :
-      return {
-        ...state, lockedOut: state.lockedOut = action.payload
-    }
-
-    case 'CHANGE_PVEFIGHTS' :
-      return {
-        ...state, pveFights: state.pveFights + action.payload
-      }
-    
-    case 'CHANGE_WEAPON' :
-      return {
-        ...state, weapon: state.weapon = action.payload
-      }
-
-    case 'CHANGE_TAGSTODAY' :
-      return {
-        ...state, tagsToday: state.tagsToday + action.payload
-      }
-
-    case 'CHANGE_EMAIL' :
-      return {
-        ...state, email: state.email = action.payload
-      }
-
-    case 'CHANGE_PASSWORD' :
-      return {
-        ...state, password: state.password = action.payload
-      }
-    
-    case 'CHANGE_NAME' :
-      return {
-        ...state, name: state.name = action.payload
-      }
-      
-    case 'GET_CHARDATA' :
-      return action.payload;
-    
-    case 'LOGOUT' :
-      return state = initialState;
-
-    default:
-      return state;
-  }
-}
-
-const store = createStore(reducer);
+import { store, persistor } from './redux';
+import { Switch, Route } from 'react-router-dom';
+import Landing from './components/Landing';
+import About from './components/About';
+import Street from './components/Street';
+import TheTrack from './components/TheTrack/TheTrack';
+import CharSheet from './components/CharSheet';
+import WeaponShop from './components/WeaponShop/WeaponShop';
+import ArmorShop from './components/ArmorShop';
+import Hospital from './components/Hospital/Hospital';
+import Bank from './components/Bank';
+import GraffitiWall from './components/GraffitiWall';
+import Gym from './components/Gym/Gym';
+import Club from './components/Club';
+import PassedOut from './components/PassedOut';
+import SignUp from "./components/SignUp";
+import withAuth from './withAuth';
+import Lockout from './components/Lockout';
 
 const Index = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route path="/about" component={About} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/lockout" component={withAuth(Lockout)} />
+          <Route path="/street" component={withAuth(Street)} />
+          <Route path="/theTrack" component={withAuth(TheTrack)} />
+          <Route path="/charSheet" component={withAuth(CharSheet)} />
+          <Route path="/weaponShop" component={withAuth(WeaponShop)} />
+          <Route path="/armorShop" component={withAuth(ArmorShop)} />
+          <Route path="/hospital" component={withAuth(Hospital)} />
+          <Route path="/bank" component={withAuth(Bank)} />
+          <Route path="/graffitiWall" component={withAuth(GraffitiWall)} />
+          <Route path="/gym" component={withAuth(Gym)} />
+          <Route path="/club" component={withAuth(Club)} />
+          <Route path="/passedOut" component={withAuth(PassedOut)} />
+        </Switch>
+      </PersistGate>
     </BrowserRouter>
   </Provider>
 );
