@@ -24,11 +24,11 @@ class Bank extends Component {
     }
 
     handleDepositChange = (e) => {
-        this.setState({ deposit : e.target.value });
+        this.setState({ deposit : Math.abs(e.target.value) });
     }
 
     handleWithdrawalChange = (e) => {
-        this.setState({ withdrawal : e.target.value });
+        this.setState({ withdrawal : Math.abs(e.target.value) });
     }
 
     sync = () => {
@@ -44,19 +44,30 @@ class Bank extends Component {
     }
 
     deposit = () => {
+        
+        fetch('/api/getCharStats', {
+            method: 'POST',
+            body: JSON.stringify({email: this.props.state.email}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
         if (this.state.deposit < 0) {this.setState({ deposit : this.props.state.cashInHand }) }
         if (this.state.deposit > this.props.state.cashInHand) {
-            fetch('/api/updateCharStats', {
+            fetch ('/api/updateCharStats', {
                 method: 'PUT',
-                body: JSON.stringify({ email: this.props.state.email, cashInBank: (this.props.state.cashInBank + this.state.deposit), 
-                    cashInHand: (this.props.state.cashInHand - this.state.deposit) }),
+                body: JSON.stringify({ email: this.props.state.email, cashInBank: (this.props.state.cashInHand), 
+                    cashInHand: 0 }),
                 headers: {
                   'Content-Type': 'application/json'
                 }
               })
             .then(this.setState({ depositForm : false, depositFailed : true }) )
-        }   else {
-                fetch('/api/updateCharStats', {
+        }
+        else { 
+            fetch('/api/updateCharStats', {
                     method: 'PUT',
                     body: JSON.stringify({ email: this.props.state.email, 
                         cashInBank: (this.props.state.cashInBank + this.state.deposit), 
@@ -71,19 +82,43 @@ class Bank extends Component {
     }
 
     withdrawal = () => {
+        fetch('/api/getCharStats', {
+            method: 'POST',
+            body: JSON.stringify({email: this.props.state.email}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
         if (this.state.withdrawal < 0) {this.setState({ withdrawal : this.props.state.cashInBank }) }
         if (this.state.withdrawal > this.props.state.cashInBank) {
-            fetch('/api/updateCharStats', {
+            fetch('/api/getCharStats', {
+                method: 'POST',
+                body: JSON.stringify({email: this.props.state.email}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then( fetch('/api/updateCharStats', {
                 method: 'PUT',
-                body: JSON.stringify({ email: this.props.state.email, cashInBank: (this.props.state.cashInBank - this.state.withdrawal), 
-                    cashInHand: (this.props.state.cashInHand + this.state.withdrawal) }),
+                body: JSON.stringify({ email: this.props.state.email, cashInBank: 0, 
+                    cashInHand: (this.props.state.cashInBank) }),
                 headers: {
                   'Content-Type': 'application/json'
                 }
-              })
+              }) )
             .then(this.setState({ withdrawalForm : false, withdrawalFailed : true }) )
-        }   else {
-                fetch('/api/updateCharStats', {
+        }   
+        else {
+            fetch('/api/getCharStats', {
+                method: 'POST',
+                body: JSON.stringify({email: this.props.state.email}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then( fetch('/api/updateCharStats', {
                     method: 'PUT',
                     body: JSON.stringify({ email: this.props.state.email, 
                         cashInBank: (this.props.state.cashInBank - this.state.withdrawal), 
@@ -91,7 +126,7 @@ class Bank extends Component {
                     headers: {
                       'Content-Type': 'application/json'
                     }
-                  })
+                  }) )
                   .then(this.setState({ withdrawalSuccess : true, withdrawalForm : false }))
  
         }
@@ -147,7 +182,7 @@ class Bank extends Component {
                     <Row>
                         <Col>
                             You don't have that much money to withdraw. You clean out your account, a total of 
-                            <span id="cash"> ${this.props.state.cashInHand}</span>.
+                            <span id="cash"> ${this.props.state.cashInBank + this.props.state.cashInHand}</span>.
                         </Col>
                     </Row>
                     <Row>
@@ -202,7 +237,7 @@ class Bank extends Component {
                     <Row>
                         <Col>
                             <input type="number" onChange={this.handleDepositChange} 
-                            value={this.state.deposit} min="0" max={this.props.state.cashInHand} />
+                            value={this.state.deposit} max={this.props.state.cashInHand} />
                         </Col>
                     </Row>
                     <Row>

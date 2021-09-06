@@ -64,8 +64,15 @@ class SmallerKid extends Component {
     }
 
     resolution = () => {
-        if (this.state.fightResults === "win") { 
-            fetch('/api/updateCharStats', {
+        if (this.state.fightResults === "win") {
+            fetch('/api/getCharStats', {
+                method: 'POST',
+                body: JSON.stringify({email: this.props.state.email}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }) 
+            .then( fetch('/api/updateCharStats', {
             method: 'PUT',
             body: JSON.stringify({ email: this.props.state.email, 
                 cashInHand: (this.props.state.cashInHand + this.state.cashGained),
@@ -76,7 +83,7 @@ class SmallerKid extends Component {
             headers: {
               'Content-Type': 'application/json'
             }
-          })
+          }) )
         .then( fetch('/api/getCharStats', {
             method: 'POST',
             body: JSON.stringify({email: this.props.state.email}),
@@ -88,7 +95,14 @@ class SmallerKid extends Component {
         .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
     }
     if (this.state.fightResults === "lose") {
-        fetch('/api/updateCharStats', {
+        fetch('/api/getCharStats', {
+            method: 'POST',
+            body: JSON.stringify({email: this.props.state.email}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then( fetch('/api/updateCharStats', {
             method: 'PUT',
             body: JSON.stringify({ email: this.props.state.email, 
                 cashInHand: (this.props.state.cashInHand + this.state.cashGained),
@@ -99,7 +113,7 @@ class SmallerKid extends Component {
             headers: {
               'Content-Type': 'application/json'
             }
-          })
+          }) )
         .then(this.props.dispatch({ type: 'LOGOUT' }) )
     }
 }

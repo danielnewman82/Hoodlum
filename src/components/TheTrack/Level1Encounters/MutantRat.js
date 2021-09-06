@@ -20,14 +20,21 @@ class MutantRat extends Component {
     }
 
     flee = () => {
-        fetch('/api/updateCharStats', {
+        fetch('/api/getCharStats', {
+            method: 'POST',
+            body: JSON.stringify({email: this.props.state.email}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then( fetch('/api/updateCharStats', {
             method: 'PUT',
             body: JSON.stringify({ email: this.props.state.email, 
                 pveFights : this.props.state.pveFights - 1, curHitPoints : this.state.playerHP }),
             headers: {
               'Content-Type': 'application/json'
             }
-          })
+          }) )
           .then( fetch('/api/getCharStats', {
             method: 'POST',
             body: JSON.stringify({email: this.props.state.email}),
@@ -64,8 +71,15 @@ class MutantRat extends Component {
     }
 
     resolution = () => {
-        if (this.state.fightResults === "win") { 
-            fetch('/api/updateCharStats', {
+        if (this.state.fightResults === "win") {
+            fetch('/api/getCharStats', {
+                method: 'POST',
+                body: JSON.stringify({email: this.props.state.email}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }) 
+            .then( fetch('/api/updateCharStats', {
             method: 'PUT',
             body: JSON.stringify({ email: this.props.state.email, 
                 cashInHand: (this.props.state.cashInHand + this.state.cashGained),
@@ -76,7 +90,7 @@ class MutantRat extends Component {
             headers: {
               'Content-Type': 'application/json'
             }
-          })
+          }) )
         .then( fetch('/api/getCharStats', {
             method: 'POST',
             body: JSON.stringify({email: this.props.state.email}),
@@ -88,7 +102,14 @@ class MutantRat extends Component {
         .then(res => this.props.dispatch({ type: 'GET_CHARDATA', payload: res }))
     }
     if (this.state.fightResults === "lose") {
-        fetch('/api/updateCharStats', {
+        fetch('/api/getCharStats', {
+            method: 'POST',
+            body: JSON.stringify({email: this.props.state.email}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then( fetch('/api/updateCharStats', {
             method: 'PUT',
             body: JSON.stringify({ email: this.props.state.email, 
                 cashInHand: (this.props.state.cashInHand + this.state.cashGained),
@@ -99,7 +120,7 @@ class MutantRat extends Component {
             headers: {
               'Content-Type': 'application/json'
             }
-          })
+          }) )
         .then(this.props.dispatch({ type: 'LOGOUT' }) )
     }
 }
