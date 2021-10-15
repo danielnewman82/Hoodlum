@@ -1,13 +1,11 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const userSchema = require('./src/models/userSchema');
 const cookieParser = require('cookie-parser');
 const tagSchema = require('./src/models/tagSchema');
-// why the shit was this here? I have no idea.
-// const { resolveNaptr } = require('dns');
+const mobSchema = require('./src/models/mobSchema');
 
 const app = express();
 
@@ -21,10 +19,13 @@ const TagModel = tagConn.model('Tag', tagSchema);
 const userConn = mongoose.createConnection(process.env.MONGODB_USER_URI, 
   {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false});
 const UserModel = userConn.model('User', userSchema);
+const mobConn = mongoose.createConnection(process.env.MONGODB_MOB_URI,
+  {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+const MobModel = mobConn.model('Mob', mobSchema);
 
 // Bodyparser middleware
-app.use( bodyParser.urlencoded({ extended: false }) );
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }) );
+app.use(express.json());
 app.use(cookieParser());
 
 // route protection middleware
@@ -67,6 +68,17 @@ app.put('/api/updateCharStats', withAuth, function(req, res) {
     if (err) return console.error(err);
     res.json(user)
   });
+  }) 
+
+// combatRound is supposed to receive the player's auth token and the attack power of the mob, fetch their attack and 
+// defense power, calculate the outcome of the round, and return the results. I have yet to figure out how to do that. 
+// But perhaps mob data should also live in the database, where it can't be tampered with... 
+
+app.put('/api/combatRound', withAuth, async function(req, res) {
+  const db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'connection error:'));
+  const player = await UserModel.findOne(req.body).lean().exec();
+  
   }) 
 
 
