@@ -77,8 +77,20 @@ app.put('/api/updateCharStats', withAuth, function(req, res) {
 app.put('/api/combatRound', withAuth, async function(req, res) {
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
-  const player = await UserModel.findOne(req.body).lean().exec();
-  
+  // parse the player's email from the request
+  const {playerId} = req.body.email
+  // pull the player's data from the DB
+  const player = await UserModel.findOne(playerId).lean().exec();
+  // calculate damage dealt to the mob
+  const damageDealt = (Math.ceil(player.weapon.atkPower / 2)) + (Math.ceil(Math.random() * (player.weapon.atkPower / 2)))
+  // calculate damage taken
+  const damageTaken = (Math.max(0, (Math.ceil(Math.random() * req.body.mobAtkPower) - player.armor.defPower)))
+  // make an object with the two
+  const results = { "damageDealt": damageDealt, "damageTaken": damageTaken}
+  // update the player's HP total in the database
+  UserModel.findOneAndUpdate(playerId, {curHitPoints: player.curHitPoints -= damageTaken}).exec('update')
+  req.body.mobHP -= damageDealt;
+  res.json({curHitPoints: player.curHitPoints, mobHP: req.body.mobHP})
   }) 
 
 
