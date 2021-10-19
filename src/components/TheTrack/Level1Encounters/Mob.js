@@ -10,7 +10,10 @@ function mapStateToProps(state) {
 class Mob extends Component {
     constructor(props) {
         super(props);
-        this.state = { turnResults : false, mobHP : 12, playerHP : this.props.state.curHitPoints,
+        this.state = { turnResults : false, 
+                        mobHP : 12, 
+                        mobAtkPower : 5,
+                        playerHP : this.props.state.curHitPoints,
                         damageDealt : 0, 
                         damageTaken : 0,
                         fightResults : null,
@@ -40,12 +43,14 @@ class Mob extends Component {
     }
     
     fight = () => {
-        //calculate damage dealt and taken this round
-        this.setState({ turnResults : true,
-                        damageDealt : (Math.ceil(this.props.state.weapon.atkPower / 2)) + (Math.ceil(Math.random() * 
-                        (this.props.state.weapon.atkPower / 2))),
-                        damageTaken : (Math.max(0, (Math.ceil(Math.random() * 4) - this.props.state.armor.defPower))),
-                    })
+        fetch('/api/combatRound', {
+            method: 'PUT',
+            body: JSON.stringify({ email: this.props.state.email, mobHP: this.state.mobHP, mobAtkPower: this.state.mobAtkPower }),
+            headers: { 'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(this.setState({ turnResults : true, damageDealt : res.damageDealt, damageTaken : res.damageTaken }))
+
         // subtract damage from mob and player HP totals
         this.setState({ mobHP : this.state.mobHP - this.state.damageDealt, playerHP : this.state.playerHP - this.state.damageTaken })
         // if player HP reaches 0 first, subtract half from cash in hand and lockout for the day

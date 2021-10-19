@@ -13,14 +13,11 @@ require('dotenv').config();
 
 const JWTSecret = process.env.JWT_SECRET;
 
-const tagConn = mongoose.createConnection(process.env.MONGODB_TAGGER_URI, 
-  {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+const tagConn = mongoose.createConnection(process.env.MONGODB_TAGGER_URI);
 const TagModel = tagConn.model('Tag', tagSchema);
-const userConn = mongoose.createConnection(process.env.MONGODB_USER_URI, 
-  {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false});
+const userConn = mongoose.createConnection(process.env.MONGODB_USER_URI);
 const UserModel = userConn.model('User', userSchema);
-const mobConn = mongoose.createConnection(process.env.MONGODB_MOB_URI,
-  {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+const mobConn = mongoose.createConnection(process.env.MONGODB_MOB_URI);
 const MobModel = mobConn.model('Mob', mobSchema);
 
 // Bodyparser middleware
@@ -64,7 +61,7 @@ app.put('/api/updateCharStats', withAuth, function(req, res) {
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
   const { email } = req.body
-  UserModel.findOneAndUpdate({email}, req.body, { new: true, upsert: true }, function(err, user) {
+  UserModel.updateOne({email}, req.body, { new: true, upsert: true }, function(err, user) {
     if (err) return console.error(err);
     res.json(user)
   });
@@ -81,6 +78,10 @@ app.put('/api/combatRound', withAuth, async function(req, res) {
   const {playerId} = req.body.email
   // pull the player's data from the DB
   const player = await UserModel.findOne(playerId).lean().exec();
+  // check if player is still alive
+  if (player.curHitPoints <= 0) { res.json(player.curHitPoints) }
+  // check if mob is still alive
+  if (req.body.mobHP <= 0) { res.json(req.body.mobHP) } 
   // calculate damage dealt to the mob
   const damageDealt = (Math.ceil(player.weapon.atkPower / 2)) + (Math.ceil(Math.random() * (player.weapon.atkPower / 2)))
   // calculate damage taken
@@ -88,9 +89,11 @@ app.put('/api/combatRound', withAuth, async function(req, res) {
   // make an object with the two
   const results = { "damageDealt": damageDealt, "damageTaken": damageTaken}
   // update the player's HP total in the database
-  UserModel.findOneAndUpdate(playerId, {curHitPoints: player.curHitPoints -= damageTaken}).exec('update')
+  
   req.body.mobHP -= damageDealt;
-  res.json({curHitPoints: player.curHitPoints, mobHP: req.body.mobHP})
+  if (player.curHitPoints > 0 && req.body.mobHP > 0) {
+    UserModel.updateOne(playerId, {curHitPoints: player.curHitPoints -= damageTaken} ).exec('updateOne')
+    .then( res.json( { results, curHitPoints: player.curHitPoints, mobHP: req.body.mobHP } ) ) }
   }) 
 
 
